@@ -69,7 +69,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      <ResponsiveContainer variant="wide" padding="xs">
+      <ResponsiveContainer variant="wide" paddingX="xs" paddingY="sm">
         <div className="flex justify-between items-center h-14">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
