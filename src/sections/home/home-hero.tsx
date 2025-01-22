@@ -1,73 +1,187 @@
-import ResponsiveContainer from "@/components/common/responsive-container";
-import Link from "next/link";
+"use client"
 
-export default function HomeHero() {
+import { useState } from "react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Search } from "lucide-react"
+
+
+export default function Page() {
+  const [activeTab, setActiveTab] = useState<"custom" | "location">("custom")
+
+  const states = [
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ]
+
   return (
-    <ResponsiveContainer
-      variant="wide"
-      padding="xs"
-      className="bg-white min-h-[90vh]"
-    >
-      <div className="relative overflow-hidden min-h-[90vh]">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-          <div className="text-center">
-            <h1 className="text-2xl md:text-7xl font-black text-gray-900 tracking-tight max-w-5xl mx-auto leading-[1.1] mb-6">
-              Find the Best Rentals
-              <span className="block text-primary"> in United States</span>
-            </h1>
-            <p className="text-sm text-black max-w-xl mx-auto mb-10">
-              Discover premium rental opportunities, from single-family homes to
-              condos and townhomes across United States
-            </p>
+    <div className="min-h-screen bg-white">
+     
 
-            {/* <div className="mt-8 max-w-3xl mx-auto">
-              <SearchBar variant="hero" />
-            </div> */}
-
-            {/* Business Categories Quick Links */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              {[
-                {
-                  icon: "🏢",
-                  title: "Offices",
-                  link: "/offices-for-lease",
-                  count: "250+",
-                },
-                {
-                  icon: "🏠",
-                  title: "Single Family Homes",
-                  link: "/",
-                  count: "180+",
-                },
-                {
-                  icon: "🏬",
-                  title: "Condos",
-                  link: "/apartments",
-                  count: "120+",
-                },
-                {
-                  icon: "🏘️",
-                  title: "Townhomes",
-                  link: "/townhomes",
-                  count: "90+",
-                },
-              ].map((category) => (
-                <Link
-                  key={category.title}
-                  href={category.link}
-                  className="group p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="text-3xl mb-2">{category.icon}</div>
-                  <h3 className="font-semibold text-gray-900">
-                    {category.title}
-                  </h3>
-                  <p className="text-primary font-bold">{category.count}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
+      {/* Hero Section */}
+      <div className="relative h-[600px]">
+        <Image
+          src="/hero.png"
+          alt="People playing guitars in living room"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+          <h1 className="text-6xl font-bold mb-4">Live freer.</h1>
+          <h2 className="text-6xl font-bold">Lease a house.</h2>
         </div>
       </div>
-    </ResponsiveContainer>
-  );
+
+      {/* Search Section */}
+      <div className="max-w-7xl mx-auto px-4 -mt-16 relative z-10">
+        {/* Navigation Tabs */}
+        <div className="flex mb-4">
+          <Button
+            variant="ghost"
+            className={`px-10 py-8 font-medium rounded-none ${
+              activeTab === "custom" ? "text-gray-900 bg-white" : "text-white bg-gray-600"
+            }`}
+            onClick={() => setActiveTab("custom")}
+          >
+            Custom Search
+          </Button>
+          <Button
+            variant="ghost"
+            className={`px-10 py-8 font-medium rounded-none ${
+              activeTab === "location" ? "text-gray-900 bg-white" : "text-white bg-gray-600"
+            }`}
+            onClick={() => setActiveTab("location")}
+          >
+            View By Location
+          </Button>
+        </div>
+
+        {/* Search Forms */}
+        <div className="bg-white p-10 rounded-lg shadow-lg ">
+          {activeTab === "custom" ? (
+            <div className="flex gap-4 items-start">
+              <div className="flex-1">
+                <Select>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Select State" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {states.map((state) => (
+                      <SelectItem key={state} value={state.toLowerCase()}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="w-48">
+                <Select>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Price range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="500-1000">$500 - $1,000</SelectItem>
+                    <SelectItem value="1000-1500">$1,000 - $1,500</SelectItem>
+                    <SelectItem value="1500-2000">$1,500 - $2,000</SelectItem>
+                    <SelectItem value="2000+">$2,000+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="w-48">
+                <Select>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Bedrooms" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 Bedroom</SelectItem>
+                    <SelectItem value="2">2 Bedrooms</SelectItem>
+                    <SelectItem value="3">3 Bedrooms</SelectItem>
+                    <SelectItem value="4">4+ Bedrooms</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="w-48">
+                <Select>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Baths" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 Bath</SelectItem>
+                    <SelectItem value="2">2 Baths</SelectItem>
+                    <SelectItem value="3">3 Baths</SelectItem>
+                    <SelectItem value="4">4+ Baths</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button className="h-12 px-8 bg-[#336699] hover:bg-[#2d557d] text-white">
+                <Search className="mr-2 h-4 w-4" />
+                Search Now
+              </Button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {states.map((state) => (
+                <Button key={state} variant="outline" className="h-12 justify-start hover:bg-green-50">
+                  {state}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }
+

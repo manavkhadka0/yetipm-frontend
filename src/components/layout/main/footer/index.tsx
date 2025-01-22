@@ -251,15 +251,14 @@ export default function Footer() {
             <Link href="/">
               <Image
                 src="/logo.svg"
-                alt="Invitation Homes"
+                alt="Yetpm"
                 width={150}
                 height={40}
                 className="h-8 md:h-10 w-auto"
               />
             </Link>
             <p className="text-xs md:text-sm text-center md:text-left text-muted-foreground">
-              Invitation Homes Inc. © {new Date().getFullYear()} All Rights
-              Reserved.
+              YETI PM Inc. © {new Date().getFullYear()} All Rights Reserved.
             </p>
           </div>
 

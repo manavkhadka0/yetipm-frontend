@@ -33,12 +33,12 @@ export const navigation: NavItem[] = [
     items: [
       {
         name: "Why Choose Us",
-        href: "/our-difference/why-us",
+        href: "/ourDiff",
         description: "What sets us apart",
       },
       {
         name: "Resident Benefits",
-        href: "/our-difference/benefits",
+        href: "/resiBenifit",
         description: "Exclusive benefits for our residents",
       },
       {

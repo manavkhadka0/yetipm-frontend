@@ -74,11 +74,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/logo.svg"
+              src="/image.png"
               alt="Yeti PM Logo"
               width={120}
               height={80}
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
 
@@ -138,7 +138,7 @@ export default function Header() {
             {/* WhatsApp CTA Button */}
             <button
               onClick={handleWhatsAppClick}
-              className="flex items-center space-x-2 bg-primary text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
+              className="flex items-center space-x-2 bg-[#336699] text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               <span className="font-medium">Call Us</span>
