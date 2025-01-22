@@ -39,9 +39,9 @@ const items = [
     color: "text-blue-600",
   },
   {
-    label: "Projects",
+    label: "Rentals",
     icon: Home,
-    href: "/admin/projects",
+    href: "/admin/rentals",
     color: "text-blue-600",
   },
 ];
