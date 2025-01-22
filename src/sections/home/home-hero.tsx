@@ -5,7 +5,7 @@ export default function HomeHero() {
   return (
     <ResponsiveContainer
       variant="wide"
-      padding="xs"
+      paddingX="xs"
       className="bg-white min-h-[90vh]"
     >
       <div className="relative overflow-hidden min-h-[90vh]">
