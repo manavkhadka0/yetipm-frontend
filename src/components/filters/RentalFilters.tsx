@@ -20,9 +20,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { RentalFiltersProps, FilterState } from "@/@types/rental";
+import { RentalFiltersProps } from "@/types/rental";
 
-export default function RentalFilters({ filters, setFilters }: RentalFiltersProps) {
+export default function RentalFilters({
+  filters,
+  setFilters,
+}: RentalFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [localFilters, setLocalFilters] = useState(filters);
   const isDesktop = useMediaQuery("(min-width: 768px)");

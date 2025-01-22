@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Shield, Home, PawPrint, Building } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { RentalComponentProps } from "@/@types/rental";
 
-export default function AdditionalInfo({ rentalDetail }: RentalComponentProps) {
+export default function AdditionalInfo() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

@@ -5,7 +5,7 @@ import RentalCard from "@/components/cards/RentalCard";
 import RentalFilters from "@/components/filters/RentalFilters";
 import RentalCardSkeleton from "@/components/cards/RentalCardSkeleton";
 import { Button } from "@/components/ui/button";
-import { RentalDetail } from "@/@types/rental";
+import { Rental } from "@/types/rentals";
 
 interface FilterState {
   min_price: string;
@@ -18,7 +18,7 @@ interface FilterState {
 }
 
 export default function RentalsPage() {
-  const [rentals, setRentals] = useState<RentalDetail[]>([]);
+  const [rentals, setRentals] = useState<Rental[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
@@ -33,6 +33,7 @@ export default function RentalsPage() {
 
   useEffect(() => {
     fetchRentals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchRentals = async () => {

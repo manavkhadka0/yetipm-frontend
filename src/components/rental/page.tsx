@@ -3,17 +3,21 @@ import PropertyDetails from "@/components/rental/rentalList/content-section";
 import NearbySections from "@/components/rental/rentalList/nearby-section";
 import AdditionalInfo from "@/components/rental/rentalList/additional-info";
 
-import { RentalComponentProps } from "@/@types/rental";
+import { Rental } from "@/types/rentals";
 
-const RentalsDetailView: React.FC<RentalComponentProps> = ({
+type RentalDetailProps = {
+  rentalDetail: Rental;
+};
+
+const RentalsDetailView: React.FC<RentalDetailProps> = ({
   rentalDetail,
-}: RentalComponentProps) => {
-  return (    
+}: RentalDetailProps) => {
+  return (
     <div>
       <PropertyListingHeroSection rentalDetail={rentalDetail} />
       <PropertyDetails rentalDetail={rentalDetail} />
-      <NearbySections rentalDetail={rentalDetail} />
-      <AdditionalInfo rentalDetail={rentalDetail} />
+      <NearbySections />
+      <AdditionalInfo />
     </div>
   );
 };

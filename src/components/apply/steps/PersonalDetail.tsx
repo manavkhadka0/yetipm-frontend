@@ -1,12 +1,34 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ApplicationStepProps } from "@/@types/apply";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export default function PersonalDetail({
+interface PersonalDetailProps {
+  formData: any;
+  handleChange: (event: { name: string; value: any }) => void;
+}
+
+const PersonalDetail: React.FC<PersonalDetailProps> = ({
   formData,
   handleChange,
-}: ApplicationStepProps) {
+}) => {
+  const onInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    handleChange({
+      name: e.target.name,
+      value: e.target.value,
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -16,9 +38,7 @@ export default function PersonalDetail({
             id="name"
             name="name"
             value={formData.name}
-            onChange={(event) =>
-              handleChange({ name: "name", value: event.target.value })
-            }
+            onChange={onInputChange}
             required
           />
         </div>
@@ -29,9 +49,7 @@ export default function PersonalDetail({
             name="dateOfBirth"
             type="date"
             value={formData.dateOfBirth}
-            onChange={(event) =>
-              handleChange({ name: "dateOfBirth", value: event.target.value })
-            }
+            onChange={onInputChange}
             required
           />
         </div>
@@ -42,9 +60,7 @@ export default function PersonalDetail({
             name="email"
             type="email"
             value={formData.email}
-            onChange={(event) =>
-              handleChange({ name: "email", value: event.target.value })
-            }
+            onChange={onInputChange}
             required
           />
         </div>
@@ -55,9 +71,7 @@ export default function PersonalDetail({
             name="phone"
             type="tel"
             value={formData.phone}
-            onChange={(event) =>
-              handleChange({ name: "phone", value: event.target.value })
-            }
+            onChange={onInputChange}
             required
           />
         </div>
@@ -68,22 +82,18 @@ export default function PersonalDetail({
             name="ssn"
             type="password"
             value={formData.ssn}
-            onChange={(event) =>
-              handleChange({ name: "ssn", value: event.target.value })
-            }
+            onChange={onInputChange}
             required
             placeholder="XXX-XX-XXXX"
           />
         </div>
         <div>
-          <Label htmlFor="driversLicense">Driver's License Number</Label>
+          <Label htmlFor="driversLicense">Driver&apos;s License Number</Label>
           <Input
             id="driversLicense"
             name="driversLicense"
             value={formData.driversLicense}
-            onChange={(event) =>
-              handleChange({ name: "driversLicense", value: event.target.value })
-            }
+            onChange={onInputChange}
           />
         </div>
       </div>
@@ -106,7 +116,8 @@ export default function PersonalDetail({
                     dispatchEvent: () => false,
                     removeEventListener: () => {},
                   },
-                } as any)
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                } as any);
               }}
             >
               <SelectTrigger>
@@ -128,9 +139,7 @@ export default function PersonalDetail({
               id="employer"
               name="employer"
               value={formData.employer}
-              onChange={(event) =>
-                handleChange({ name: "employer", value: event.target.value })
-              }
+              onChange={onInputChange}
             />
           </div>
           <div>
@@ -139,9 +148,7 @@ export default function PersonalDetail({
               id="occupation"
               name="occupation"
               value={formData.occupation}
-              onChange={(event) =>
-                handleChange({ name: "occupation", value: event.target.value })
-              }
+              onChange={onInputChange}
             />
           </div>
         </div>
@@ -156,9 +163,7 @@ export default function PersonalDetail({
               id="emergencyContactName"
               name="emergencyContactName"
               value={formData.emergencyContactName}
-              onChange={(event) =>
-                handleChange({ name: "emergencyContactName", value: event.target.value })
-              }
+              onChange={onInputChange}
               required
             />
           </div>
@@ -169,9 +174,7 @@ export default function PersonalDetail({
               name="emergencyContactPhone"
               type="tel"
               value={formData.emergencyContactPhone}
-              onChange={(event) =>
-                handleChange({ name: "emergencyContactPhone", value: event.target.value })
-              }
+              onChange={onInputChange}
               required
             />
           </div>
@@ -181,9 +184,7 @@ export default function PersonalDetail({
               id="emergencyContactRelation"
               name="emergencyContactRelation"
               value={formData.emergencyContactRelation}
-              onChange={(event) =>
-                handleChange({ name: "emergencyContactRelation", value: event.target.value })
-              }
+              onChange={onInputChange}
               required
             />
           </div>
@@ -191,4 +192,6 @@ export default function PersonalDetail({
       </div>
     </div>
   );
-}
+};
+
+export default PersonalDetail;

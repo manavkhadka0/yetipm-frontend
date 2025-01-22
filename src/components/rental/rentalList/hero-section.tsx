@@ -13,9 +13,15 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { useState } from "react";
-import { RentalComponentProps } from "@/@types/rental";
+import { Rental } from "@/types/rentals";
 
-export default function PropertyListingHeroSection({ rentalDetail }: RentalComponentProps) {
+type RentalComponentProps = {
+  rentalDetail: Rental;
+};
+
+export default function PropertyListingHeroSection({
+  rentalDetail,
+}: RentalComponentProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
@@ -57,7 +63,10 @@ export default function PropertyListingHeroSection({ rentalDetail }: RentalCompo
       {/* Image carousel */}
       <div className="relative aspect-[16/9] mb-6">
         <Image
-          src={rentalDetail?.images?.[currentImageIndex]?.image || "/placeholder-rental.jpg"}
+          src={
+            rentalDetail?.images?.[currentImageIndex]?.image ||
+            "/placeholder-rental.jpg"
+          }
           alt={`Property image ${currentImageIndex + 1}`}
           fill
           className="rounded-lg object-cover"
@@ -92,7 +101,8 @@ export default function PropertyListingHeroSection({ rentalDetail }: RentalCompo
           </div>
           <div className="flex items-center gap-4 text-gray-600">
             <div className="flex items-center gap-1">
-              <span className="font-semibold">{rentalDetail?.bedrooms}</span> bed
+              <span className="font-semibold">{rentalDetail?.bedrooms}</span>{" "}
+              bed
             </div>
             <div className="flex items-center gap-1">
               <span className="font-semibold">{rentalDetail?.bathrooms}</span>{" "}
@@ -122,9 +132,9 @@ export default function PropertyListingHeroSection({ rentalDetail }: RentalCompo
             </div>
           </div>
           <Link href={"/apply-now"}>
-          <Button className="bg-green-700 hover:bg-green-800 text-white px-8">
-            Apply now
-          </Button>
+            <Button className="bg-green-700 hover:bg-green-800 text-white px-8">
+              Apply now
+            </Button>
           </Link>
         </div>
       </div>

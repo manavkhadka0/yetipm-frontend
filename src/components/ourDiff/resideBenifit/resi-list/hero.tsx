@@ -52,8 +52,8 @@ export default function Page() {
 
           <p className="text-lg">
             Looking for something you can call your own without feeling like
-            you're tied down? We get you. And we're constantly innovating for
-            you, too.
+            you&apos;re tied down? We get you. And we&apos;re constantly
+            innovating for you, too.
           </p>
         </div>
       </section>

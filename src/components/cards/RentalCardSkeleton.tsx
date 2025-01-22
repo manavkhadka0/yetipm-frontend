@@ -1,4 +1,4 @@
-export default function RentalCardSkeleton(): JSX.Element {
+export default function RentalCardSkeleton(): React.JSX.Element {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm">
       <div className="animate-pulse">

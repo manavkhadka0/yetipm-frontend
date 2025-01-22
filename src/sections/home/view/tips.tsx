@@ -1,12 +1,14 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-white">
       <main className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-16">Home-leasing, simplified</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-16">
+          Home-leasing, simplified
+        </h1>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
@@ -21,12 +23,18 @@ export default function Page() {
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Before you apply</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                Before you apply
+              </h2>
               <p className="text-gray-600 mb-6">
-                Whether you're new to leasing or have been renting houses for years, we'll make finding your home as
-                smooth as possible.
+                Whether you&apos;re new to leasing or have been renting houses
+                for years, we&apos;ll make finding your home as smooth as
+                possible.
               </p>
-              <Button variant="link" className="text-[#336699] hover:text-[#264d73] font-semibold">
+              <Button
+                variant="link"
+                className="text-[#336699] hover:text-[#264d73] font-semibold"
+              >
                 See helpful tips
               </Button>
             </div>
@@ -43,12 +51,18 @@ export default function Page() {
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Qualification requirements</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                Qualification requirements
+              </h2>
               <p className="text-gray-600 mb-6">
-                You're on your way to a worry-free leasing lifestyle. First, let's make sure you meet the qualification
+                You&apos;re on your way to a worry-free leasing lifestyle.
+                First, let&apos;s make sure you meet the qualification
                 requirements.
               </p>
-              <Button variant="link" className="text-[#336699] hover:text-[#264d73] font-semibold">
+              <Button
+                variant="link"
+                className="text-[#336699] hover:text-[#264d73] font-semibold"
+              >
                 See requirements
               </Button>
             </div>
@@ -65,12 +79,17 @@ export default function Page() {
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Application process</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                Application process
+              </h2>
               <p className="text-gray-600 mb-6">
-                Our application process couldn't be easier. No, really. You can do everything online, and we're always
-                here to help.
+                Our application process couldn&apos;t be easier. No, really. You
+                can do everything online, and we&apos;re always here to help.
               </p>
-              <Button variant="link" className="text-[#336699] hover:text-[#264d73] font-semibold">
+              <Button
+                variant="link"
+                className="text-[#336699] hover:text-[#264d73] font-semibold"
+              >
                 Get started
               </Button>
             </div>
@@ -78,6 +97,5 @@ export default function Page() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-

@@ -49,7 +49,7 @@ export default function FeaturesSection() {
             The YETI HOME Difference.
           </h2>
           <p className="text-xl text-gray-600">
-            This is what it means to "live freer."
+            This is what it means to &quot;live freer.&quot;
           </p>
         </div>
 

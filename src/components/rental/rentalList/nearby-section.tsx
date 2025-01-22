@@ -4,9 +4,8 @@ import { ArrowLeft, ArrowRight, ExternalLink, Heart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { RentalComponentProps } from "@/@types/rental";
 
-export default function NearbySections({ rentalDetail }: RentalComponentProps) {
+export default function NearbySections() {
   // You might want to fetch nearby schools and similar homes data from an API
   // For now, we'll keep the static data but add the proper prop
   return (

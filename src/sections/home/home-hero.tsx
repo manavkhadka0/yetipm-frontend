@@ -1,15 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search } from "lucide-react"
-
+import { useState } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState<"custom" | "location">("custom")
+  const [activeTab, setActiveTab] = useState<"custom" | "location">("custom");
 
   const states = [
     "Alabama",
@@ -62,12 +66,10 @@ export default function Page() {
     "West Virginia",
     "Wisconsin",
     "Wyoming",
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-white">
-     
-
       {/* Hero Section */}
       <div className="relative h-[600px]">
         <Image
@@ -91,7 +93,9 @@ export default function Page() {
           <Button
             variant="ghost"
             className={`px-10 py-8 font-medium rounded-none ${
-              activeTab === "custom" ? "text-gray-900 bg-white" : "text-white bg-gray-600"
+              activeTab === "custom"
+                ? "text-gray-900 bg-white"
+                : "text-white bg-gray-600"
             }`}
             onClick={() => setActiveTab("custom")}
           >
@@ -100,7 +104,9 @@ export default function Page() {
           <Button
             variant="ghost"
             className={`px-10 py-8 font-medium rounded-none ${
-              activeTab === "location" ? "text-gray-900 bg-white" : "text-white bg-gray-600"
+              activeTab === "location"
+                ? "text-gray-900 bg-white"
+                : "text-white bg-gray-600"
             }`}
             onClick={() => setActiveTab("location")}
           >
@@ -173,7 +179,11 @@ export default function Page() {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {states.map((state) => (
-                <Button key={state} variant="outline" className="h-12 justify-start hover:bg-green-50">
+                <Button
+                  key={state}
+                  variant="outline"
+                  className="h-12 justify-start hover:bg-green-50"
+                >
                   {state}
                 </Button>
               ))}
@@ -182,6 +192,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

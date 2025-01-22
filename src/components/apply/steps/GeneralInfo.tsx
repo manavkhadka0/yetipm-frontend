@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ApplicationStepProps } from "@/@types/apply";
+import { ApplicationStepProps } from "@/types/apply";
 
 export default function GeneralInfo({
   formData,
@@ -52,12 +52,10 @@ export default function GeneralInfo({
       <div>
         <Label htmlFor="pets">Do you have any pets?</Label>
         <Select
-  name="pets"
-  value={formData.pets}
-  onValueChange={(value) =>
-    handleChange({ name: "pets", value })
-  }
->
+          name="pets"
+          value={formData.pets}
+          onValueChange={(value) => handleChange({ name: "pets", value })}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select an option" />
           </SelectTrigger>

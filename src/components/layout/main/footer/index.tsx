@@ -250,7 +250,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Link href="/">
               <Image
-                src="/logo.svg"
+                src="/image.png"
                 alt="Yetpm"
                 width={150}
                 height={40}

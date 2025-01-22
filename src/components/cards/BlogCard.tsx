@@ -1,6 +1,12 @@
-import { BlogCardProps } from "@/@types/rental";
+import { BlogCardProps } from "@/types/rental";
+import React from "react";
 
-const BlogCard = ({ image, date, title, excerpt }: BlogCardProps): JSX.Element => {
+const BlogCard = ({
+  image,
+  date,
+  title,
+  excerpt,
+}: BlogCardProps): React.JSX.Element => {
   return (
     <div className="relative overflow-hidden bg-gray-900 group rounded-xl">
       <a href="#" title="" className="block">

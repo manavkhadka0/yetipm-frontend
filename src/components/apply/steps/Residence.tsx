@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ApplicationStepProps } from "@/@types/apply";
+import { ApplicationStepProps } from "@/types/apply";
 
 export default function Residence({
   formData,

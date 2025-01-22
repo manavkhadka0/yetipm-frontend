@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BedDouble, Bath, Maximize2, MapPin } from "lucide-react";
-import { RentalCardProps } from "@/@types/rental";
+import { Rental } from "@/types/rentals";
+
+type RentalCardProps = {
+  rental: Rental;
+};
 
 export default function RentalCard({ rental }: RentalCardProps) {
   return (
@@ -13,7 +17,7 @@ export default function RentalCard({ rental }: RentalCardProps) {
             <span className="px-3 py-1 text-xs font-medium bg-[#0B3B2C] text-white rounded-full">
               FOR RENT
             </span>
-            {rental.featured && (
+            {rental.features && (
               <span className="px-3 py-1 text-xs font-medium bg-[#F3C577] text-[#0B3B2C] rounded-full">
                 FEATURED
               </span>
@@ -24,7 +28,7 @@ export default function RentalCard({ rental }: RentalCardProps) {
           <div className="relative h-[240px] overflow-hidden">
             <Image
               src={rental.images[0]?.image || "/placeholder-rental.jpg"}
-              alt={rental.title || "Rental"}
+              alt={rental.images[0]?.image || "Rental"}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-110"
             />
@@ -45,7 +49,7 @@ export default function RentalCard({ rental }: RentalCardProps) {
 
             {/* Title */}
             <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              {rental.title}
+              {rental.name}
             </h3>
 
             {/* Features */}

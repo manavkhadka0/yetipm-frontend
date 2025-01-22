@@ -29,7 +29,7 @@ export default function Page() {
         <div className="relative z-1 text-white text-center px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-4">Why YETI PM?</h1>
           <p className="text-xl md:text-2xl">
-            The nation's premier home leasing company.
+            The nation&apos;s premier home leasing company.
           </p>
         </div>
       </section>
@@ -51,8 +51,8 @@ export default function Page() {
 
           <p className="text-lg">
             Looking for something you can call your own without feeling like
-            you're tied down? We get you. And we're constantly innovating for
-            you, too.
+            you&apos;re tied down? We get you. And we&apos;re constantly
+            innovating for you, too.
           </p>
         </div>
       </section>
