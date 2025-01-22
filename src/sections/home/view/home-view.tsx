@@ -4,6 +4,7 @@ import Filter from "./filter";
 import NewHomes from "./explore";
 import Page from "./tips";
 import ServicesSectio from "./service";
+import WeInclude from "../we-include";
 
 export default function HomeView() {
   return (
@@ -11,6 +12,7 @@ export default function HomeView() {
       <HomeHero />
       <Filter />
       <NewHomes />
+      <WeInclude />
       <Page />
       <ServicesSectio />
     </>
