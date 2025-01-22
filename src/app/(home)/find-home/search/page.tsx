@@ -67,7 +67,7 @@ export default function SearchPage() {
       {/* Hero Section */}
       <div className="relative h-[500px]">
         <Image
-          src="/search-hero.jpg"
+          src="/single.png"
           alt="Beautiful homes landscape"
           fill
           className="object-cover"
