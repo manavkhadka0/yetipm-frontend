@@ -95,7 +95,7 @@ export default function Header() {
                   <>
                     <button
                       className={cn(
-                        "flex items-center space-x-1 mx-4 py-1 rounded-lg text-sm font-medium transition-colors duration-200",
+                        "flex items-center space-x-1  mx-4 py-1 rounded-lg text-sm font-bold transition-colors duration-200",
                         pathname === item.href
                           ? "text-primary"
                           : "text-gray-700 hover:text-primary",
@@ -123,7 +123,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
+                      "px-4 py-2 font-bold rounded-lg text-sm  transition-colors duration-200",
                       pathname === item.href
                         ? "text-primary"
                         : "text-gray-700 hover:text-primary"

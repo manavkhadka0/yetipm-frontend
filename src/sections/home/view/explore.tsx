@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function NewHomes() {
   return (
@@ -20,20 +20,22 @@ export default function NewHomes() {
           {/* Content Section */}
           <div className="space-y-6">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              Brand-new houses for rent with high-quality amenities
+              Discover Your New Home in Our Premium Communities
             </h1>
 
             <p className="text-lg text-gray-600">
-              Lease a home in 1 of our premier communities of newly built single-family homes in select locations across
-              the country.
+              Choose from a selection of brand-new single-family homes available
+              for lease in top locations nationwide.
             </p>
 
             <p className="text-lg text-gray-600">
-              Be among the first to lease 1 of these spacious homes and enjoy our worry-free leasing lifestyle.
+              Be one of the first to settle into a spacious, move-in ready home
+              with modern amenities and a hassle-free leasing experience.
             </p>
 
             <p className="text-lg text-gray-600">
-              The houses are first come, first serve so get your application in before it&apos;s too late!
+              These homes won&apos;t last long—apply today and secure your spot
+              before they&apos;re gone!
             </p>
 
             <div className="pt-4">
@@ -41,13 +43,12 @@ export default function NewHomes() {
                 href="/communities"
                 className="inline-block px-8 py-4 text-lg font-semibold text-white bg-[#336699] rounded-lg hover:bg-[#2a547d] transition-colors duration-300"
               >
-                Explore our communities
+                Explore Our Communities
               </Link>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

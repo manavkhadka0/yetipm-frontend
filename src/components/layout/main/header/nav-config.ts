@@ -2,54 +2,42 @@ import { NavItem } from "@/types/nav";
 
 export const navigation: NavItem[] = [
   {
-    name: "Find your home",
-    href: "/find-home",
+    name: "Pricing",
+    href: "/pricing",
+  },
+  {
+    name: "Owners",
+    href: "/owners",
     items: [
       {
-        name: "Search Homes",
-        href: "/find-home/search",
+        name: "Management",
+        href: "/owners/managemnet",
         description: "Browse available homes in your area",
       },
       {
-        name: "Featured Listings",
-        href: "/find-home/featured",
+        name: "Rental-IQ",
+        href: "/owners/rentaliq",
         description: "View our featured rental properties",
       },
       {
-        name: "Locations",
-        href: "/find-home/locations",
+        name: "Concierge",
+        href: "/owners/concierge",
         description: "Explore homes by location",
       },
       {
-        name: "Pricing",
-        href: "/find-home/pricing",
+        name: "Same Day Lease",
+        href: "/owners/samedaylease",
         description: "Learn about our rental rates",
       },
-    ],
-  },
-  {
-    name: "Our difference",
-    href: "/our-difference",
-    items: [
       {
-        name: "Why Choose Us",
-        href: "/ourDiff",
-        description: "What sets us apart",
+        name: "Smart Maintenance",
+        href: "/owners/maintenance",
+        description: "Learn about our maintenance services",
       },
       {
-        name: "Resident Benefits",
-        href: "/resiBenifit",
-        description: "Exclusive benefits for our residents",
-      },
-      {
-        name: "Our Services",
-        href: "/our-difference/services",
-        description: "Professional property management services",
-      },
-      {
-        name: "Success Stories",
-        href: "/our-difference/testimonials",
-        description: "Hear from our happy residents",
+        name: "Owner Resource Center",
+        href: "/owners/resource-center",
+        description: "Access owner resources and information",
       },
     ],
   },
@@ -58,51 +46,96 @@ export const navigation: NavItem[] = [
     href: "/resources",
     items: [
       {
-        name: "Resident Guide",
-        href: "/resources/resident-guide",
-        description: "Essential information for residents",
+        name: "Buy Rentals",
+        href: "/rentals",
+        description: "Browse available homes in your area",
       },
       {
-        name: "FAQs",
-        href: "/resources/faqs",
-        description: "Frequently asked questions",
+        name: "Sell My Property",
+        href: "/sell-property",
+        description: "List your property for lease",
       },
       {
-        name: "Blog",
-        href: "/resources/blog",
-        description: "Tips, news, and updates",
+        name: "Owner Referral",
+        href: "/owner-referral",
+        description: "Refer property owners to YetiPM",
       },
       {
-        name: "Support Center",
-        href: "/resources/support",
-        description: "Get help and support",
+        name: "Agent Referral",
+        href: "/agent-referral",
+        description: "Refer real estate agents to YetiPM",
       },
     ],
   },
   {
-    name: "About",
-    href: "/about",
+    name: "Search Rentals",
+    href: "/rentals",
+  },
+  {
+    name: "Residents",
+    href: "/residents",
     items: [
       {
-        name: "Our Story",
-        href: "/about/story",
-        description: "Learn about our company",
+        name: "Pay my rent",
+        href: "/residents/pay-rent",
+        description: "Pay your rent online",
       },
       {
-        name: "Leadership",
-        href: "/about/leadership",
-        description: "Meet our team",
+        name: "Tenant Portal",
+        href: "/residents/portal",
+        description: "Access your resident portal",
       },
       {
-        name: "Careers",
-        href: "/about/careers",
-        description: "Join our team",
+        name: "Resident Benefit",
+        href: "/residents/benefits",
+        description: "Explore exclusive resident benefits",
       },
       {
-        name: "News & Press",
-        href: "/about/news",
-        description: "Company updates and press releases",
+        name: "Package",
+        href: "/residents/packages",
+        description: "Manage your package deliveries",
+      },
+      {
+        name: "Maintenance",
+        href: "/residents/maintenance",
+        description: "Submit and track maintenance requests",
+      },
+      {
+        name: "Requests",
+        href: "/residents/requests",
+        description: "Submit general requests",
+      },
+      {
+        name: "Move-Out",
+        href: "/residents/move-out",
+        description: "Access move-out information and procedures",
       },
     ],
   },
+  {
+    name:"Company",
+    href: "/company",
+    items: [
+      {
+        name: "Our Team",
+        href: "/our-team",
+        description: "Meet the people behind YetiPM",
+      },
+      {
+        name: "Our Values",
+        href: "/our-values",
+        description: "Learn about our core principles and mission",
+      },
+      {
+        name: "News",
+        href: "/news",
+        description: "Stay updated with our latest announcements",
+      },
+    ]
+  },
+  {
+    name:" Contact",
+    href: "/contact-us",
+  },
+
 ];

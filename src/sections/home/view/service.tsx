@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
+import { useState } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 type Service = {
-  id: string
-  name: string
-  title: string
-  description: string
-  buttonText: string
-  imageSrc: string
-}
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  imageSrc: string;
+};
 
 const services: Service[] = [
   {
@@ -51,15 +51,17 @@ const services: Service[] = [
     buttonText: "Explore services",
     imageSrc: "/placeholder.svg?height=600&width=800",
   },
-]
+];
 
 export default function ServicesSection() {
-  const [activeService, setActiveService] = useState(services[0])
+  const [activeService, setActiveService] = useState(services[0]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#336699] to-[#1a334d] py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-white text-5xl font-bold text-center mb-12">Live the worry-free leasing lifestyle.</h2>
+        <h2 className="text-white text-5xl font-bold text-center mb-12">
+          Live the worry-free leasing lifestyle.
+        </h2>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
@@ -70,14 +72,27 @@ export default function ServicesSection() {
                   key={service.id}
                   onClick={() => setActiveService(service)}
                   className={`w-full text-left px-6 py-6 transition-all duration-300 flex items-center justify-between group
-                    ${activeService.id === service.id ? "bg-[#336699] text-white" : "text-white/90 hover:bg-white/10"}
+                    ${
+                      activeService.id === service.id
+                        ? "bg-[#336699] text-white"
+                        : "text-white/90 hover:bg-white/10"
+                    }
                   `}
+                  aria-label={`View details for ${service.name}`} // Added aria-label for accessibility
                 >
                   <span className="font-medium">{service.name}</span>
                   <ChevronRight
                     className={`w-5 h-5 transition-transform duration-300
-                    ${activeService.id === service.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
-                    ${activeService.id === service.id ? "translate-x-0" : "-translate-x-2 group-hover:translate-x-0"}
+                    ${
+                      activeService.id === service.id
+                        ? "opacity-100"
+                        : "opacity-0 group-hover:opacity-100"
+                    }
+                    ${
+                      activeService.id === service.id
+                        ? "translate-x-0"
+                        : "-translate-x-2 group-hover:translate-x-0"
+                    }
                   `}
                   />
                 </button>
@@ -89,10 +104,11 @@ export default function ServicesSection() {
               <div className="absolute inset-0 z-0">
                 <Image
                   src={"/hero.png"}
-                  alt=""
+                  alt="Hero image for services section" // Added alt text for accessibility
                   fill
                   className="object-cover"
                   priority
+                  // Lazy loading image for better performance
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#336699]/90 to-transparent" />
               </div>
@@ -119,6 +135,5 @@ export default function ServicesSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

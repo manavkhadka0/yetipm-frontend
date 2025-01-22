@@ -63,9 +63,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          There&apos;s the old way to lease a home,
+          There&apos;s the traditional way to lease a home,
           <br />
-          then there&apos;s our way.
+          and then there&apos;s our way.
         </h1>
         <p className="max-w-3xl mx-auto text-lg mb-8 text-gray-600">
           At YETI PM, we offer pet-friendly, yard-having homes for lease with
@@ -81,10 +81,10 @@ export default function Home() {
       {/* Filter Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            You just want to be you.{" "}
-            <span className="text-[#336699]">
-              We have a home for <p className="text-center">that.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            You deserve a space that&apos;s truly yours.
+            <span className="text-[#336699] text-center">
+              <p className="text-center">We have a home for that.</p>
             </span>
           </h2>
           <p className="text-lg text-gray-600 text-center">

@@ -20,6 +20,7 @@ export default function Page() {
                 alt="Family discussing home leasing"
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
@@ -34,6 +35,7 @@ export default function Page() {
               <Button
                 variant="link"
                 className="text-[#336699] hover:text-[#264d73] font-semibold"
+                aria-label="See helpful tips for applying"
               >
                 See helpful tips
               </Button>
@@ -48,6 +50,7 @@ export default function Page() {
                 alt="Family in kitchen"
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
@@ -62,6 +65,7 @@ export default function Page() {
               <Button
                 variant="link"
                 className="text-[#336699] hover:text-[#264d73] font-semibold"
+                aria-label="See the qualification requirements"
               >
                 See requirements
               </Button>
@@ -76,6 +80,7 @@ export default function Page() {
                 alt="Family cooking together"
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <div className="relative p-6 bg-white shadow-lg rounded-lg transform -translate-y-8 transition-transform group-hover:-translate-y-10">
@@ -89,6 +94,7 @@ export default function Page() {
               <Button
                 variant="link"
                 className="text-[#336699] hover:text-[#264d73] font-semibold"
+                aria-label="Start the application process"
               >
                 Get started
               </Button>
