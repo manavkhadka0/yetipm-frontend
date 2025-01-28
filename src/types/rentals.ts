@@ -46,3 +46,18 @@ export interface Feature {
   name: string;
   images: string;
 }
+
+export interface FilterState {
+  min_price: string;
+  max_price: string;
+  beds: string;
+  baths: string;
+  project_type: string;
+  city: string;
+  availability: string;
+}
+
+export interface RentalFiltersProps {
+  filters: FilterState;
+  setFilters: (filters: FilterState) => void;
+}

@@ -20,7 +20,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { RentalFiltersProps } from "@/types/rental";
+import { RentalFiltersProps } from "@/types/rentals";
 
 export default function RentalFilters({
   filters,

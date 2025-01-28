@@ -1,5 +1,11 @@
-import { BlogCardProps } from "@/types/rental";
 import React from "react";
+
+type BlogCardProps = {
+  image: string;
+  date: string;
+  title: string;
+  excerpt: string;
+};
 
 const BlogCard = ({
   image,
