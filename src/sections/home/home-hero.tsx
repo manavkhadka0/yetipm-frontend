@@ -81,8 +81,8 @@ export default function Page() {
         />
         <div className="absolute inset-0 bg-black/20" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-          <h1 className="text-6xl font-bold mb-4">While you sleep.</h1>
-          <h2 className="text-6xl font-bold">we manage your property.</h2>
+          <h1 className="text-6xl font-bold mb-4">Your Property,</h1>
+          <h2 className="text-6xl font-bold">Our Priority.</h2>
         </div>
       </div>
 

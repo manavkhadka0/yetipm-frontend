@@ -63,15 +63,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          There&apos;s the traditional way to lease a home,
+           Why settle for traditional?
           <br />
-          and then there&apos;s our way.
+           Lease smarter, the Yeti way.
         </h1>
-        <p className="max-w-3xl mx-auto text-lg mb-8 text-gray-600">
-          At YETI PM, we offer pet-friendly, yard-having homes for lease with
-          Smart Home technology in awesome neighborhoods across the country.
-          Live in a great house without the headache and long-term commitment of
-          owning.
+        <p className="max-w-3xl mx-auto text-lg mb-8 text-gray-600 text-justify">
+          Love the home, skip the commitment - Yeti PM has you covered. We offer pet-friendly homes equipped with smart technology, spacious yards, and located in amazing neighborhoods, giving you the perfect blend of modern convenience and comfort—all without the headaches and long-term commitment of homeownership
+
         </p>
         <button className="bg-[#336699] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#2a547d] transition-colors">
           Discover your dream home
@@ -82,9 +80,9 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-            You deserve a space that&apos;s truly yours.
+            You deserve a place that feels uniquely yours at Yeti PM,
             <span className="text-[#336699] text-center">
-              <p className="text-center">We have a home for that.</p>
+              <p className="text-center">we have the perfect home waiting for you..</p>
             </span>
           </h2>
           <p className="text-lg text-gray-600 text-center">

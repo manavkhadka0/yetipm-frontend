@@ -20,22 +20,20 @@ export default function NewHomes() {
           {/* Content Section */}
           <div className="space-y-6">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              Discover Your New Home in Our Premium Communities
+             Find Your Dream Home in Exceptional Communities
             </h1>
 
             <p className="text-lg text-gray-600">
-              Choose from a selection of brand-new single-family homes available
-              for lease in top locations nationwide.
+              Explore our collection of single-family homes for lease in prime locations across DFW Metroplex.
             </p>
 
             <p className="text-lg text-gray-600">
-              Be one of the first to settle into a spacious, move-in ready home
-              with modern amenities and a hassle-free leasing experience.
+              Step into a spacious, move-in-ready home featuring modern amenities, thoughtful design, and a seamless leasing experience.
             </p>
 
             <p className="text-lg text-gray-600">
-              These homes won&apos;t last long—apply today and secure your spot
-              before they&apos;re gone!
+              Don&apos;t miss your chance to secure the perfect home—apply now before it’s too late!
+
             </p>
 
             <div className="pt-4">

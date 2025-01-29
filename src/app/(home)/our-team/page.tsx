@@ -1,29 +1,36 @@
+"use client";
+import { useEffect, useState } from 'react';
+import { Twitter, Facebook, Linkedin, Instagram } from 'lucide-react';
+
 interface TeamMember {
+  id: number;
   name: string;
-  title: string;
-  image: string;
+  role: string;
   description: string;
-  department: "Leadership" | "Engineering";
+  profile_picture: string | null;
+  facebook_link: string | null;
+  instagram_link: string | null;
+  twitter_link: string | null;
+  linkedin_link: string | null;
 }
 
-const teamMembers: TeamMember[] = [
-  {
-    name: "Suraj Poudyal",
-    title: "Broker/Owner",
-    image: "/team-members/suraj.jpg",
-    department: "Leadership",
-    description: `With over 1.5 decades of experience as a Real Estate professional, Suraj (meaning "Sun") has earned a reputation for providing top-notch guidance from start to finish. Known for lowering stress levels and making the home-buying experience pleasurable, he maintains a strong base of loyal repeating customers. As an explorer by nature who loves biking in the Texan plains, Suraj has helped hundreds of clients find their dream homes.`,
-  },
-  {
-    name: "Sunil Guatam",
-    title: "Real Estate Professional & Civil Engineer",
-    image: "/team-members/sunil.png",
-    department: "Engineering",
-    description: `A Civil Engineer graduate from UT Arlington, Sunil brings a unique combination of technical expertise and aesthetic appreciation to real estate. Known as a "home-doctor," his engineering background enables him to understand the in-and-out of every home, from design to foundation and structure. As a photographer by passion, he has a special eye for identifying the aesthetic qualities of properties, helping clients find homes that are both structurally sound and picturesquely beautiful.`,
-  },
-];
-
 export default function OurTeamPage() {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await fetch('https://yetipm.baliyoventures.com/api/team/');
+        const data = await response.json();
+        setTeamMembers(data.results);
+      } catch (error) {
+        console.error('Error fetching team members:', error);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
@@ -46,7 +53,7 @@ export default function OurTeamPage() {
       <div className="container mx-auto px-4 py-20">
         {teamMembers.map((member, index) => (
           <div
-            key={index}
+            key={member.id}
             className={`flex flex-col md:flex-row items-center gap-12 py-16 ${
               index !== 0 ? "border-t border-gray-200" : ""
             }`}
@@ -54,7 +61,7 @@ export default function OurTeamPage() {
             <div className={`md:w-1/3 ${index % 2 === 1 ? "md:order-2" : ""}`}>
               <div className="relative aspect-square overflow-hidden rounded-2xl shadow-xl">
                 <img
-                  src={member.image}
+                  src={member.profile_picture || "/default-profile.jpg"}
                   alt={member.name}
                   className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
                 />
@@ -63,16 +70,38 @@ export default function OurTeamPage() {
 
             <div className={`md:w-2/3 ${index % 2 === 1 ? "md:order-1" : ""}`}>
               <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-primary">
+                <h2 className="text-3xl font-bold text-primary flex items-center">
                   {member.name}
                 </h2>
                 <p className="text-xl text-gray-600 font-medium">
-                  {member.title}
+                  {member.role}
                 </p>
                 <div className="w-20 h-1 bg-primary/20 rounded-full"></div>
-                <p className="text-gray-600 leading-relaxed">
-                  {member.description}
-                </p>
+                <div className="text-gray-600 leading-relaxed">
+                  <div dangerouslySetInnerHTML={{ __html: member.description }} />
+                  <div className="flex space-x-4 mt-2">
+                    {member.twitter_link && (
+                      <a href={member.twitter_link} target="_blank" rel="noopener noreferrer">
+                        <Twitter className="text-primary h-6 w-6" />
+                      </a>
+                    )}
+                    {member.facebook_link && (
+                      <a href={member.facebook_link} target="_blank" rel="noopener noreferrer">
+                        <Facebook className="text-primary h-6 w-6" />
+                      </a>
+                    )}
+                    {member.linkedin_link && (
+                      <a href={member.linkedin_link} target="_blank" rel="noopener noreferrer">
+                        <Linkedin className="text-primary h-6 w-6" />
+                      </a>
+                    )}
+                    {member.instagram_link && (
+                      <a href={member.instagram_link} target="_blank" rel="noopener noreferrer">
+                        <Instagram className="text-primary h-6 w-6" />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

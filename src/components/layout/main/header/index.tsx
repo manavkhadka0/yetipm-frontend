@@ -78,7 +78,7 @@ export default function Header() {
               alt="Yeti PM Logo"
               width={120}
               height={80}
-              className="h-10 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
 
