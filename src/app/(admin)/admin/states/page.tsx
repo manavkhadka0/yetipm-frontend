@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { State, StatesResponse } from "@/types/states";
+import { StatesResponse } from "@/types/states";
 import axios from "axios";
 import { showError } from "@/lib/alerts";
 import { Button } from "@/components/ui/button";
@@ -11,19 +11,43 @@ import { EditStateDialog } from "./components/states-edit-state-dialog";
 import { columns } from "./components/states-columns";
 
 export default function StatesPage() {
-  const [states, setStates] = useState<State[]>([]);
+  const [states, setStates] = useState<StatesResponse>();
   const [isLoading, setIsLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
-  const fetchStates = async () => {
+  const fetchStates = async (page: number = 1, size: number = pageSize) => {
     try {
+      setIsLoading(true);
       const response = await axios.get<StatesResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/states/`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/states/?page=${page}&page_size=${size}`
       );
-      setStates(response.data.results);
-      setIsLoading(false);
+      setStates(response.data);
+      setCurrentPage(page);
+      setPageSize(size);
     } catch {
       showError("Failed to fetch states");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGlobalSearch = async (searchTerm: string) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/api/states/?search=${encodeURIComponent(searchTerm)}`
+      );
+      const data = await response.json();
+      setStates(data as StatesResponse);
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Error searching states:", error);
+      showError("Failed to search states");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -31,6 +55,14 @@ export default function StatesPage() {
   useEffect(() => {
     fetchStates();
   }, []);
+
+  const handlePageChange = (page: number) => {
+    fetchStates(page, pageSize);
+  };
+
+  const handlePageSizeChange = (newSize: number) => {
+    fetchStates(1, newSize);
+  };
 
   return (
     <div className="container mx-auto py-10">
@@ -44,9 +76,17 @@ export default function StatesPage() {
 
       <DataTable
         columns={columns}
-        data={states}
+        data={states?.results || []}
         onDataChange={fetchStates}
         isLoading={isLoading}
+        onGlobalSearch={handleGlobalSearch}
+        pagination={{
+          pageCount: Math.ceil((states?.count || 0) / pageSize),
+          currentPage,
+          pageSize,
+          onPageChange: handlePageChange,
+          onPageSizeChange: handlePageSizeChange,
+        }}
       />
 
       <EditStateDialog

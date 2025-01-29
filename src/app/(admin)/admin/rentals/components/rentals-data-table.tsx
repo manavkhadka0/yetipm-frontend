@@ -32,8 +32,16 @@ import { DataTablePagination } from "./rentals-data-table-pagination";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  onDataChange?: () => void;
+  onDataChange: (page?: number, size?: number) => void;
   isLoading?: boolean;
+  onGlobalSearch?: (searchTerm: string) => void;
+  pagination?: {
+    pageCount: number;
+    currentPage: number;
+    pageSize: number;
+    onPageChange: (page: number) => void;
+    onPageSizeChange: (pageSize: number) => void;
+  };
 }
 
 export interface TableMeta<TData> extends BaseTableMeta<TData> {
@@ -44,7 +52,9 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   onDataChange,
+  onGlobalSearch,
   isLoading,
+  pagination,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -53,6 +63,17 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = React.useState("");
+
+  const handleGlobalSearch = React.useCallback(
+    (term: string) => {
+      setGlobalFilter(term);
+      if (onGlobalSearch) {
+        onGlobalSearch(term);
+      }
+    },
+    [onGlobalSearch]
+  );
 
   const table = useReactTable({
     data,
@@ -62,6 +83,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      globalFilter,
     },
     meta: {
       refreshData: async () => {
@@ -131,14 +153,28 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  <div className="flex flex-col items-center justify-center space-y-2">
+                    <p>No results found.</p>
+                    {globalFilter && (
+                      <button
+                        onClick={() => handleGlobalSearch("")}
+                        className="text-sm text-muted-foreground hover:text-primary"
+                      >
+                        Clear search
+                      </button>
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination
+        table={table}
+        onPageChange={pagination?.onPageChange}
+        onPageSizeChange={pagination?.onPageSizeChange}
+      />
     </div>
   );
 }

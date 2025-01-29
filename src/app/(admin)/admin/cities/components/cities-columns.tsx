@@ -22,6 +22,13 @@ export const columns: ColumnDef<City>[] = [
     enableSorting: true,
   },
   {
+    accessorKey: "description",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Description" />
+    ),
+    enableSorting: true,
+  },
+  {
     id: "actions",
     cell: ({ row, table }) => (
       <DataTableRowActions

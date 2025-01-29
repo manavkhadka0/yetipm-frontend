@@ -28,12 +28,22 @@ import {
 import { DataTablePagination } from "./cities-data-table-pagination";
 import { DataTableToolbar } from "./cities-data-table-toolbar";
 import { CityTableSkeleton } from "@/components/skeletons/city-table-skeleton";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onDataChange?: () => void;
   isLoading?: boolean;
+  onGlobalSearch?: (searchTerm: string) => void;
+  pagination?: {
+    pageCount: number;
+    currentPage: number;
+    pageSize: number;
+    onPageChange: (page: number) => void;
+    onPageSizeChange: (pageSize: number) => void;
+  };
 }
 
 export interface TableMeta<TData> extends BaseTableMeta<TData> {
@@ -45,6 +55,8 @@ export function DataTable<TData, TValue>({
   data,
   onDataChange,
   isLoading,
+  onGlobalSearch,
+  pagination,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -62,6 +74,10 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      pagination: {
+        pageIndex: (pagination?.currentPage || 1) - 1,
+        pageSize: pagination?.pageSize || 10,
+      },
     },
     meta: {
       refreshData: async () => {
@@ -81,11 +97,20 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    manualPagination: true,
+    pageCount: pagination?.pageCount || 1,
   });
+
+  const handleReset = () => {
+    table.resetColumnFilters();
+    if (onDataChange) {
+      onDataChange();
+    }
+  };
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} onReset={handleReset} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -131,14 +156,39 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  <div className="flex flex-col items-center gap-2">
+                    <p>No results.</p>
+                    {table.getState().columnFilters.length > 0 &&
+                      onGlobalSearch && (
+                        <Button
+                          variant="secondary"
+                          onClick={() =>
+                            onGlobalSearch(
+                              (table
+                                .getColumn("name")
+                                ?.getFilterValue() as string) ?? ""
+                            )
+                          }
+                          className="h-8 px-2 lg:px-3"
+                        >
+                          Search All Cities
+                          <Search className="ml-2 h-4 w-4" />
+                        </Button>
+                      )}
+                  </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {pagination && (
+        <DataTablePagination
+          table={table}
+          onPageChange={pagination.onPageChange}
+          onPageSizeChange={pagination.onPageSizeChange}
+        />
+      )}
     </div>
   );
 }

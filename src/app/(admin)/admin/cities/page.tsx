@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { City, CityResponse } from "@/types/city";
+import { CityResponse } from "@/types/city";
 import { columns } from "./components/cities-columns";
 import { DataTable } from "./components/cities-data-table";
 import axios from "axios";
@@ -11,19 +11,43 @@ import { Plus } from "lucide-react";
 import { EditCityDialog } from "./components/cities-edit-city-dialog";
 
 export default function CitiesPage() {
-  const [cities, setCities] = useState<City[]>([]);
+  const [cities, setCities] = useState<CityResponse>();
   const [isLoading, setIsLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
-  const fetchCities = async () => {
+  const fetchCities = async (page: number = 1, size: number = pageSize) => {
     try {
+      setIsLoading(true);
       const response = await axios.get<CityResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/?page=${page}&page_size=${size}`
       );
-      setCities(response.data.results);
-      setIsLoading(false);
+      setCities(response.data);
+      setCurrentPage(page);
+      setPageSize(size);
     } catch {
       showError("Failed to fetch cities");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGlobalSearch = async (searchTerm: string) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/api/cities/?search=${encodeURIComponent(searchTerm)}`
+      );
+      const data = await response.json();
+      setCities(data as CityResponse);
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Error searching cities:", error);
+      showError("Failed to search cities");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -31,6 +55,14 @@ export default function CitiesPage() {
   useEffect(() => {
     fetchCities();
   }, []);
+
+  const handlePageChange = (page: number) => {
+    fetchCities(page, pageSize);
+  };
+
+  const handlePageSizeChange = (newSize: number) => {
+    fetchCities(1, newSize);
+  };
 
   return (
     <div className="container mx-auto py-10">
@@ -44,9 +76,17 @@ export default function CitiesPage() {
 
       <DataTable
         columns={columns}
-        data={cities}
+        data={cities?.results || []}
         onDataChange={fetchCities}
         isLoading={isLoading}
+        onGlobalSearch={handleGlobalSearch}
+        pagination={{
+          pageCount: Math.ceil((cities?.count || 0) / pageSize),
+          currentPage,
+          pageSize,
+          onPageChange: handlePageChange,
+          onPageSizeChange: handlePageSizeChange,
+        }}
       />
 
       <EditCityDialog
