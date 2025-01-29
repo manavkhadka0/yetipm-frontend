@@ -28,6 +28,8 @@ import {
 import { DataTableToolbar } from "./rentals-data-table-toolbar";
 import { RentalTableSkeleton } from "@/components/skeletons/rental-table-skeleton";
 import { DataTablePagination } from "./rentals-data-table-pagination";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -63,17 +65,6 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = React.useState("");
-
-  const handleGlobalSearch = React.useCallback(
-    (term: string) => {
-      setGlobalFilter(term);
-      if (onGlobalSearch) {
-        onGlobalSearch(term);
-      }
-    },
-    [onGlobalSearch]
-  );
 
   const table = useReactTable({
     data,
@@ -83,8 +74,15 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
-      globalFilter,
+      pagination: pagination
+        ? {
+            pageIndex: pagination.currentPage - 1,
+            pageSize: pagination.pageSize,
+          }
+        : undefined,
     },
+    pageCount: pagination?.pageCount,
+    manualPagination: true,
     meta: {
       refreshData: async () => {
         if (onDataChange) {
@@ -105,9 +103,16 @@ export function DataTable<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  const handleReset = () => {
+    table.resetColumnFilters();
+    if (onDataChange) {
+      onDataChange();
+    }
+  };
+
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} onReset={handleReset} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -153,16 +158,25 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  <div className="flex flex-col items-center justify-center space-y-2">
-                    <p>No results found.</p>
-                    {globalFilter && (
-                      <button
-                        onClick={() => handleGlobalSearch("")}
-                        className="text-sm text-muted-foreground hover:text-primary"
-                      >
-                        Clear search
-                      </button>
-                    )}
+                  <div className="flex flex-col items-center gap-2">
+                    <p>No results.</p>
+                    {table.getState().columnFilters.length > 0 &&
+                      onGlobalSearch && (
+                        <Button
+                          variant="secondary"
+                          onClick={() =>
+                            onGlobalSearch(
+                              (table
+                                .getColumn("name")
+                                ?.getFilterValue() as string) ?? ""
+                            )
+                          }
+                          className="h-8 px-2 lg:px-3"
+                        >
+                          Search All Rentals
+                          <Search className="ml-2 h-4 w-4" />
+                        </Button>
+                      )}
                   </div>
                 </TableCell>
               </TableRow>
@@ -170,11 +184,13 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination
-        table={table}
-        onPageChange={pagination?.onPageChange}
-        onPageSizeChange={pagination?.onPageSizeChange}
-      />
+      {pagination && (
+        <DataTablePagination
+          table={table}
+          onPageChange={pagination.onPageChange}
+          onPageSizeChange={pagination.onPageSizeChange}
+        />
+      )}
     </div>
   );
 }
