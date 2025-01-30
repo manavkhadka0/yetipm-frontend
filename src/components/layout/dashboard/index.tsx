@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import {
   SidebarInset,
   SidebarProvider,
@@ -12,11 +10,8 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
-
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
+    <SidebarProvider defaultOpen={true}>
       <AppSidebar />
       <SidebarInset>
         <main className="p-2 min-h-screen w-full">

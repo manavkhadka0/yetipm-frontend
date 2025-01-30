@@ -28,41 +28,40 @@ export const locations: FooterLink[] = [
 ];
 
 export const findYourHome: FooterLink[] = [
-  { label: "Search locations", href: "/search-locations" },
-  { label: "Rental communities", href: "/rental-communities" },
-  { label: "Qualification requirements", href: "/qualification-requirements" },
-  { label: "Before you apply", href: "/before-you-apply" },
-  { label: "Application process", href: "/application-process" },
-  { label: "Leasing fees", href: "/leasing-fees" },
+  { label: "Search locations", href: "#" },
+  { label: "Rental communities", href: "#" },
+  { label: "Qualification requirements", href: "#" },
+  { label: "Before you apply", href: "#" },
+  { label: "Application process", href: "#" },
+  { label: "Leasing fees", href: "#" },
 ];
 
 export const about: FooterLink[] = [
-  { label: "Our story", href: "/our-story" },
+  { label: "Our story", href: "#" },
   { label: "Our values", href: "/our-values" },
   { label: "Our Team", href: "/our-team" },
 ];
 
 export const helpCenter: FooterLink[] = [
-  { label: "FAQs", href: "/faqs" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Blog", href: "/blog" },
+  { label: "Contact Us", href: "/contact-us" },
+  { label: "Blog", href: "/blogs" },
 ];
 
 export const currentResidents: FooterLink[] = [
-  { label: "Pay my rent", href: "/pay-rent" },
-  { label: "Request maintenance", href: "/maintenance" },
-  { label: "Resident resources", href: "/resources" },
-  { label: "Resident responsibilities", href: "/responsibilities" },
-  { label: "Resident offers", href: "/offers" },
-  { label: "Renewal", href: "/renewal" },
+  { label: "Pay my rent", href: "#" },
+  { label: "Request maintenance", href: "#" },
+  { label: "Resident resources", href: "#" },
+  { label: "Resident responsibilities", href: "#" },
+  { label: "Resident offers", href: "#" },
+  { label: "Renewal", href: "#" },
   { label: "Move-out guide", href: "/move-out" },
 ];
 
 export const ourServices: FooterLink[] = [
-  { label: "Lease Easy", href: "/lease-easy" },
-  { label: "Pets", href: "/pets" },
-  { label: "ProCare", href: "/procare" },
-  { label: "Pool information", href: "/pool-information" },
+  { label: "Lease Easy", href: "#" },
+  { label: "Pets", href: "#" },
+  { label: "ProCare", href: "#" },
+  { label: "Pool information", href: "#" },
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -74,6 +73,6 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const legalLinks: FooterLink[] = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms & Conditions", href: "#" },
 ];

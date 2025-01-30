@@ -9,7 +9,7 @@ export const contactFormSchema = z.object({
     .nonempty("Phone number is required."),
   email: z.string().email("Invalid email address."),
   message: z.string().min(1, "Message is required."),
-  property_id: z.string().optional(),
+  property: z.string().optional(),
 });
 
 export type ContactFormSchema = z.infer<typeof contactFormSchema>;

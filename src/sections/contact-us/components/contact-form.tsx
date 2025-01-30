@@ -37,7 +37,7 @@ export default function ContactForm({
       phone_number: "",
       email: "",
       message: "",
-      property_id: propertyId || "",
+      property: propertyId || "",
     },
   });
 
@@ -54,7 +54,7 @@ export default function ContactForm({
           body: JSON.stringify({
             ...data,
             inquiry_type: inquiryType,
-            property_id: propertyId,
+            property: propertyId ? parseInt(propertyId) : null,
           }),
         }
       );

@@ -151,7 +151,7 @@ export default function PropertyDetails({
       {/* Floating Enquire Button and Dialog */}
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="fixed z-50 bottom-8 right-8 shadow-lg rounded-full px-6 py-6 bg-green-700 hover:bg-green-800">
+          <Button className="fixed z-50 bottom-8 left-8 shadow-lg rounded-full px-6 py-6 bg-green-700 hover:bg-green-800">
             <MessageCircle className="w-5 h-5 mr-2" />
             Enquire Now
           </Button>
