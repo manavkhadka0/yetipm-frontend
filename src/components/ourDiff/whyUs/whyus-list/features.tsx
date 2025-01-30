@@ -41,7 +41,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <div className="bg-[#336699]/10">
+    <div className="bg-[#003d21]/10">
       <section className="py-10 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -59,7 +59,7 @@ export default function FeaturesSection() {
             <div key={index} className="flex flex-col items-start">
               <div className="mb-4">
                 <feature.icon
-                  className="w-8 h-8 text-[#336699]"
+                  className="w-8 h-8 text-[#003d21]"
                   strokeWidth={1.5}
                 />
               </div>

@@ -8,7 +8,7 @@ import {
 const FAQ = () => {
   return (
     <div className="max-w-2xl mx-auto py-16">
-      <h2 className="text-2xl font-semibold text-[#336699] mb-6">
+      <h2 className="text-2xl font-semibold text-[#003d21] mb-6">
         Why YETI PM Frequently Asked Questions
       </h2>
       <Accordion type="single" collapsible>

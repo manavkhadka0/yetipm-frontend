@@ -40,7 +40,7 @@ export function CountdownTimer() {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-4 md:gap-8 w-full max-w-4xl mx-auto bg-[#336699] rounded-lg p-8 md:p-12">
+    <div className="grid grid-cols-4 gap-4 md:gap-8 w-full max-w-4xl mx-auto bg-[#003d21] rounded-lg p-8 md:p-12">
       {Object.entries(timeLeft).map(([key, value]) => (
         <div key={key} className="text-center">
           <div className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-2">

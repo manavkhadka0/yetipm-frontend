@@ -63,15 +63,18 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-           Why settle for traditional?
+          Why settle for traditional?
           <br />
-           Lease smarter, the Yeti way.
+          Lease smarter, the Yeti way.
         </h1>
         <p className="max-w-3xl mx-auto text-lg mb-8 text-gray-600 text-justify">
-          Love the home, skip the commitment - Yeti PM has you covered. We offer pet-friendly homes equipped with smart technology, spacious yards, and located in amazing neighborhoods, giving you the perfect blend of modern convenience and comfort—all without the headaches and long-term commitment of homeownership
-
+          Love the home, skip the commitment - Yeti PM has you covered. We offer
+          pet-friendly homes equipped with smart technology, spacious yards, and
+          located in amazing neighborhoods, giving you the perfect blend of
+          modern convenience and comfort—all without the headaches and long-term
+          commitment of homeownership
         </p>
-        <button className="bg-[#336699] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#2a547d] transition-colors">
+        <button className="bg-[#003d21] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#2a547d] transition-colors">
           Discover your dream home
         </button>
       </section>
@@ -81,8 +84,10 @@ export default function Home() {
         <div className="max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
             You deserve a place that feels uniquely yours at Yeti PM,
-            <span className="text-[#336699] text-center">
-              <p className="text-center">we have the perfect home waiting for you..</p>
+            <span className="text-[#003d21] text-center">
+              <p className="text-center">
+                we have the perfect home waiting for you..
+              </p>
             </span>
           </h2>
           <p className="text-lg text-gray-600 text-center">
@@ -98,7 +103,7 @@ export default function Home() {
               onClick={() => setActiveRegion(region as typeof activeRegion)}
               className={`pb-4 px-4 relative ${
                 activeRegion === region
-                  ? "text-[#336699] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#336699]"
+                  ? "text-[#003d21] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#003d21]"
                   : "text-gray-600 hover:text-black"
               }`}
             >

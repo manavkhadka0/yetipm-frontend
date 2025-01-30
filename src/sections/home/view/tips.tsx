@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 export default function Page() {
   return (
@@ -32,13 +31,6 @@ export default function Page() {
                 for years, we&apos;ll make finding your home as smooth as
                 possible.
               </p>
-              <Button
-                variant="link"
-                className="text-[#336699] hover:text-[#264d73] font-semibold"
-                aria-label="See helpful tips for applying"
-              >
-                See helpful tips
-              </Button>
             </div>
           </div>
 
@@ -62,13 +54,6 @@ export default function Page() {
                 First, let&apos;s make sure you meet the qualification
                 requirements.
               </p>
-              <Button
-                variant="link"
-                className="text-[#336699] hover:text-[#264d73] font-semibold"
-                aria-label="See the qualification requirements"
-              >
-                See requirements
-              </Button>
             </div>
           </div>
 
@@ -91,13 +76,6 @@ export default function Page() {
                 Our application process couldn&apos;t be easier. No, really. You
                 can do everything online, and we&apos;re always here to help.
               </p>
-              <Button
-                variant="link"
-                className="text-[#336699] hover:text-[#264d73] font-semibold"
-                aria-label="Start the application process"
-              >
-                Get started
-              </Button>
             </div>
           </div>
         </div>

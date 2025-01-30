@@ -57,7 +57,7 @@ export default function ServicesSection() {
   const [activeService, setActiveService] = useState(services[0]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#336699] to-[#1a334d] py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#003d21] to-[#1a334d] py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-white text-5xl font-bold text-center mb-12">
           Live the worry-free leasing lifestyle.
@@ -74,7 +74,7 @@ export default function ServicesSection() {
                   className={`w-full text-left px-6 py-6 transition-all duration-300 flex items-center justify-between group
                     ${
                       activeService.id === service.id
-                        ? "bg-[#336699] text-white"
+                        ? "bg-[#003d21] text-white"
                         : "text-white/90 hover:bg-white/10"
                     }
                   `}
@@ -110,7 +110,7 @@ export default function ServicesSection() {
                   priority
                   // Lazy loading image for better performance
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#336699]/90 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#003d21]/90 to-transparent" />
               </div>
 
               <div className="relative z-10 p-12 min-h-[500px] flex items-center">
@@ -122,7 +122,7 @@ export default function ServicesSection() {
                     {activeService.description}
                   </p>
                   <Button
-                    className="bg-white text-[#336699] hover:bg-white/90 transition-all duration-300 px-8 py-6 text-lg font-medium"
+                    className="bg-white text-[#003d21] hover:bg-white/90 transition-all duration-300 px-8 py-6 text-lg font-medium"
                     size="lg"
                   >
                     {activeService.buttonText}
