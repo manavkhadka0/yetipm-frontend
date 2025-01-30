@@ -13,22 +13,18 @@ export interface SocialLink {
 }
 
 export const locations: FooterLink[] = [
-  { label: "Atlanta", href: "/atlanta" },
-  { label: "Carolinas", href: "/carolinas" },
-  { label: "Chicago", href: "/chicago" },
-  { label: "Dallas", href: "/dallas" },
-  { label: "Denver", href: "/denver" },
-  { label: "Houston", href: "/houston" },
-  { label: "Jacksonville", href: "/jacksonville" },
-  { label: "Las Vegas", href: "/las-vegas" },
-  { label: "Minneapolis", href: "/minneapolis" },
-  { label: "Northern California", href: "/northern-california" },
-  { label: "Orlando", href: "/orlando" },
-  { label: "Phoenix", href: "/phoenix" },
-  { label: "Seattle", href: "/seattle" },
-  { label: "South Florida/ Miami", href: "/south-florida-miami" },
-  { label: "Southern California", href: "/southern-california" },
-  { label: "Tampa", href: "/tampa" },
+  { label: "Arlington", href: "/rentals/cities/arlington" },
+  { label: "Austin", href: "/rentals/cities/austin" },
+  { label: "Dallas", href: "/rentals/cities/dallas" },
+  { label: "El Paso", href: "/rentals/cities/el-paso" },
+  { label: "Fort Worth", href: "/rentals/cities/fort-worth" },
+  { label: "Garland", href: "/rentals/cities/garland" },
+  { label: "Houston", href: "/rentals/cities/houston" },
+  { label: "Irving", href: "/rentals/cities/irving" },
+  { label: "Laredo", href: "/rentals/cities/laredo" },
+  { label: "Lubbock", href: "/rentals/cities/lubbock" },
+  { label: "Plano", href: "/rentals/cities/plano" },
+  { label: "San Antonio", href: "/rentals/cities/san-antonio" },
 ];
 
 export const findYourHome: FooterLink[] = [
@@ -42,19 +38,14 @@ export const findYourHome: FooterLink[] = [
 
 export const about: FooterLink[] = [
   { label: "Our story", href: "/our-story" },
-  { label: "Sustainability", href: "/sustainability" },
-  { label: "Investors", href: "/investors" },
-  { label: "Vendors", href: "/vendors" },
-  { label: "Careers", href: "/careers" },
+  { label: "Our values", href: "/our-values" },
+  { label: "Our Team", href: "/our-team" },
 ];
 
 export const helpCenter: FooterLink[] = [
   { label: "FAQs", href: "/faqs" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Local Directory", href: "/directory" },
   { label: "Blog", href: "/blog" },
-  { label: "COVID-19", href: "/covid-19" },
-  { label: "Fraud prevention", href: "/fraud-prevention" },
 ];
 
 export const currentResidents: FooterLink[] = [
@@ -83,8 +74,6 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const legalLinks: FooterLink[] = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-  { label: "Do Not Sell", href: "/do-not-sell" },
-  { label: "Cookie Preference", href: "/cookie-preference" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ];

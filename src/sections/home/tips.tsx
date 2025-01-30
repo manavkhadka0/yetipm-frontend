@@ -1,3 +1,4 @@
+import HeadingSection from "@/components/common/heading-section";
 import Image from "next/image";
 
 export default function Page() {
@@ -5,14 +6,11 @@ export default function Page() {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <main className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Home-leasing, simplified
-          </h1>
-          <p className="text-lg text-gray-600">
-            Your journey to finding the perfect home starts here
-          </p>
-        </div>
+
+        <HeadingSection
+          title="Home-leasing, simplified"
+          subtitle="Your journey to finding the perfect home starts here"
+        />
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">

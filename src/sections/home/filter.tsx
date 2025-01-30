@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Rental } from "@/types/rentals";
 import RentalCard from "@/components/cards/RentalCard";
 import RentalCardSkeleton from "@/components/cards/RentalCardSkeleton";
+import Link from "next/link";
+import HeadingSection from "@/components/common/heading-section";
 
 export default function FeaturedListings() {
   const [featuredRentals, setFeaturedRentals] = useState<Rental[]>([]);
@@ -51,11 +53,10 @@ export default function FeaturedListings() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
         <div className="container mx-auto px-4 py-32 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              Why settle for traditional?
-              <br />
-              Lease smarter, the Yeti way.
-            </h1>
+            <HeadingSection
+              title="Why settle for traditional? Lease smarter, the Yeti way."
+              subtitle="We are here to make your home-leasing experience easier and hassle-free."
+            />
             <p className="max-w-3xl mx-auto text-lg mb-10 text-gray-600 leading-relaxed">
               Love the home, skip the commitment - Yeti PM has you covered. We
               offer pet-friendly homes equipped with smart technology, spacious
@@ -63,43 +64,39 @@ export default function FeaturedListings() {
               perfect blend of modern convenience and comfort—all without the
               headaches and long-term commitment of homeownership
             </p>
-            <button className="bg-primary text-white px-10 py-4 rounded-full font-semibold hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:scale-105 transform">
-              Discover your dream home
-            </button>
+            <Link
+              href="/find-home/search"
+              className="group inline-flex items-center gap-2 px-6 md:px-8 py-3 bg-white border-2 border-[#003d21]/20 text-[#003d21] rounded-full font-semibold hover:border-[#003d21]/40 transition-all duration-300 hover:shadow-lg"
+            >
+              <span className="relative">
+                Discover Your Dream Home
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#003d21] transition-all group-hover:w-full"></span>
+              </span>
+              <svg
+                className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
           </div>
         </div>
-
-        {/* Decorative elements */}
-        <div className="absolute -bottom-8 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-white"></div>
       </section>
 
-      {/* Featured Listings Section */}
       <section className="relative bg-white py-16 md:py-24 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white"></div>
-        <div className="absolute right-0 top-0 w-1/3 h-96 bg-primary/5 blur-3xl rounded-full transform translate-x-1/2"></div>
-        <div className="absolute left-0 bottom-0 w-1/4 h-96 bg-primary/5 blur-3xl rounded-full transform -translate-x-1/2"></div>
-
         <div className="container mx-auto px-4 sm:px-6 relative">
-          <div className="max-w-3xl mx-auto mb-12 md:mb-16">
-            {/* Section Header */}
-            <div className="space-y-4 text-center">
-              <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full">
-                Exclusive Listings
-              </span>
-              <h2 className="text-3xl md:text-5xl font-bold">
-                Featured Properties
-                <span className="block text-primary/80 mt-4 text-lg md:text-xl font-normal">
-                  Discover our hand-picked selection of premium homes
-                </span>
-              </h2>
-              <div className="flex items-center justify-center gap-2 pt-4">
-                <div className="w-8 md:w-12 h-1 bg-primary/20 rounded-full"></div>
-                <div className="w-2 md:w-3 h-2 md:h-3 bg-primary/30 rounded-full"></div>
-                <div className="w-8 md:w-12 h-1 bg-primary/20 rounded-full"></div>
-              </div>
-            </div>
-          </div>
+          <HeadingSection
+            badge="Exclusive Listings"
+            title="Why settle for traditional? Lease smarter, the Yeti way."
+            subtitle="We are here to make your home-leasing experience easier and hassle-free."
+          />
 
           {/* Featured Properties Grid */}
           <div className="relative max-w-7xl mx-auto">
@@ -158,10 +155,13 @@ export default function FeaturedListings() {
 
             {/* View All Properties Button */}
             <div className="text-center mt-12 md:mt-16">
-              <button className="group inline-flex items-center gap-2 px-6 md:px-8 py-3 bg-white border-2 border-primary/20 text-primary rounded-full font-semibold hover:border-primary/40 transition-all duration-300 hover:shadow-lg">
+              <Link
+                href="/find-home/search"
+                className="group inline-flex items-center gap-2 px-6 md:px-8 py-3 bg-white border-2 border-[#003d21]/20 text-[#003d21] rounded-full font-semibold hover:border-[#003d21]/40 transition-all duration-300 hover:shadow-lg"
+              >
                 <span className="relative">
                   View All Properties
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#003d21] transition-all group-hover:w-full"></span>
                 </span>
                 <svg
                   className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
@@ -176,7 +176,7 @@ export default function FeaturedListings() {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

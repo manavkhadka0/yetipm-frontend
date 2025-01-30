@@ -10,6 +10,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import HeadingSection from "@/components/common/heading-section";
 
 const features = [
   {
@@ -93,15 +94,10 @@ export default function WeInclude() {
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#003d21] mb-4 animate-fade-in-up">
-            All Plans Include
-            <span className="block h-1 w-24 mx-auto mt-4 bg-[#C4A484]/60 rounded-full" />
-          </h2>
-          <p className="text-lg text-gray-600 animate-fade-in-up delay-100">
-            Everything you need to manage your property effectively
-          </p>
-        </div>
+        <HeadingSection
+          title="Everything you need to manage your property effectively"
+          subtitle="Discover our hand-picked selection of premium homes"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (

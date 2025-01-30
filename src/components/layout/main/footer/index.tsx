@@ -280,10 +280,10 @@ export default function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-[#003d21] font-bold"
                   aria-label={social.label}
                 >
-                  <social.icon className="h-4 w-4 md:h-5 md:w-5" />
+                  <social.icon className="h-6 w-6 " />
                 </a>
               ))}
             </div>

@@ -92,7 +92,7 @@ export const navigation: NavItem[] = [
   // },
   {
     name: "Blog",
-    href: "/blog",
+    href: "/blogs",
   },
   {
     name: "Company",

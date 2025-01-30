@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -10,63 +11,73 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Search, MapPin } from "lucide-react";
+import { locations } from "@/components/layout/main/footer/footer-config";
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState<"custom" | "location">("custom");
+  const router = useRouter();
 
-  const states = [
-    "Alabama",
-    "Alaska",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "Florida",
-    "Georgia",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Vermont",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-  ];
+  const handleCitySelect = (city: string) => {
+    router.push(
+      `/find-home/search?city=${encodeURIComponent(city.toLowerCase())}`
+    );
+  };
+
+  const handleCustomSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Get form data and construct search params
+    const formData = new FormData(e.target as HTMLFormElement);
+    const params = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      if (value) {
+        params.append(key, value.toString());
+      }
+    }
+
+    router.push(`/find-home/search?${params.toString()}`);
+  };
+
+  // Mobile city selection sheet component
+  const CitiesSheet = () => (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button
+          variant="outline"
+          className="w-full md:hidden flex items-center gap-2"
+        >
+          <MapPin className="h-4 w-4" />
+          Select City
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="bottom" className="h-[80vh]">
+        <SheetHeader>
+          <SheetTitle>Select a City</SheetTitle>
+        </SheetHeader>
+        <div className="grid grid-cols-2 gap-4 mt-6 overflow-y-auto">
+          {locations.map((location) => (
+            <Button
+              key={location.href}
+              variant="outline"
+              className="justify-start h-12"
+              onClick={() => handleCitySelect(location.label)}
+            >
+              <MapPin className="h-4 w-4 mr-2" />
+              {location.label}
+            </Button>
+          ))}
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
 
   return (
     <div className="min-h-screen bg-white">
@@ -90,7 +101,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Search Section - Made responsive */}
+      {/* Search Section */}
       <div className="max-w-7xl mx-auto px-4 -mt-16 relative z-10">
         {/* Navigation Tabs */}
         <div className="flex flex-col sm:flex-row">
@@ -121,23 +132,29 @@ export default function Page() {
         {/* Search Forms */}
         <div className="bg-white p-4 sm:p-10 rounded-lg shadow-lg">
           {activeTab === "custom" ? (
-            <div className="flex flex-col sm:flex-row gap-4 items-start">
+            <form
+              onSubmit={handleCustomSearch}
+              className="flex flex-col sm:flex-row gap-4 items-start"
+            >
               <div className="w-full sm:flex-1">
-                <Select>
+                <Select name="city">
                   <SelectTrigger className="h-12">
-                    <SelectValue placeholder="Select State" />
+                    <SelectValue placeholder="Select City" />
                   </SelectTrigger>
                   <SelectContent>
-                    {states.map((state) => (
-                      <SelectItem key={state} value={state.toLowerCase()}>
-                        {state}
+                    {locations.map((location) => (
+                      <SelectItem
+                        key={location.href}
+                        value={location.label.toLowerCase()}
+                      >
+                        {location.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="w-full sm:w-48">
-                <Select>
+                <Select name="price_range">
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Price range" />
                   </SelectTrigger>
@@ -150,7 +167,7 @@ export default function Page() {
                 </Select>
               </div>
               <div className="w-full sm:w-48">
-                <Select>
+                <Select name="bedrooms">
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Bedrooms" />
                   </SelectTrigger>
@@ -163,7 +180,7 @@ export default function Page() {
                 </Select>
               </div>
               <div className="w-full sm:w-48">
-                <Select>
+                <Select name="bathrooms">
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Baths" />
                   </SelectTrigger>
@@ -175,23 +192,36 @@ export default function Page() {
                   </SelectContent>
                 </Select>
               </div>
-              <Button className="w-full sm:w-auto h-12 px-8 bg-[#003d21] hover:bg-[#003d21]/80 text-white">
+              <Button
+                type="submit"
+                className="w-full sm:w-auto h-12 px-8 bg-[#003d21] hover:bg-[#003d21]/80 text-white"
+              >
                 <Search className="mr-2 h-4 w-4" />
                 Search Now
               </Button>
-            </div>
+            </form>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {states.map((state) => (
-                <Button
-                  key={state}
-                  variant="outline"
-                  className="h-12 justify-start hover:bg-green-50"
-                >
-                  {state}
-                </Button>
-              ))}
-            </div>
+            <>
+              {/* Mobile View */}
+              <div className="md:hidden">
+                <CitiesSheet />
+              </div>
+
+              {/* Desktop View */}
+              <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {locations.map((location) => (
+                  <Button
+                    key={location.href}
+                    variant="outline"
+                    className="h-12 justify-start hover:bg-green-50"
+                    onClick={() => handleCitySelect(location.label)}
+                  >
+                    <MapPin className="h-4 w-4 mr-2" />
+                    {location.label}
+                  </Button>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

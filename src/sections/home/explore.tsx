@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowRight, Home, Star } from "lucide-react";
+import { MapPin, Home, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const highlights = [
@@ -93,7 +93,6 @@ export default function ExploreSection() {
                 late!
               </p>
             </div>
-
             {/* Features List - Updated with staggered animations */}
             <div className="space-y-4">
               {highlights.map((item, index) => (
@@ -115,25 +114,31 @@ export default function ExploreSection() {
                 </div>
               ))}
             </div>
-
-            <div className="pt-4 animate-fade-in-up delay-300">
+            <div className="pt-4">
               <Link
-                href="/communities"
-                className={cn(
-                  "group inline-flex items-center px-8 py-4 rounded-xl",
-                  "text-lg font-semibold text-white",
-                  "bg-gradient-to-r from-[#003d21] to-[#004d29]",
-                  "hover:from-[#003d21] hover:to-[#003d21]",
-                  "transition-all duration-300 ease-in-out",
-                  "shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30",
-                  "hover:-translate-y-0.5",
-                  "border border-[#c8a977]/20"
-                )}
+                href="/find-home/search"
+                className="group inline-flex items-center gap-2 px-6 md:px-8 py-3 bg-white border-2 border-[#003d21]/20 text-[#003d21] rounded-full font-semibold hover:border-[#003d21]/40 transition-all duration-300 hover:shadow-lg"
               >
-                Explore Our Communities
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="relative">
+                  Explore Our Communities
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#003d21] transition-all group-hover:w-full"></span>
+                </span>
+                <svg
+                  className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
               </Link>
             </div>
+            ;
           </div>
         </div>
       </div>

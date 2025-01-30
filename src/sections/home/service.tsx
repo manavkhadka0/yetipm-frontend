@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import HeadingSection from "@/components/common/heading-section";
 
 // Separate the types and data into their own sections for better organization
 interface Service {
@@ -104,12 +105,17 @@ export default function ServicesSection() {
   return (
     <section className="min-h-screen bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 relative">
+        {/* <div className="text-center mb-16 relative">
           <h2 className="text-[#003d21] font-bold text-5xl md:text-6xl">
             Live the worry-free leasing lifestyle.
           </h2>
           <div className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent opacity-50 blur-3xl -z-10" />
-        </div>
+        </div> */}
+
+        <HeadingSection
+          title="Live the worry-free leasing lifestyle."
+          subtitle="Your journey to finding the perfect home starts here"
+        />
 
         <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
