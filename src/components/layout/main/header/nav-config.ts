@@ -42,30 +42,8 @@ export const navigation: NavItem[] = [
   //   ],
   // },
   {
-    name: "Resources",
-    href: "/resources",
-    items: [
-      {
-        name: "Buy Rentals",
-        href: "/find-home/search",
-        description: "Browse available homes in your area",
-      },
-      {
-        name: "Sell My Property",
-        href: "/sell-property",
-        description: "List your property for lease",
-      },
-      {
-        name: "Owner Referral",
-        href: "/owner-referral",
-        description: "Refer property owners to YetiPM",
-      },
-      {
-        name: "Agent Referral",
-        href: "/agent-referral",
-        description: "Refer real estate agents to YetiPM",
-      },
-    ],
+    name: "Buy Rentals",
+    href: "/find-home/search",
   },
   {
     name: "Search Rentals",
@@ -113,6 +91,10 @@ export const navigation: NavItem[] = [
   //   ],
   // },
   {
+    name: "Blog",
+    href: "/blog",
+  },
+  {
     name: "Company",
     href: "/company",
     items: [
@@ -127,9 +109,9 @@ export const navigation: NavItem[] = [
         description: "Learn about our core principles and mission",
       },
       {
-        name: "News",
-        href: "/news",
-        description: "Stay updated with our latest announcements",
+        name: "Our Story",
+        href: "/our-story",
+        description: "Learn about our journey and how we started",
       },
     ],
   },

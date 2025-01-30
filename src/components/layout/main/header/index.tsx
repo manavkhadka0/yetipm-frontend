@@ -78,10 +78,9 @@ export default function Header() {
               alt="Yeti PM Logo"
               width={120}
               height={80}
-              className="h-10 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => (
@@ -138,13 +137,12 @@ export default function Header() {
             {/* WhatsApp CTA Button */}
             <button
               onClick={handleWhatsAppClick}
-              className="flex items-center space-x-2 bg-[#336699] text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
+              className="flex items-center space-x-2 bg-[#003d21] text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               <span className="font-medium">Call Us</span>
             </button>
           </nav>
-
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet>

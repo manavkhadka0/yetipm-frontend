@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   description: "Property Management for Rentals in United States of America ",
 };
 
-const bricolage = Bricolage_Grotesque({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-bricolage",
+  variable: "--font-playfair",
 });
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bricolage.variable} antialiased`}>
+      <body className={`${playfair.variable} antialiased`}>
         {children}
         <Toaster />
       </body>

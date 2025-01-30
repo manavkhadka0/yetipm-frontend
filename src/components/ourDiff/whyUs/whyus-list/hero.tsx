@@ -37,7 +37,7 @@ export default function Page() {
       {/* Content Section */}
       <section className="max-w-4xl mx-auto px-4 py-16 text-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-12">
-          Live your best life – <span className="text-[#336699]">today.</span>
+          Live your best life – <span className="text-[#003d21]">today.</span>
         </h2>
 
         <div className="space-y-6 text-gray-700">
@@ -60,7 +60,7 @@ export default function Page() {
       {/* Custom styles for the theme color */}
       <style jsx global>{`
         :root {
-          --theme-color: #336699;
+          --theme-color: #003d21;
         }
       `}</style>
     </main>
