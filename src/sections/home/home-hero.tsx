@@ -71,7 +71,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-[600px]">
+      <div className="relative h-[600px] md:h-[700px]">
         <Image
           src="/hero.png"
           alt="People playing guitars in living room"
@@ -79,20 +79,24 @@ export default function Page() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-          <h1 className="text-6xl font-bold mb-4">Your Property,</h1>
-          <h2 className="text-6xl font-bold">Our Priority.</h2>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#003d21]/80 to-[#003d21]/60" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">
+            Your Property,
+          </h1>
+          <h2 className="text-4xl md:text-6xl font-bold text-shadow-lg">
+            Our Priority.
+          </h2>
         </div>
       </div>
 
-      {/* Search Section */}
+      {/* Search Section - Made responsive */}
       <div className="max-w-7xl mx-auto px-4 -mt-16 relative z-10">
         {/* Navigation Tabs */}
-        <div className="flex mb-4">
+        <div className="flex flex-col sm:flex-row">
           <Button
             variant="ghost"
-            className={`px-10 py-8 font-medium rounded-none ${
+            className={`px-6 sm:px-10 py-6 sm:py-8 font-medium rounded-none ${
               activeTab === "custom"
                 ? "text-gray-900 bg-white"
                 : "text-white bg-gray-600"
@@ -103,7 +107,7 @@ export default function Page() {
           </Button>
           <Button
             variant="ghost"
-            className={`px-10 py-8 font-medium rounded-none ${
+            className={`px-6 sm:px-10 py-6 sm:py-8 font-medium rounded-none ${
               activeTab === "location"
                 ? "text-gray-900 bg-white"
                 : "text-white bg-gray-600"
@@ -115,10 +119,10 @@ export default function Page() {
         </div>
 
         {/* Search Forms */}
-        <div className="bg-white p-10 rounded-lg shadow-lg ">
+        <div className="bg-white p-4 sm:p-10 rounded-lg shadow-lg">
           {activeTab === "custom" ? (
-            <div className="flex gap-4 items-start">
-              <div className="flex-1">
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <div className="w-full sm:flex-1">
                 <Select>
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Select State" />
@@ -132,7 +136,7 @@ export default function Page() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="w-48">
+              <div className="w-full sm:w-48">
                 <Select>
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Price range" />
@@ -145,7 +149,7 @@ export default function Page() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="w-48">
+              <div className="w-full sm:w-48">
                 <Select>
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Bedrooms" />
@@ -158,7 +162,7 @@ export default function Page() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="w-48">
+              <div className="w-full sm:w-48">
                 <Select>
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Baths" />
@@ -171,13 +175,13 @@ export default function Page() {
                   </SelectContent>
                 </Select>
               </div>
-              <Button className="h-12 px-8 bg-[#003d21] hover:bg-[#2d557d] text-white">
+              <Button className="w-full sm:w-auto h-12 px-8 bg-[#003d21] hover:bg-[#003d21]/80 text-white">
                 <Search className="mr-2 h-4 w-4" />
                 Search Now
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {states.map((state) => (
                 <Button
                   key={state}
