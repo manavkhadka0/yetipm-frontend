@@ -9,12 +9,10 @@ import { ViewEnquiryDialog } from "./enquiries-view-dialog";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
-  onSuccess: () => void;
 }
 
 export function DataTableRowActions<TData>({
   row,
-  onSuccess,
 }: DataTableRowActionsProps<TData>) {
   const [showViewDialog, setShowViewDialog] = useState(false);
   const enquiry = row.original as Enquiry;

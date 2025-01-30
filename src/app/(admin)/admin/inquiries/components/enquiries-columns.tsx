@@ -3,7 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Enquiry } from "@/types/enquiries";
 import { Badge } from "@/components/ui/badge";
-import { TableMeta } from "./enquiries-data-table";
 import { DataTableColumnHeader } from "./enquiries-data-table-column-header";
 import { DataTableRowActions } from "./enquiries-data-table-row-actions";
 import { format } from "date-fns";
@@ -61,13 +60,6 @@ export const columns: ColumnDef<Enquiry>[] = [
   },
   {
     id: "actions",
-    cell: ({ row, table }) => (
-      <DataTableRowActions
-        row={row}
-        onSuccess={() =>
-          (table.options.meta as TableMeta<Enquiry>).refreshData()
-        }
-      />
-    ),
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

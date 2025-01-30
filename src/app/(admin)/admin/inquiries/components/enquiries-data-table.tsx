@@ -52,7 +52,6 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   onDataChange,
-  onGlobalSearch,
   isLoading,
   pagination,
 }: DataTableProps<TData, TValue>) {
