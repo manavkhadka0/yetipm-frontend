@@ -1,6 +1,12 @@
 "use client";
 
-import { LayoutDashboard, MapPin, Home, Globe } from "lucide-react";
+import {
+  LayoutDashboard,
+  MapPin,
+  Home,
+  Globe,
+  MessageCircle,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -42,6 +48,12 @@ const items = [
     label: "Rentals",
     icon: Home,
     href: "/admin/rentals",
+    color: "text-blue-600",
+  },
+  {
+    label: "Inquiries",
+    icon: MessageCircle,
+    href: "/admin/inquiries",
     color: "text-blue-600",
   },
 ];

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import TawkChat from "@/components/twak-to-messenger";
 
 export const metadata: Metadata = {
   title: "Yeti PM",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} antialiased`}>
         {children}
         <Toaster />
+        <TawkChat />
       </body>
     </html>
   );

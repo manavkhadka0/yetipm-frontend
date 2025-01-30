@@ -17,7 +17,10 @@ export default function BlogCard({ blog }: BlogCardProps) {
         <CardHeader className="p-0">
           <div className="relative h-48 w-full">
             <Image
-              src={blog.thumbnail_image || "/blog-placeholder.jpg"}
+              src={
+                `${process.env.NEXT_PUBLIC_API_URL}${blog.thumbnail_image}` ||
+                "/blog-placeholder.jpg"
+              }
               alt={blog.thumbnail_image_alt_description || blog.title}
               fill
               className="object-cover"

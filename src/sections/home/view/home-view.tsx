@@ -4,8 +4,16 @@ import NewHomes from "../explore";
 import Page from "../tips";
 import WeInclude from "../we-include";
 import ServicesSection from "../service";
+import Qna from "@/components/ourDiff/whyUs/whyus-list/qna";
 
-export default function HomeView() {
+const fetchFaqs = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/faqs/`);
+  const data = await response.json();
+  return data.results;
+};
+
+export default async function HomeView() {
+  const faqs = await fetchFaqs();
   return (
     <>
       <HomeHero />
@@ -13,6 +21,7 @@ export default function HomeView() {
       <NewHomes />
       <WeInclude />
       <Page />
+      <Qna faqs={faqs} />
       <ServicesSection />
     </>
   );

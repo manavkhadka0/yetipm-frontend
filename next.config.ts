@@ -4,7 +4,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "yetipm.baliyoventures.com",
-        pathname: "/media/images/**", // Adjust the pathname if necessary
+        pathname: "/media/**/**", // Adjust the pathname if necessary
       },
     ],
   },

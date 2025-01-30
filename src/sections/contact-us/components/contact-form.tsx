@@ -13,21 +13,31 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import {
   ContactFormSchema,
   contactFormSchema,
 } from "@/schemas/contact-form-schemas";
+import { showError, showSuccess } from "@/lib/alerts";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  propertyId?: string;
+  inquiryType?: "General Inquiry" | "Specific Property";
+};
+
+export default function ContactForm({
+  propertyId,
+  inquiryType = "General Inquiry",
+}: ContactFormProps) {
   const [loading, setLoading] = useState(false); // State for tracking loading status
   const form = useForm<ContactFormSchema>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: "",
+      first_name: "",
+      last_name: "",
       phone_number: "",
       email: "",
       message: "",
+      property_id: propertyId || "",
     },
   });
 
@@ -35,13 +45,17 @@ export default function ContactForm() {
     setLoading(true); // Start loading
     try {
       const response = await fetch(
-        "https://ratishshakya.pythonanywhere.com/api/contact/contact/",
+        "https://yetipm.baliyoventures.com/api/inquiries/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            inquiry_type: inquiryType,
+            property_id: propertyId,
+          }),
         }
       );
 
@@ -50,18 +64,18 @@ export default function ContactForm() {
         const errorMessage =
           errorData.phone_number?.[0] ||
           "Failed to send the message. Please try again.";
-        toast.error(errorMessage, {
-          description: "Please check your input and try again.",
+        showError(errorMessage, {
+          timer: 3000,
         });
       } else {
-        toast("Message sent successfully!", {
-          description: "Your message has been sent.",
+        showSuccess("Message sent successfully!", {
+          timer: 3000,
         });
         form.reset(); // Clear the form fields
       }
     } catch {
-      toast.error("An error occurred while sending the message.", {
-        description: "Please try again later.",
+      showError("An error occurred while sending the message.", {
+        timer: 3000,
       });
     } finally {
       setLoading(false); // Stop loading
@@ -72,23 +86,43 @@ export default function ContactForm() {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Enter your name"
-                    className="p-5"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="first_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your first name"
+                      className="p-5"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="last_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your first name"
+                      className="p-5"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <FormField
             control={form.control}
@@ -151,7 +185,6 @@ export default function ContactForm() {
               disabled={loading} // Disable button while loading
             >
               {loading ? "Sending..." : "Send Message →"}{" "}
-              {/* Update button text */}
             </Button>
           </div>
         </form>
