@@ -21,12 +21,6 @@ export default async function EditRentalPage({
 
   return (
     <ResponsiveContainer variant="narrow" paddingX="sm" paddingY="md">
-      {/* <div className="mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-wrap break-words">
-          Edit Rental: {rental.name}
-        </h1>
-      </div> */}
-
       <Suspense
         fallback={
           <div className="flex h-[calc(100vh-4rem)] items-center justify-center">

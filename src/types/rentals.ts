@@ -28,6 +28,7 @@ export interface Rental {
   bedrooms: number;
   bathrooms: number;
   availability: boolean;
+  is_featured: boolean;
   available_date: string;
   postal_code: string;
   created_at: string;

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -36,41 +35,13 @@ import { City } from "@/types/city";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { propertyTypes } from "./data/properyTypes";
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Project name must be at least 2 characters.",
-  }),
-  project_type: z.string().min(1, {
-    message: "Please select a project type.",
-  }),
-  city: z.string().min(1, {
-    message: "Please select a city.",
-  }),
-  project_address: z.string().min(5, {
-    message: "Address must be at least 5 characters.",
-  }),
-  postal_code: z.string().optional(),
-  price: z.coerce.number().min(1, "Price is required"),
-  price_breakdown: z.string().optional(),
-  project_description: z.string().optional(),
-  area_square_footage: z.coerce.number().optional(),
-  garage_spaces: z.coerce.number().optional(),
-  bedrooms: z.coerce.number().min(1, "Number of bedrooms is required"),
-  bathrooms: z.coerce.number().min(1, "Number of bathrooms is required"),
-  availability: z.boolean().optional(),
-  available_date: z.string().optional(),
-  uploaded_images: z.array(z.any()).optional(),
-  feature_ids: z.array(z.number()).optional(),
-});
+import {
+  RentalFormSchema,
+  rentalFormSchema,
+} from "@/schemas/rental-form-schema";
 
 interface RentalFormProps {
   initialData?: Rental;
-}
-
-interface RentalImage {
-  id: number;
-  image: string;
 }
 
 export function RentalForm({ initialData }: RentalFormProps) {
@@ -79,7 +50,7 @@ export function RentalForm({ initialData }: RentalFormProps) {
   const [cities, setCities] = useState<City[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
   const router = useRouter();
-  const [existingImages, setExistingImages] = useState<RentalImage[]>(
+  const [existingImages, setExistingImages] = useState<Rental["images"]>(
     initialData?.images || []
   );
 
@@ -89,10 +60,11 @@ export function RentalForm({ initialData }: RentalFormProps) {
     multiple: true,
   };
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<RentalFormSchema>({
+    resolver: zodResolver(rentalFormSchema),
     defaultValues: {
       name: initialData?.name || "",
+      is_featured: initialData?.is_featured || false,
       project_type: initialData?.project_type || "",
       project_address: initialData?.project_address || "",
       postal_code: initialData?.postal_code || "",
@@ -162,7 +134,7 @@ export function RentalForm({ initialData }: RentalFormProps) {
     }
   };
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: RentalFormSchema) => {
     try {
       setIsLoading(true);
       console.log("Form values:", values);
