@@ -59,7 +59,7 @@ export default function OurTeamPage() {
             }`}
           >
             <div className={`md:w-1/3 ${index % 2 === 1 ? "md:order-2" : ""}`}>
-              <div className="relative aspect-square overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative aspect-square overflow-hidden rounded ">
                 <img
                   src={member.profile_picture || "/default-profile.jpg"}
                   alt={member.name}
@@ -78,7 +78,7 @@ export default function OurTeamPage() {
                 </p>
                 <div className="w-20 h-1 bg-primary/20 rounded-full"></div>
                 <div className="text-gray-600 leading-relaxed">
-                  <div dangerouslySetInnerHTML={{ __html: member.description }} />
+                  <div dangerouslySetInnerHTML={{ __html: member.description }}/>
                   <div className="flex space-x-4 mt-2">
                     {member.twitter_link && (
                       <a href={member.twitter_link} target="_blank" rel="noopener noreferrer">

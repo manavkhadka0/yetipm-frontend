@@ -29,15 +29,15 @@ export default function ExploreSection() {
     <section className="relative py-24 bg-gradient-to-b from-white to-gray-50">
       {/* Add decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -left-4 top-1/4 w-24 h-24 bg-[#f5e6d3]/30 rounded-full blur-2xl" />
-        <div className="absolute right-0 bottom-1/4 w-32 h-32 bg-[#003d21]/10 rounded-full blur-3xl" />
+        <div className="absolute -left-4 top-1/4 w-24 h-24 bg-[#f5e6d3]/30  blur-2xl" />
+        <div className="absolute right-0 bottom-1/4 w-32 h-32 bg-[#003d21]/10  blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Image Section */}
           <div className="relative group animate-fade-in-up">
-            <div className="relative h-[500px] lg:h-[600px] rounded-2xl overflow-hidden">
+            <div className="relative h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
               <Image
                 src="/image2.png"
                 alt="Brand new houses for rent"
@@ -84,7 +84,7 @@ export default function ExploreSection() {
                 </span>
               </h2>
 
-              <p className="text-lg text-gray-600 leading-relaxed animate-fade-in-up delay-100">
+              <p className="text-lg text-black leading-relaxed animate-fade-in-up delay-100">
                 Explore our collection of single-family homes for lease in prime
                 locations across DFW Metroplex. Step into a spacious,
                 move-in-ready home featuring modern amenities, thoughtful
@@ -99,7 +99,7 @@ export default function ExploreSection() {
                 <div
                   key={index}
                   className={cn(
-                    "flex items-start space-x-3 text-gray-600",
+                    "flex items-start space-x-3 text-black",
                     "transform transition-all duration-500 hover:translate-x-2",
                     "animate-fade-in-up",
                     item.delay

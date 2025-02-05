@@ -91,7 +91,7 @@ export const navigation: NavItem[] = [
   //   ],
   // },
   {
-    name: "Blog",
+    name: " Yeti Blogs",
     href: "/blogs",
   },
   {

@@ -47,17 +47,17 @@ export default function FeaturedListings() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-black">
+    <main className="min-h-screen  text-black">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+        <div className="absolute inset-0"></div>
         <div className="container mx-auto px-4 py-32 relative">
           <div className="max-w-4xl mx-auto text-center">
             <HeadingSection
               title="Why settle for traditional? Lease smarter, the Yeti way."
               subtitle="We are here to make your home-leasing experience easier and hassle-free."
             />
-            <p className="max-w-3xl mx-auto text-lg mb-10 text-gray-600 leading-relaxed">
+            <p className="max-w-3xl mx-auto text-lg mb-10 text-black-600 leading-relaxed">
               Love the home, skip the commitment - Yeti PM has you covered. We
               offer pet-friendly homes equipped with smart technology, spacious
               yards, and located in amazing neighborhoods, giving you the

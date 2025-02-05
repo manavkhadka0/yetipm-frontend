@@ -117,7 +117,7 @@ export default function ServicesSection() {
           subtitle="Your journey to finding the perfect home starts here"
         />
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-lg shadow-2xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
             <nav className="md:w-72 flex-shrink-0 bg-[#003d21]/90 backdrop-blur-lg">
               {services.map((service) => (

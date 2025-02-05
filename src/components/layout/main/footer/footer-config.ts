@@ -37,7 +37,7 @@ export const findYourHome: FooterLink[] = [
 ];
 
 export const about: FooterLink[] = [
-  { label: "Our story", href: "#" },
+  { label: "Our story", href: "/our-story" },
   { label: "Our values", href: "/our-values" },
   { label: "Our Team", href: "/our-team" },
 ];
@@ -65,14 +65,14 @@ export const ourServices: FooterLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Instagram, href: "https://www.instagram.com/yeti_property_management?igsh=MjU2dzBmcWNkNWVx&utm_source=qr", label: "Instagram" },
+  { icon: Facebook, href: " https://www.facebook.com/share/1CqKDHroKL/?mibextid=wwXIfr", label: "Facebook" },
   { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Linkedin, href: " https://www.linkedin.com/company/yeti-property-management/", label: "LinkedIn" },
   { icon: Twitter, href: "#", label: "Twitter" },
 ];
 
 export const legalLinks: FooterLink[] = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms & Conditions", href: "#" },
+  { label: "Privacy Policy", href: "https://www.neighborly.com/your-privacy-rights" },
+  { label: "Terms & Conditions", href: "https://www.neighborly.com/terms-of-use" },
 ];

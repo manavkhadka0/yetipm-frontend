@@ -1,10 +1,7 @@
 export const address = {
-  address: "Naxal-19, Kathmandu, Nepal",
-  street: "Lorem Ipsum Street 85486",
-  landline_1: "+977 01-4444444",
-  landline_2: "+977 01-4444445",
-  mobile_1: "+977 9800000001",
-  mobile_2: "+977 9800000002",
-  email_1: "syangdenholidays@gmail.com",
-  email_2: "syangden@gmail.com",
+  address: "Irving TX 75039, USA",
+  street: " 222 W Las Colinas Blvd #1650 E",
+  landline_1: "469-345-6419",
+  email_1: "info@yetipm.com",
+  email_2: "shraddha@yetiinsu.com",
 };

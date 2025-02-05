@@ -41,7 +41,7 @@ export default function Page() {
               key={index}
               className="relative group transition-all duration-300 hover:scale-[1.02]"
             >
-              <div className="relative h-72 mb-6 overflow-hidden rounded-2xl shadow-md">
+              <div className="relative h-72 mb-6 overflow-hidden border-2 border-gray-100">
                 <Image
                   src={item.image}
                   alt={item.alt}
@@ -51,7 +51,7 @@ export default function Page() {
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
-              <div className="relative p-8 bg-white rounded-2xl shadow-xl">
+              <div className="relative p-8 bg-white border-2 border-gray-100  ">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">
                   {item.title}
                 </h2>

@@ -46,30 +46,7 @@ export default function ContactDetails() {
                 {address.landline_1}
               </a>
             )}
-            {address.landline_2 && (
-              <a
-                href={`tel:${address.landline_2}`}
-                className="block text-sm hover:text-blue-500 transition-colors"
-              >
-                {address.landline_2}
-              </a>
-            )}
-            {address.mobile_1 && (
-              <a
-                href={`tel:${address.mobile_1}`}
-                className="block text-sm hover:text-blue-500 transition-colors"
-              >
-                {address.mobile_1}
-              </a>
-            )}
-            {address.mobile_2 && (
-              <a
-                href={`tel:${address.mobile_2}`}
-                className="block text-sm hover:text-blue-500 transition-colors"
-              >
-                {address.mobile_2}
-              </a>
-            )}
+           
           </div>
         </div>
 

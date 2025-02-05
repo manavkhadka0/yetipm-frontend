@@ -69,7 +69,7 @@ export default function ServicesSection() {
           subtitle="Your journey to finding the perfect home starts here"
         />
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-lg shadow-2xl overflow-hidden">
           <div className="flex flex-col md:flex-row">
             {/* Service Navigation */}
             <div className="md:w-72 flex-shrink-0 bg-white/5 backdrop-blur-lg">

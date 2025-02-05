@@ -27,11 +27,11 @@ export default function RentalCard({ rental }: RentalCardProps) {
           {/* Main Image */}
           <div className="relative h-[240px] overflow-hidden">
             <Image
-              src={rental.images[0]?.image || "/placeholder-rental.jpg"}
-              alt={rental.images[0]?.image || "Rental"}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-            />
+  src={(rental.images && rental.images.length > 0 ? rental.images[0].image : "/placeholder-rental.jpg")}
+  alt={rental.images && rental.images.length > 0 ? rental.images[0].image : "Rental"}
+  
+  className="object-cover transition-transform duration-300 group-hover:scale-110"
+/>
           </div>
 
           {/* Content */}

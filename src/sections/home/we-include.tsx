@@ -104,8 +104,8 @@ export default function WeInclude() {
             <div
               key={index}
               className={cn(
-                "p-8 rounded-2xl transition-all duration-300",
-                "bg-gradient-to-br from-white via-[#C4A484]/5 to-[#C4A484]/10",
+                "p-8  transition-all duration-300",
+                "border-transparent",
                 "shadow-[0_8px_30px_rgb(196,164,132,0.12)]",
                 "border border-[#C4A484]/10"
               )}
