@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Home, Star } from "lucide-react";
@@ -76,7 +78,10 @@ export default function ExploreSection() {
           {/* Content Section - Updated with better animations */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#003d21] leading-tight animate-fade-in-up">
+              <h2
+                suppressHydrationWarning
+                className="text-3xl lg:text-4xl font-bold text-[#003d21] leading-tight animate-fade-in-up"
+              >
                 Find Your Dream Home in{" "}
                 <span className="text-[#c8a977] relative">
                   Exceptional Communities
@@ -138,7 +143,6 @@ export default function ExploreSection() {
                 </svg>
               </Link>
             </div>
-            ;
           </div>
         </div>
       </div>

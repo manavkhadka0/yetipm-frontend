@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Wrench,
   Wind,
@@ -94,10 +96,12 @@ export default function WeInclude() {
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
-        <HeadingSection
-          title="Everything you need to manage your property effectively"
-          subtitle="Discover our hand-picked selection of premium homes"
-        />
+        <div suppressHydrationWarning>
+          <HeadingSection
+            title="Everything you need to manage your property effectively"
+            subtitle="Discover our hand-picked selection of premium homes"
+          />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
@@ -121,7 +125,10 @@ export default function WeInclude() {
                   <feature.icon className={cn("w-6 h-6", "text-[#003d21]")} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3
+                    suppressHydrationWarning
+                    className="text-lg font-semibold text-gray-900 mb-2"
+                  >
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">

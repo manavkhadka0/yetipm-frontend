@@ -1,16 +1,23 @@
 import RentalsDetailView from "@/components/rental/page";
 import { Rental } from "@/types/rentals";
 
+type RentalDetailPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+const fetchRental = async (slug: string): Promise<Rental> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${slug}`
+  );
+  return response.json();
+};
+
 export default async function RentalsDetailPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  // Wait for the entire params object
+}: RentalDetailPageProps) {
   const resolvedParams = await params;
 
-  const rentalDetail: Rental = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${resolvedParams.slug}`
-  ).then((res) => res.json());
+  const rentalDetail: Rental = await fetchRental(resolvedParams.slug);
+
   return <RentalsDetailView rentalDetail={rentalDetail} />;
 }

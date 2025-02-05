@@ -92,12 +92,14 @@ export default function Page() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#003d21]/80 to-[#003d21]/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg">
-            Your Property,
-          </h1>
-          <h2 className="text-4xl md:text-6xl font-bold text-shadow-lg">
-            Our Priority.
-          </h2>
+          <div className="space-y-4">
+            <h1
+              suppressHydrationWarning
+              className="text-4xl md:text-6xl font-bold text-shadow-lg"
+            >
+              Your Property, Our Priority.
+            </h1>
+          </div>
         </div>
       </div>
 

@@ -7,28 +7,26 @@ import ServicesSection from "../service";
 import Qna from "@/components/ourDiff/whyUs/whyus-list/qna";
 import Testimonials from "../testimonials";
 import { Testimonial } from "@/types/testimonials";
+import { RentalList } from "@/types/rentals";
+import FeaturedRentals from "../featured-rentals";
+import { Faq } from "@/types/faqs";
 
-const fetchFaqs = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/faqs/`);
-  const data = await response.json();
-  return data.results;
+type HomeViewProps = {
+  faqs: Faq[];
+  testimonials: Testimonial[];
+  featuredRentals: RentalList[];
 };
 
-const fetchTestimonials = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/`
-  );
-  const data = await response.json();
-  return data.results;
-};
-
-export default async function HomeView() {
-  const faqs = await fetchFaqs();
-  const testimonials: Testimonial[] = await fetchTestimonials();
+export default async function HomeView({
+  faqs,
+  testimonials,
+  featuredRentals,
+}: HomeViewProps) {
   return (
     <>
       <HomeHero />
       <Filter />
+      <FeaturedRentals rentals={featuredRentals} />
       <NewHomes />
       <WeInclude />
       <Page />

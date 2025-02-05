@@ -11,28 +11,32 @@ export interface RentalFeature {
   name: string;
 }
 
-export interface Rental {
+export interface RentalList {
   id: number;
-  images: RentalImage[];
-  features: RentalFeature[];
-  city: City;
   name: string;
   slug: string;
-  project_type: string;
   project_address: string;
   price: number;
-  price_breakdown: string;
-  project_description: string;
   area_square_footage: number;
-  garage_spaces: number;
+  thumbnail_image: string;
   bedrooms: number;
   bathrooms: number;
-  availability: boolean;
+  city: City;
   is_featured: boolean;
-  available_date: string;
-  postal_code: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface Rental extends RentalList {
+  images: RentalImage[];
+  features: RentalFeature[];
+  project_type: string;
+  price_breakdown: string;
+  project_description: string;
+  garage_spaces: number;
+  availability: boolean;
+  available_date: string;
+  postal_code: string;
 }
 
 export interface RentalsResponse {
