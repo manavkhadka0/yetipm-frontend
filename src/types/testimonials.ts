@@ -1,4 +1,3 @@
-"use client";
 export type Testimonial = {
   id: string | number;
   name: string;

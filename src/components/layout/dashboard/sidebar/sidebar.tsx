@@ -6,6 +6,10 @@ import {
   Home,
   Globe,
   MessageCircle,
+  HelpCircle,
+  Star,
+  Users,
+  FileText,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -54,6 +58,30 @@ const items = [
     label: "Inquiries",
     icon: MessageCircle,
     href: "/admin/inquiries",
+    color: "text-blue-600",
+  },
+  {
+    label: "FAQs",
+    icon: HelpCircle,
+    href: "/admin/faqs",
+    color: "text-blue-600",
+  },
+  {
+    label: "Testimonials",
+    icon: Star,
+    href: "/admin/testimonials",
+    color: "text-blue-600",
+  },
+  {
+    label: "Team",
+    icon: Users,
+    href: "/admin/team",
+    color: "text-blue-600",
+  },
+  {
+    label: "Blog",
+    icon: FileText,
+    href: "/admin/blog/posts",
     color: "text-blue-600",
   },
 ];

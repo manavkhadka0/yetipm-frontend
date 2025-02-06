@@ -6,8 +6,30 @@ export interface BlogTag {
 }
 
 export interface BlogCategory {
+  id: number;
   category_name: string;
   category_image: string | null;
+}
+
+export interface BlogCategoryResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: BlogCategory[];
+}
+
+export interface BlogTagResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: BlogTag[];
+}
+
+export interface BlogAuthorResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: BlogAuthor[];
 }
 
 export interface BlogAuthor {

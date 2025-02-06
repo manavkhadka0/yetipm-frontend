@@ -75,7 +75,6 @@ export default function ApplyNow() {
 
   const renderOverview = () => {
     return (
-      
       <div className="space-y-8 ">
         <div>
           <h2 className="text-xl font-semibold mb-4">
