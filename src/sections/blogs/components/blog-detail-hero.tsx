@@ -14,10 +14,7 @@ export default function BlogDetailHero({ blog }: BlogDetailHeroProps) {
       {/* Hero Image */}
       <div className="relative h-[400px] md:h-[500px]">
         <Image
-          src={
-            `${process.env.NEXT_PUBLIC_API_URL}${blog.thumbnail_image}` ||
-            "/blog-placeholder.jpg"
-          }
+          src={`${blog.thumbnail_image}` || "/blog-placeholder.jpg"}
           alt={blog.thumbnail_image_alt_description || blog.title}
           fill
           className="object-cover"
