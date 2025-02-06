@@ -12,7 +12,6 @@ import Residence from "@/components/apply/steps/Residence";
 import IncomeVerification from "@/components/apply/steps/IncomeVerification";
 import Applicants from "@/components/apply/steps/Applicants";
 import PayAndSubmit from "@/components/apply/steps/PayAndSubmit";
-import ResponsiveContainer from "../common/responsive-container";
 
 const steps = [
   { name: "Overview", completed: true },

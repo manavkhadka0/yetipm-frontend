@@ -64,7 +64,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <Image src="/logo.svg" alt="Logo" width={100} height={100} />
+        <Image src="/image.png" alt="Logo" width={80} height={80} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
