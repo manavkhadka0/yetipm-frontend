@@ -17,7 +17,7 @@ type TestimonialsProps = {
 
 export default function Testimonials({ testimonials }: TestimonialsProps) {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 ">
       <ResponsiveContainer paddingX="md">
         <HeadingSection
           title="What Our Clients Say"

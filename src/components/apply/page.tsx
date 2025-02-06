@@ -12,6 +12,7 @@ import Residence from "@/components/apply/steps/Residence";
 import IncomeVerification from "@/components/apply/steps/IncomeVerification";
 import Applicants from "@/components/apply/steps/Applicants";
 import PayAndSubmit from "@/components/apply/steps/PayAndSubmit";
+import ResponsiveContainer from "../common/responsive-container";
 
 const steps = [
   { name: "Overview", completed: true },
@@ -75,6 +76,7 @@ export default function ApplyNow() {
 
   const renderOverview = () => {
     return (
+      
       <div className="space-y-8 ">
         <div>
           <h2 className="text-xl font-semibold mb-4">

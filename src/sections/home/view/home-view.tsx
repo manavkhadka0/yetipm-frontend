@@ -10,6 +10,7 @@ import { Testimonial } from "@/types/testimonials";
 import { RentalList } from "@/types/rentals";
 import FeaturedRentals from "../featured-rentals";
 import { Faq } from "@/types/faqs";
+import ContactView from "@/sections/contact-us/view/contact-view";
 
 type HomeViewProps = {
   faqs: Faq[];
@@ -33,6 +34,7 @@ export default async function HomeView({
       <Qna faqs={faqs} />
       <ServicesSection />
       <Testimonials testimonials={testimonials} />
+      <ContactView />
     </>
   );
 }

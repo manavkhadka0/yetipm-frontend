@@ -42,13 +42,10 @@ export const navigation: NavItem[] = [
   //   ],
   // },
   {
-    name: "Buy Rentals",
+    name: "Search Rentals",
     href: "/find-home/search",
   },
-  {
-    name: "Search Rentals",
-    href: "/rentals",
-  },
+
   // {
   //   name: "Residents",
   //   href: "/residents",

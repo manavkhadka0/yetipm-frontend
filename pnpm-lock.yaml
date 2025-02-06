@@ -173,6 +173,9 @@ importers:
       next:
         specifier: 15.1.5
         version: 15.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-nprogress-bar:
+        specifier: ^2.4.4
+        version: 2.4.4
       next-share:
         specifier: ^0.27.0
         version: 0.27.0(react@19.0.0)
@@ -2711,6 +2714,9 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
+  next-nprogress-bar@2.4.4:
+    resolution: {integrity: sha512-SeOtJCh9T0+RCGH+fl1SxHUt5uU3wH3emhVBZiKCbTHbGYYBho3o2DkuwCjoI7IxV5uGjHBuSVJI2+v3pMC64A==}
+
   next-share@0.27.0:
     resolution: {integrity: sha512-Fmfl4LIL61g10vtiDECVldxtNgVNd4OQgnI5vk9IJxn/WMZLdhniUtV15xz4PGpo8UuDdTHwmDT8R/CP60EQHA==}
     engines: {node: '>=8', npm: '>=5'}
@@ -2747,6 +2753,9 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  nprogress-v2@1.0.4:
+    resolution: {integrity: sha512-HPhTEgqsQMFXXuaftvu6bevqEXvcQ/hogvkAswlcNyS9eRGjvo7wZY1O4H3aZS4Uq8oWSO6sL3dOj6Oq/ZJN5A==}
 
   nwsapi@2.2.16:
     resolution: {integrity: sha512-F1I/bimDpj3ncaNDhfyMWuFqmQDBwDB0Fogc2qpL3BWvkQteFD/8BzWuIRl83rq0DXfm8SGt/HFhLXZyljTXcQ==}
@@ -6190,6 +6199,10 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
+  next-nprogress-bar@2.4.4:
+    dependencies:
+      nprogress-v2: 1.0.4
+
   next-share@0.27.0(react@19.0.0):
     dependencies:
       jsonp: 0.2.1
@@ -6228,6 +6241,8 @@ snapshots:
       - babel-plugin-macros
 
   normalize-path@3.0.0: {}
+
+  nprogress-v2@1.0.4: {}
 
   nwsapi@2.2.16: {}
 

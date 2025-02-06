@@ -27,6 +27,10 @@ export default function SearchPage() {
   const [rentals, setRentals] = useState<Rental[]>([]);
   const [isLoadingRentals, setIsLoadingRentals] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(null);
+const [selectedPropertyType, setSelectedPropertyType] = useState<string | null>(null);
+
 
   // Fetch cities
   const fetchCities = async () => {
@@ -43,19 +47,39 @@ export default function SearchPage() {
 
   // Fetch rentals
   const fetchRentals = async () => {
-    setIsLoadingRentals(true);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/?availability=true`
-      );
-      const data = await response.json();
-      setRentals(data.results);
-    } catch {
-      setError("Failed to fetch rentals");
-    } finally {
-      setIsLoadingRentals(false);
-    }
-  };
+  setIsLoadingRentals(true);
+  try {
+    const params: URLSearchParams = new URLSearchParams();
+    if (selectedCity) params.append("city", selectedCity);
+    if (selectedPriceRange) params.append("price_range", selectedPriceRange);
+    if (selectedPropertyType) params.append("property_type", selectedPropertyType);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/projects/?availability=true&${params.toString()}`
+    );
+    const data = await response.json();
+    setRentals(data.results);
+  } catch {
+    setError("Failed to fetch rentals");
+  } finally {
+    setIsLoadingRentals(false);
+  }
+};
+const handleCityChange = (value: string) => {
+  setSelectedCity(value);
+  fetchRentals(); // Refetch rentals when city changes
+};
+
+const handlePriceChange = (value: string) => {
+  setSelectedPriceRange(value);
+  fetchRentals(); // Refetch rentals when price range changes
+};
+
+const handlePropertyTypeChange = (value: string) => {
+  setSelectedPropertyType(value);
+  fetchRentals(); // Refetch rentals when property type changes
+};
+
 
   useEffect(() => {
     fetchCities();
@@ -90,7 +114,7 @@ export default function SearchPage() {
         <div className="bg-white rounded-xl shadow-lg p-6 -mt-24 relative z-10">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex-1 min-w-[200px]">
-              <Select>
+              <Select onValueChange={handleCityChange}>
                 <SelectTrigger className="h-12">
                   <MapPin className="w-4 h-4 mr-2" />
                   <SelectValue placeholder="Select Location" />
@@ -105,7 +129,7 @@ export default function SearchPage() {
               </Select>
             </div>
             <div className="w-48">
-              <Select>
+              <Select onValueChange={handlePriceChange}>
                 <SelectTrigger className="h-12">
                   <DollarSign className="w-4 h-4 mr-2" />
                   <SelectValue placeholder="Price Range" />
@@ -119,7 +143,7 @@ export default function SearchPage() {
               </Select>
             </div>
             <div className="w-48">
-              <Select>
+              <Select onValueChange={handlePropertyTypeChange}>
                 <SelectTrigger className="h-12">
                   <Home className="w-4 h-4 mr-2" />
                   <SelectValue placeholder="Property Type" />
