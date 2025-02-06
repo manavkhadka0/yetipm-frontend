@@ -70,7 +70,7 @@ const items: MenuItem[] = [
         href: "/admin/cities",
       },
       {
-        label: "Provinces",
+        label: "States",
         href: "/admin/states",
       },
     ],
