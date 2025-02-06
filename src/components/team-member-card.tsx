@@ -50,7 +50,7 @@ export function TeamMemberCard({
 
           <div className="text-gray-600 leading-relaxed">
             <div
-              className="prose prose-gray max-w-none"
+              className="prose prose-gray max-w-none text-justify"
               dangerouslySetInnerHTML={{ __html: member.description }}
             />
           </div>
