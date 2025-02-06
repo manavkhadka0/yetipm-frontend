@@ -9,6 +9,7 @@ import { QuoteIcon } from "lucide-react";
 import { Testimonial } from "../../types/testimonials";
 import HeadingSection from "@/components/common/heading-section";
 import ResponsiveContainer from "@/components/common/responsive-container";
+import DOMPurify from "isomorphic-dompurify";
 
 type TestimonialsProps = {
   testimonials: Testimonial[];
@@ -41,11 +42,14 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                     <div className="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
                       <QuoteIcon className="h-8 w-8 text-blue-500 mb-4" />
                       <blockquote className="flex-grow">
-                        <p
+                        <div
                           className="text-gray-700 text-lg leading-relaxed mb-4"
                           dangerouslySetInnerHTML={{
-                            __html: testimonial.testimonial,
+                            __html: DOMPurify.sanitize(
+                              testimonial.testimonial ?? ""
+                            ),
                           }}
+                          suppressHydrationWarning
                         />
                       </blockquote>
                       <footer className="mt-4">
