@@ -7,6 +7,8 @@ export interface City {
   state: number;
 }
 
+
+
 export interface CityResponse {
   count: number;
   next: string | null;

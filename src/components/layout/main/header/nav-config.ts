@@ -101,11 +101,6 @@ export const navigation: NavItem[] = [
         description: "Meet the people behind YetiPM",
       },
       {
-        name: "Our Values",
-        href: "/our-values",
-        description: "Learn about our core principles and mission",
-      },
-      {
         name: "Our Story",
         href: "/our-story",
         description: "Learn about our journey and how we started",

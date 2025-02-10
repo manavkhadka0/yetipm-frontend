@@ -14,7 +14,7 @@ export const rentalFormSchema = z.object({
     message: "Address must be at least 5 characters.",
   }),
   is_featured: z.boolean().optional().default(false),
-  postal_code: z.string().optional(),
+  zip_code: z.string().optional(),
   price: z.coerce.number().min(1, "Price is required"),
   price_breakdown: z.string().optional(),
   project_description: z.string().optional(),

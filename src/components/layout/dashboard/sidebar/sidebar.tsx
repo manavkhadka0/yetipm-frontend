@@ -73,6 +73,10 @@ const items: MenuItem[] = [
         label: "States",
         href: "/admin/states",
       },
+      {
+        label: "Features",
+        href: "/admin/features",
+      },
     ],
   },
   {

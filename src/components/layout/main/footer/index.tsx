@@ -10,7 +10,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  locations,
   findYourHome,
   about,
   helpCenter,
@@ -26,6 +25,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { City } from "@/types/city";
 
 // Helper component for links with tooltip
 function FooterLink({
@@ -58,30 +59,61 @@ function FooterLink({
 }
 
 export default function Footer() {
+  const [cities, setCities] = useState<City[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Fetch cities from the API
+  const fetchCities = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch cities");
+      }
+      const data = await response.json();
+      setCities(data.results); // Assuming the API returns an object with a `results` array
+    } catch (err) {
+      setErrorMessage("Failed to fetch cities");
+      console.error(err);
+    }
+  };
+
+  // Fetch cities on component mount
+  useEffect(() => {
+    fetchCities();
+  }, []);
+
   return (
     <TooltipProvider>
       <ResponsiveContainer paddingX="xs" paddingY="xl">
         {/* Mobile Accordion View */}
         <div className="md:hidden space-y-2">
           <Accordion type="single" collapsible className="w-full">
+            {/* Locations Accordion */}
             <AccordionItem value="locations" className="border-b border-border">
               <AccordionTrigger className="text-base font-semibold py-3">
                 Locations
               </AccordionTrigger>
               <AccordionContent className="pb-3">
                 <div className="space-y-2">
-                  {locations.map((link, index) => (
-                    <FooterLink
-                      key={index}
-                      href={link.href}
-                      label={link.label}
-                      className="block text-sm text-muted-foreground hover:text-primary"
-                    />
-                  ))}
+                  {errorMessage ? (
+                    <p className="text-sm text-muted-foreground">{errorMessage}</p>
+                  ) : (
+                    cities.map((city, index) => (
+                      <FooterLink
+                        key={index}
+                        href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
+                        label={city.name} // Assuming each city has a `name` for the label
+                        className="block text-sm text-muted-foreground hover:text-primary"
+                      />
+                    ))
+                  )}
                 </div>
               </AccordionContent>
             </AccordionItem>
 
+            {/* Find Your Home Accordion */}
             <AccordionItem value="find-home" className="border-b border-border">
               <AccordionTrigger className="text-base font-semibold py-3">
                 Find your home
@@ -100,6 +132,7 @@ export default function Footer() {
               </AccordionContent>
             </AccordionItem>
 
+            {/* Our Services Accordion */}
             <AccordionItem
               value="our-services"
               className="border-b border-border"
@@ -121,6 +154,7 @@ export default function Footer() {
               </AccordionContent>
             </AccordionItem>
 
+            {/* About Accordion */}
             <AccordionItem value="about" className="border-b border-border">
               <AccordionTrigger className="text-base font-semibold py-3">
                 About
@@ -139,6 +173,7 @@ export default function Footer() {
               </AccordionContent>
             </AccordionItem>
 
+            {/* Help Center Accordion */}
             <AccordionItem
               value="help-center"
               className="border-b border-border"
@@ -160,6 +195,7 @@ export default function Footer() {
               </AccordionContent>
             </AccordionItem>
 
+            {/* Current Residents Accordion */}
             <AccordionItem
               value="current-residents"
               className="border-b border-border"
@@ -189,18 +225,22 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Locations</h3>
             <div className="space-y-2">
-              {locations.map((link, index) => (
-                <FooterLink
-                  key={index}
-                  href={link.href}
-                  label={link.label}
-                  className="block text-muted-foreground hover:text-primary"
-                />
-              ))}
+              {errorMessage ? (
+                <p className="text-sm text-muted-foreground">{errorMessage}</p>
+              ) : (
+                cities.map((city, index) => (
+                  <FooterLink
+                    key={index}
+                    href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
+                    label={city.name} // Assuming each city has a `name` for the label
+                    className="block text-muted-foreground hover:text-primary"
+                  />
+                ))
+              )}
             </div>
           </div>
 
-          {/* Find your home */}
+          {/* Find Your Home */}
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Find your home</h3>
             <div className="space-y-2">
@@ -242,7 +282,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Help center */}
+          {/* Help Center */}
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Help center</h3>
             <div className="space-y-2">
@@ -257,7 +297,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Current residents */}
+          {/* Current Residents */}
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Current residents</h3>
             <div className="space-y-2">
@@ -287,7 +327,7 @@ export default function Footer() {
                 />
               </Link>
               <p className="text-xs md:text-sm text-center md:text-left text-muted-foreground">
-                YETI PM Inc. © {new Date().getFullYear()} All Rights Reserved.
+                YETI PM Inc. {new Date().getFullYear()} All Rights Reserved.
               </p>
             </div>
 
@@ -306,13 +346,15 @@ export default function Footer() {
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
                   <a
-                    key={index}
-                    href={social.href}
-                    className="text-[#003d21] font-bold"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-6 w-6 " />
-                  </a>
+  key={index}
+  href={social.href}
+  className="text-[#003d21] font-bold"
+  aria-label={social.label}
+  target="_blank" // Add this line
+  rel="noopener noreferrer" // It's a good practice to include this for security
+>
+  <social.icon className="h-6 w-6" />
+</a>
                 ))}
               </div>
             </div>

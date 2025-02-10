@@ -36,7 +36,7 @@ export interface Rental extends RentalList {
   garage_spaces: number;
   availability: boolean;
   available_date: string;
-  postal_code: string;
+  zip_code: string;
 }
 
 export interface RentalsResponse {

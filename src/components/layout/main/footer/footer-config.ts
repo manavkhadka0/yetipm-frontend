@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface FooterLink {
@@ -38,7 +38,7 @@ export const findYourHome: FooterLink[] = [
 
 export const about: FooterLink[] = [
   { label: "Our story", href: "/our-story" },
-  { label: "Our values", href: "/our-values" },
+  // { label: "Our values", href: "/our-values" },
   { label: "Our Team", href: "/our-team" },
 ];
 
@@ -67,9 +67,7 @@ export const ourServices: FooterLink[] = [
 export const socialLinks: SocialLink[] = [
   { icon: Instagram, href: "https://www.instagram.com/yeti_property_management?igsh=MjU2dzBmcWNkNWVx&utm_source=qr", label: "Instagram" },
   { icon: Facebook, href: " https://www.facebook.com/share/1CqKDHroKL/?mibextid=wwXIfr", label: "Facebook" },
-  { icon: Youtube, href: "#", label: "YouTube" },
   { icon: Linkedin, href: " https://www.linkedin.com/company/yeti-property-management/", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
 ];
 
 export const legalLinks: FooterLink[] = [

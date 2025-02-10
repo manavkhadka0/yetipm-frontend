@@ -67,7 +67,7 @@ export function RentalForm({ initialData }: RentalFormProps) {
       is_featured: initialData?.is_featured || false,
       project_type: initialData?.project_type || "",
       project_address: initialData?.project_address || "",
-      postal_code: initialData?.postal_code || "",
+      zip_code: initialData?.zip_code || "",
       price: initialData?.price || 0,
       price_breakdown: initialData?.price_breakdown || "",
       project_description: initialData?.project_description || "",
@@ -305,12 +305,12 @@ export function RentalForm({ initialData }: RentalFormProps) {
 
             <FormField
               control={form.control}
-              name="postal_code"
+              name="zip_code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Postal Code</FormLabel>
+                  <FormLabel>Zip Code</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter postal code" {...field} />
+                    <Input placeholder="Enter zip code" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
