@@ -23,15 +23,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
 import { Features } from "@/types/features";
-import { Loader2 } from "lucide-react";
+import { Loader2, X, CloudUpload, Paperclip } from "lucide-react";
+import {
+  FileUploader,
+  FileInput,
+  FileUploaderContent,
+  FileUploaderItem,
+} from "@/components/ui/file-upload";
 
 const formSchema = z.object({
   name: z.string().min(2, "Feature name must be at least 2 characters"),
-  image: z
-    .any()
-    .refine((file) => file instanceof File || typeof file === "string", {
-      message: "Image is required",
-    }),
+  image: z.any().refine((file) => file instanceof File || typeof file === "string", {
+    message: "Image is required",
+  }),
 });
 
 interface EditFeaturesDialogProps {
@@ -49,6 +53,7 @@ export function EditFeaturesDialog({
 }: EditFeaturesDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(feature?.image || null);
+  const [file, setFile] = useState<File | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,15 +70,23 @@ export function EditFeaturesDialog({
         image: feature?.image || "",
       });
       setPreview(feature?.image || null);
+      setFile(null);
     }
   }, [open, feature, form]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      form.setValue("image", file);
-      setPreview(URL.createObjectURL(file));
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      form.setValue("image", selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+      setFile(selectedFile);
     }
+  };
+
+  const handleImageDelete = () => {
+    form.setValue("image", "");
+    setPreview(null);
+    setFile(null);
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -113,6 +126,22 @@ export function EditFeaturesDialog({
     }
   };
 
+  const handleFileChange = (files: File[] | null) => {
+    if (files === null) {
+      setFile(null);
+      return;
+    }
+    if (files.length === 0) {
+      setFile(null);
+      return;
+    }
+    setFile(files[0]);
+    if (files[0]) {
+      form.setValue("image", files[0]);
+      setPreview(URL.createObjectURL(files[0]));
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -126,6 +155,7 @@ export function EditFeaturesDialog({
         ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              {/* Feature Name Input */}
               <FormField
                 control={form.control}
                 name="name"
@@ -140,32 +170,69 @@ export function EditFeaturesDialog({
                 )}
               />
 
-              <FormItem>
-                <FormLabel>Feature Image</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                  />
-                </FormControl>
-                {preview && (
-                  <img
-                    src={preview}
-                    alt="Feature Preview"
-                    className="mt-2 w-20 h-20 rounded-md"
-                  />
-                )}
-                <FormMessage />
-              </FormItem>
+              {/* Feature Image Upload */}
+              <FormField
+                control={form.control}
+                name="image"
+                render={() => (
+                  <FormItem>
+                    <FormLabel>Feature Image</FormLabel>
+                    <div className="space-y-4">
+                      {/* Image Preview with Delete Button */}
+                      {preview && (
+                        <div className="relative w-32 h-32 group">
+                          <img
+                            src={preview}
+                            alt="Feature Preview"
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleImageDelete}
+                            className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      )}
 
+                      {/* File Upload UI */}
+                      <FileUploader
+                        value={file ? [file] : []}
+                        onValueChange={handleFileChange}
+                        dropzoneOptions={{ maxSize: 2 * 1024 * 1024 }} // Max 2MB
+                        className="relative bg-background rounded-lg p-2"
+                      >
+                        <FileInput className="outline-dashed outline-1 outline-slate-500">
+                          <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
+                            <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
+                            <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
+                              <span className="font-semibold">Click to upload</span>
+                              &nbsp; or drag and drop
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              PNG, JPG, or GIF (max 2MB)
+                            </p>
+                          </div>
+                        </FileInput>
+                        <FileUploaderContent>
+                          {file && (
+                            <FileUploaderItem index={0}>
+                              <Paperclip className="h-4 w-4 stroke-current" />
+                              <span>{file.name}</span>
+                            </FileUploaderItem>
+                          )}
+                        </FileUploaderContent>
+                      </FileUploader>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Buttons */}
               <div className="flex justify-end space-x-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isLoading}
-                >
+                <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
                   Cancel
                 </Button>
                 <Button type="submit" disabled={isLoading}>
