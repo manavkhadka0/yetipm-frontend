@@ -74,14 +74,6 @@ export function EditFeaturesDialog({
     }
   }, [open, feature, form]);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    if (selectedFile) {
-      form.setValue("image", selectedFile);
-      setPreview(URL.createObjectURL(selectedFile));
-      setFile(selectedFile);
-    }
-  };
 
   const handleImageDelete = () => {
     form.setValue("image", "");
