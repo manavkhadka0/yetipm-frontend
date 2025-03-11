@@ -17,6 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { showSuccess, showError } from "@/lib/alerts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +31,7 @@ import { FaqFormSchema, faqFormSchema } from "@/schemas/faqs-form-schema";
 import type { Faq } from "@/types/faqs";
 import axios from "axios";
 import { MinimalTiptapEditor } from "@/components/common/minimal-tiptap";
+import { CATEGORY_CHOICES } from "@/constants/categories";
 
 interface EditFaqDialogProps {
   open: boolean;
@@ -45,6 +53,7 @@ export function EditFaqDialog({
     defaultValues: {
       question: faq?.question || "",
       answer: faq?.answer || "",
+      category: faq?.category || "General Questions",
     },
   });
 
@@ -58,6 +67,7 @@ export function EditFaqDialog({
       const formData = new URLSearchParams();
       formData.append("question", values.question);
       formData.append("answer", values.answer);
+      formData.append("category", values.category);
 
       const response = await axios({
         method: faq ? "PUT" : "POST",
@@ -91,6 +101,33 @@ export function EditFaqDialog({
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {CATEGORY_CHOICES.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="question"

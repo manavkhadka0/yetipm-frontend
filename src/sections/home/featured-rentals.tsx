@@ -11,7 +11,7 @@ type FeaturedRentalsProps = {
 
 export default function FeaturedRentals({ rentals }: FeaturedRentalsProps) {
   return (
-    <section className="relative bg-white py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-white py-8 md:py-16 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative">
         <div suppressHydrationWarning>
           <HeadingSection

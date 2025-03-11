@@ -3,12 +3,12 @@ import HeadingSection from "@/components/common/heading-section";
 
 export default function FeaturedListings() {
   return (
-    <main className="min-h-screen  text-black">
+    <main className="text-black">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0"></div>
-        <div className="container mx-auto px-4 py-32 relative">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="container mx-auto px-4 py-16 relative">
+          <div className=" mx-auto text-center">
             <HeadingSection
               title="Why settle for traditional? Lease smarter, the Yeti way."
               subtitle="We are here to make your home-leasing experience easier and hassle-free."

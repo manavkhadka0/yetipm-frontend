@@ -2,8 +2,6 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { CheckIcon } from "lucide-react";
 
@@ -15,163 +13,211 @@ interface PricingTier {
   leaseRenewal: number;
   popular?: boolean;
   features: {
+    startManaging: boolean;
     virtualTour: boolean;
-    rentalIQTech: boolean;
+    rentalMarketAnalysis: boolean;
     dedicatedManager: boolean;
-    pricingPromise: boolean;
-    hassleFreePromise: boolean;
-    accountingPromise: boolean;
-    evictionPayment: string | number;
-    tenantPlacement: string;
-    rentalProtection: boolean;
+    priceAssurance: boolean;
+    satisfactionGuarantee: boolean;
+    accountingTracking: boolean;
+    evictionProtection: boolean;
+    tenantPlacement10: boolean;
+    rentalIncome10: boolean;
+    tenantPlacement12: boolean;
+    rentalIncome12: boolean;
+    freeEvaluation: boolean;
+    priorityTenantPlacement: boolean;
+    photographyStaging: boolean;
+    customMarketing: boolean;
+    emergencySupport: boolean;
   };
 }
 
 const pricingTiers: PricingTier[] = [
   {
-    name: "Professional",
-    monthlyPrice: 99,
-    yearlyPrice: 89,
-    leasingFee: "60%",
-    leaseRenewal: 375,
+    name: "Yeti Essential",
+    monthlyPrice: 109,
+    yearlyPrice: 109,
+    leasingFee: "55%",
+    leaseRenewal: 350,
     features: {
+      startManaging: true,
       virtualTour: true,
-      rentalIQTech: true,
+      rentalMarketAnalysis: true,
       dedicatedManager: true,
-      pricingPromise: true,
-      hassleFreePromise: true,
-      accountingPromise: true,
-      evictionPayment: 20,
-      tenantPlacement: "10 Months",
-      rentalProtection: false,
+      priceAssurance: true,
+      satisfactionGuarantee: true,
+      accountingTracking: true,
+      evictionProtection: true,
+      tenantPlacement10: true,
+      rentalIncome10: false,
+      tenantPlacement12: false,
+      rentalIncome12: false,
+      freeEvaluation: false,
+      priorityTenantPlacement: false,
+      photographyStaging: false,
+      customMarketing: false,
+      emergencySupport: false,
     },
   },
   {
-    name: "Premium",
-    monthlyPrice: 139,
-    yearlyPrice: 129,
-    leasingFee: "50%",
-    leaseRenewal: 375,
+    name: "Yeti Advantage",
+    monthlyPrice: 149,
+    yearlyPrice: 149,
+    leasingFee: "45%",
+    leaseRenewal: 350,
     popular: true,
     features: {
+      startManaging: true,
       virtualTour: true,
-      rentalIQTech: true,
+      rentalMarketAnalysis: true,
       dedicatedManager: true,
-      pricingPromise: true,
-      hassleFreePromise: true,
-      accountingPromise: true,
-      evictionPayment: "Included",
-      tenantPlacement: "12 Months",
-      rentalProtection: true,
+      priceAssurance: true,
+      satisfactionGuarantee: true,
+      accountingTracking: true,
+      evictionProtection: true,
+      tenantPlacement10: true,
+      rentalIncome10: true,
+      tenantPlacement12: true,
+      rentalIncome12: true,
+      freeEvaluation: false,
+      priorityTenantPlacement: false,
+      photographyStaging: false,
+      customMarketing: false,
+      emergencySupport: false,
     },
   },
   {
-    name: "Executive",
-    monthlyPrice: 189,
-    yearlyPrice: 179,
+    name: "Yeti Elite",
+    monthlyPrice: 199,
+    yearlyPrice: 199,
     leasingFee: "No Leasing Fee",
-    leaseRenewal: 375,
+    leaseRenewal: 350,
     features: {
+      startManaging: true,
       virtualTour: true,
-      rentalIQTech: true,
+      rentalMarketAnalysis: true,
       dedicatedManager: true,
-      pricingPromise: true,
-      hassleFreePromise: true,
-      accountingPromise: true,
-      evictionPayment: 20,
-      tenantPlacement: "10 Months",
-      rentalProtection: false,
+      priceAssurance: true,
+      satisfactionGuarantee: true,
+      accountingTracking: true,
+      evictionProtection: true,
+      tenantPlacement10: true,
+      rentalIncome10: true,
+      tenantPlacement12: true,
+      rentalIncome12: true,
+      freeEvaluation: true,
+      priorityTenantPlacement: true,
+      photographyStaging: true,
+      customMarketing: true,
+      emergencySupport: true,
     },
   },
 ];
 
 export default function PricingPage() {
-  const [isYearly, setIsYearly] = React.useState(false);
+  // Group features by tier for better organization
+  const essentialFeatures = [
+    "startManaging",
+    "virtualTour",
+    "rentalMarketAnalysis",
+    "dedicatedManager",
+    "priceAssurance",
+    "satisfactionGuarantee",
+    "accountingTracking",
+    "evictionProtection",
+    "tenantPlacement10",
+  ];
+
+  const advantageOnlyFeatures = [
+    "rentalIncome10",
+    "tenantPlacement12",
+    "rentalIncome12",
+  ];
+
+  const eliteOnlyFeatures = [
+    "freeEvaluation",
+    "priorityTenantPlacement",
+    "photographyStaging",
+    "customMarketing",
+    "emergencySupport",
+  ];
 
   const renderFeatureLabel = (key: string) => {
     const labels: Record<string, string> = {
+      startManaging: "Start Managing with Yeti",
       virtualTour: "Virtual Property Tours",
-      rentalIQTech: "Rental IQ Technology",
-      dedicatedManager: "Dedicated Asset Manager",
-      pricingPromise: "Price Match Promise",
-      hassleFreePromise: "60-Day Hassle-Free Promise",
-      accountingPromise: "Accounting Guarantee",
-      evictionPayment: "Eviction Protection",
-      tenantPlacement: "Tenant Placement Guarantee",
-      rentalProtection: "Rental Income Protection",
+      rentalMarketAnalysis: "Rental Market Analysis",
+      dedicatedManager: "Dedicated Property Manager",
+      priceAssurance: "Yeti Price Assurance",
+      satisfactionGuarantee: "60-Day Satisfaction Guarantee",
+      accountingTracking: "Accounting & Financial Tracking",
+      evictionProtection: "Eviction Protection ($20/month)",
+      tenantPlacement10: "Tenant Placement Guarantee – 10 Months",
+      rentalIncome10: "Rental Income Security – 10 Months",
+      tenantPlacement12: "Tenant Placement Guarantee – 12 Months",
+      rentalIncome12: "Rental Income Security – 12 Months",
+      freeEvaluation: "Free Property Evaluation",
+      priorityTenantPlacement: "Priority Tenant Placement",
+      photographyStaging: "Professional Photography & Staging",
+      customMarketing: "Custom Marketing Plan",
+      emergencySupport: "24/7 Emergency Maintenance Support",
     };
     return labels[key] || key;
   };
 
-  const renderFeatureValue = (
-    key: string,
-    value: boolean | string | number
-  ) => {
-    if (typeof value === "boolean") {
-      return value ? (
-        <CheckIcon className="h-4 w-4 text-primary flex-shrink-0" />
-      ) : (
-        <span className="h-4 w-4 block flex-shrink-0" />
-      );
-    }
+  const renderFeatureSection = (tierName: string) => {
+    let featuresToShow: string[] = [];
+    let includedText = "";
 
-    // Handle special cases for evictionPayment and tenantPlacement
-    if (key === "evictionPayment") {
-      return value === "Included" ? (
-        <CheckIcon className="h-4 w-4 text-primary flex-shrink-0" />
-      ) : (
-        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-          ${value}
-        </span>
-      );
-    }
-
-    if (key === "tenantPlacement") {
-      return (
-        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-          {value}
-        </span>
-      );
+    switch (tierName) {
+      case "Yeti Essential":
+        featuresToShow = essentialFeatures;
+        break;
+      case "Yeti Advantage":
+        featuresToShow = advantageOnlyFeatures;
+        includedText = "Everything in Yeti Essential +";
+        break;
+      case "Yeti Elite":
+        featuresToShow = eliteOnlyFeatures;
+        includedText = "Everything in Yeti Advantage +";
+        break;
     }
 
     return (
-      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-        {value}
-      </span>
+      <div className="space-y-4">
+        {includedText && (
+          <div className="pb-2 text-sm font-medium text-primary border-b border-gray-200">
+            {includedText}
+          </div>
+        )}
+        <ul className="space-y-3">
+          {featuresToShow.map((feature) => (
+            <li
+              key={feature}
+              className="flex items-center gap-2 text-sm text-gray-600"
+            >
+              <CheckIcon className="h-4 w-4 text-primary flex-shrink-0" />
+              <span>{renderFeatureLabel(feature)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   };
 
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            Choose Your Plan
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold sm:text-5xl">
+            <span className="text-primary">Property Management</span>{" "}
+            <span className="text-blue-600">Plans</span>
           </h1>
           <p className="mt-5 text-xl text-gray-500">
-            Select the perfect plan for your property management needs
+            Choose the perfect plan for your property management needs
           </p>
-        </div>
-
-        {/* Billing Toggle */}
-        <div className="mt-12 flex justify-center items-center gap-3">
-          <Label htmlFor="billing-toggle" className="text-sm font-medium">
-            Monthly
-          </Label>
-          <Switch
-            id="billing-toggle"
-            checked={isYearly}
-            onCheckedChange={setIsYearly}
-          />
-          <div className="flex items-center gap-2">
-            <Label htmlFor="billing-toggle" className="text-sm font-medium">
-              Yearly
-            </Label>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
-              Save 10%
-            </Badge>
-          </div>
         </div>
 
         {/* Pricing Cards */}
@@ -179,16 +225,16 @@ export default function PricingPage() {
           {pricingTiers.map((tier) => (
             <div
               key={tier.name}
-              className={`flex flex-col rounded-lg shadow-lg transition-all duration-200 hover:scale-105 ${
+              className={`flex flex-col rounded-2xl shadow-lg transition-all duration-200 hover:scale-105 ${
                 tier.popular
-                  ? "relative border-2 border-primary bg-white"
-                  : "border border-gray-200 bg-white"
+                  ? "relative border-2 border-primary bg-white ring-4 ring-primary/10"
+                  : "border border-gray-200 bg-white hover:border-primary/50"
               }`}
             >
               {tier.popular && (
                 <div className="absolute -top-5 left-0 right-0 mx-auto w-32">
                   <Badge
-                    className="w-full justify-center bg-primary text-primary-foreground"
+                    className="w-full justify-center bg-primary text-white shadow-lg"
                     variant="default"
                   >
                     Most Popular
@@ -196,59 +242,55 @@ export default function PricingPage() {
                 </div>
               )}
 
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900">
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900">
                   {tier.name}
                 </h3>
 
-                <div className="mt-4 flex items-baseline text-gray-900">
-                  <span className="text-4xl font-bold tracking-tight">
-                    ${isYearly ? tier.yearlyPrice : tier.monthlyPrice}
+                <div className="mt-6 flex items-baseline">
+                  <span className="text-5xl font-bold tracking-tight text-primary">
+                    ${tier.monthlyPrice}
                   </span>
-                  <span className="ml-1 text-base font-semibold">/month</span>
+                  <span className="ml-1 text-xl font-medium text-gray-500">
+                    /month
+                  </span>
                 </div>
 
-                <div className="mt-4 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Leasing Fee</span>
-                    <span className="font-medium">{tier.leasingFee}</span>
+                <div className="mt-6 space-y-3">
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-blue-50/50">
+                    <span className="text-gray-600 font-medium">
+                      Leasing Fee
+                    </span>
+                    <span className="font-bold text-lg text-primary">
+                      {tier.leasingFee}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Lease Renewal</span>
-                    <span className="font-medium">${tier.leaseRenewal}</span>
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-blue-50/50">
+                    <span className="text-gray-600 font-medium">
+                      Lease Renewal
+                    </span>
+                    <span className="font-bold text-lg text-primary">
+                      ${tier.leaseRenewal}
+                    </span>
                   </div>
                 </div>
 
                 <Button
-                  className="mt-6 w-full"
+                  className={`mt-8 w-full text-base py-6 ${
+                    tier.popular ? "bg-primary hover:bg-primary/90" : ""
+                  }`}
                   variant={tier.popular ? "default" : "outline"}
                 >
                   Get Started
                 </Button>
               </div>
 
-              <div className="flex flex-1 flex-col border-t border-gray-200 bg-gray-50/50 p-6">
+              <div className="flex flex-1 flex-col border-t border-gray-200 bg-gray-50 p-8 rounded-b-2xl">
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 mb-4">
+                  <h4 className="text-base font-semibold text-gray-900 mb-6">
                     Features included:
                   </h4>
-                  <ul className="space-y-3">
-                    {Object.entries(tier.features).map(([key, value]) => (
-                      <li
-                        key={key}
-                        className={`flex items-center justify-between gap-2 text-sm ${
-                          typeof value === "boolean" && !value
-                            ? "text-gray-400"
-                            : "text-gray-600"
-                        }`}
-                      >
-                        <span className="text-sm">
-                          {renderFeatureLabel(key)}
-                        </span>
-                        {renderFeatureValue(key, value)}
-                      </li>
-                    ))}
-                  </ul>
+                  {renderFeatureSection(tier.name)}
                 </div>
               </div>
             </div>

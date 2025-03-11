@@ -3,7 +3,7 @@ import HomeView from "@/sections/home/view/home-view";
 const fetchFaqs = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/faqs/`);
   const data = await response.json();
-  return data.results;
+  return data;
 };
 
 const fetchTestimonials = async () => {

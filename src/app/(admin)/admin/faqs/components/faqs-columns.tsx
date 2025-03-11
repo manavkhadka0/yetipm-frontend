@@ -5,8 +5,26 @@ import { Faq } from "@/types/faqs";
 import { TableMeta } from "./faqs-data-table";
 import { DataTableColumnHeader } from "./faqs-data-table-column-header";
 import { DataTableRowActions } from "./faqs-data-table-row-actions";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<Faq>[] = [
+  {
+    accessorKey: "category",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Category" />
+    ),
+    cell: ({ row }) => {
+      const category = row.getValue("category") as string;
+      return (
+        <Badge variant="secondary" className="font-medium">
+          {category || "General Questions"}
+        </Badge>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+  },
   {
     accessorKey: "question",
     header: ({ column }) => (

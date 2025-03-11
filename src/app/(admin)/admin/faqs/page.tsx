@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaqsResponse } from "@/types/faqs";
+import { Faq } from "@/types/faqs";
 import { columns } from "./components/faqs-columns";
 import axios from "axios";
 import { showError } from "@/lib/alerts";
@@ -10,22 +10,46 @@ import { Plus } from "lucide-react";
 import { EditFaqDialog } from "./components/faqs-edit-dialog";
 import { DataTable } from "./components/faqs-data-table";
 
+interface FaqFilters {
+  category?: string;
+  search?: string;
+}
+
 export default function FaqsPage() {
-  const [faqs, setFaqs] = useState<FaqsResponse>();
+  const [faqs, setFaqs] = useState<Faq[]>([]);
+  const [filteredFaqs, setFilteredFaqs] = useState<Faq[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const fetchFaqs = async (page: number = 1, size: number = pageSize) => {
+  const fetchFaqs = async (filters?: FaqFilters) => {
     try {
       setIsLoading(true);
-      const response = await axios.get<FaqsResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/faqs/?page=${page}&page_size=${size}`
-      );
-      setFaqs(response.data);
-      setCurrentPage(page);
-      setPageSize(size);
+      let url = `${process.env.NEXT_PUBLIC_API_URL}/api/faqs/`;
+
+      // Add filters to URL
+      if (filters?.category || filters?.search) {
+        url += "?";
+        const params = [];
+        if (filters.category) {
+          params.push(`category=${encodeURIComponent(filters.category)}`);
+        }
+        if (filters.search) {
+          params.push(`search=${encodeURIComponent(filters.search)}`);
+        }
+        url += params.join("&");
+      }
+
+      const response = await axios.get<Faq[]>(url);
+
+      const allFaqs = response.data;
+      setFaqs(allFaqs);
+
+      // Apply client-side pagination
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      setFilteredFaqs(allFaqs.slice(start, end));
     } catch {
       showError("Failed to fetch FAQs");
     } finally {
@@ -36,15 +60,15 @@ export default function FaqsPage() {
   const handleGlobalSearch = async (searchTerm: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.get<FaqsResponse>(
+      const response = await axios.get<Faq[]>(
         `${
           process.env.NEXT_PUBLIC_API_URL
-        }/api/faqs/?search=${encodeURIComponent(
-          searchTerm
-        )}&page_size=${pageSize}`
+        }/api/faqs/?search=${encodeURIComponent(searchTerm)}`
       );
-      setFaqs(response.data);
+      const searchResults = response.data;
+      setFaqs(searchResults);
       setCurrentPage(1);
+      setFilteredFaqs(searchResults.slice(0, pageSize));
     } catch (error) {
       console.error("Error searching FAQs:", error);
       showError("Failed to search FAQs");
@@ -57,12 +81,20 @@ export default function FaqsPage() {
     fetchFaqs();
   }, []);
 
+  // Update filtered FAQs when page or page size changes
+  useEffect(() => {
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+    setFilteredFaqs(faqs.slice(start, end));
+  }, [currentPage, pageSize, faqs]);
+
   const handlePageChange = (page: number) => {
-    fetchFaqs(page, pageSize);
+    setCurrentPage(page);
   };
 
   const handlePageSizeChange = (newSize: number) => {
-    fetchFaqs(1, newSize);
+    setPageSize(newSize);
+    setCurrentPage(1);
   };
 
   return (
@@ -77,12 +109,12 @@ export default function FaqsPage() {
 
       <DataTable
         columns={columns}
-        data={faqs?.results || []}
+        data={filteredFaqs}
         onDataChange={fetchFaqs}
         isLoading={isLoading}
         onGlobalSearch={handleGlobalSearch}
         pagination={{
-          pageCount: Math.ceil((faqs?.count || 0) / pageSize),
+          pageCount: Math.ceil(faqs.length / pageSize),
           currentPage,
           pageSize,
           onPageChange: handlePageChange,

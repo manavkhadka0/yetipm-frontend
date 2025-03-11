@@ -1,3 +1,4 @@
+"use client";
 import HomeHero from "../home-hero";
 import Filter from "../filter";
 import NewHomes from "../explore";
@@ -18,7 +19,7 @@ type HomeViewProps = {
   featuredRentals: RentalList[];
 };
 
-export default async function HomeView({
+export default function HomeView({
   faqs,
   testimonials,
   featuredRentals,

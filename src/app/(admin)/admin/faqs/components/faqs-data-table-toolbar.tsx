@@ -5,6 +5,8 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "./faqs-data-table-view-options";
+import { DataTableFacetedFilter } from "@/components/common/data-table-faceted-filter";
+import { CATEGORY_CHOICES } from "@/constants/categories";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -21,7 +23,7 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter FAQs..."
+          placeholder="Filter questions..."
           value={
             (table.getColumn("question")?.getFilterValue() as string) ?? ""
           }
@@ -30,6 +32,16 @@ export function DataTableToolbar<TData>({
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        {table.getColumn("category") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("category")}
+            title="Category"
+            options={CATEGORY_CHOICES.map((category) => ({
+              label: category,
+              value: category,
+            }))}
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"
