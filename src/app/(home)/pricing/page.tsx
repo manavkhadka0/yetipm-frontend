@@ -187,7 +187,7 @@ export default function PricingPage() {
     return (
       <div className="space-y-4">
         {includedText && (
-          <div className="pb-2 text-sm font-medium text-primary border-b border-gray-200">
+          <div className="pb-2 text-sm font-medium text-[#003d21] border-b border-gray-200">
             {includedText}
           </div>
         )}
@@ -197,7 +197,7 @@ export default function PricingPage() {
               key={feature}
               className="flex items-center gap-2 text-sm text-gray-600"
             >
-              <CheckIcon className="h-4 w-4 text-primary flex-shrink-0" />
+              <CheckIcon className="h-4 w-4 text-[#c8a977] flex-shrink-0" />
               <span>{renderFeatureLabel(feature)}</span>
             </li>
           ))}
@@ -212,8 +212,8 @@ export default function PricingPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold sm:text-5xl">
-            <span className="text-primary">Property Management</span>{" "}
-            <span className="text-blue-600">Plans</span>
+            <span className="text-[#003d21]">Property Management</span>{" "}
+            <span className="text-[#c8a977]">Plans</span>
           </h1>
           <p className="mt-5 text-xl text-gray-500">
             Choose the perfect plan for your property management needs
@@ -227,14 +227,14 @@ export default function PricingPage() {
               key={tier.name}
               className={`flex flex-col rounded-2xl shadow-lg transition-all duration-200 hover:scale-105 ${
                 tier.popular
-                  ? "relative border-2 border-primary bg-white ring-4 ring-primary/10"
-                  : "border border-gray-200 bg-white hover:border-primary/50"
+                  ? "relative border-2 border-[#003d21] bg-white ring-4 ring-[#c8a977]/10"
+                  : "border border-gray-200 bg-white hover:border-[#c8a977]/50"
               }`}
             >
               {tier.popular && (
                 <div className="absolute -top-5 left-0 right-0 mx-auto w-32">
                   <Badge
-                    className="w-full justify-center bg-primary text-white shadow-lg"
+                    className="w-full justify-center bg-[#003d21] text-white shadow-lg"
                     variant="default"
                   >
                     Most Popular
@@ -243,12 +243,12 @@ export default function PricingPage() {
               )}
 
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900">
+                <h3 className="text-2xl font-bold text-[#003d21]">
                   {tier.name}
                 </h3>
 
                 <div className="mt-6 flex items-baseline">
-                  <span className="text-5xl font-bold tracking-tight text-primary">
+                  <span className="text-5xl font-bold tracking-tight text-[#c8a977]">
                     ${tier.monthlyPrice}
                   </span>
                   <span className="ml-1 text-xl font-medium text-gray-500">
@@ -257,19 +257,19 @@ export default function PricingPage() {
                 </div>
 
                 <div className="mt-6 space-y-3">
-                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-blue-50/50">
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-[#c8a977]/10">
                     <span className="text-gray-600 font-medium">
                       Leasing Fee
                     </span>
-                    <span className="font-bold text-lg text-primary">
+                    <span className="font-bold text-lg text-[#003d21]">
                       {tier.leasingFee}
                     </span>
                   </div>
-                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-blue-50/50">
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-[#c8a977]/10">
                     <span className="text-gray-600 font-medium">
                       Lease Renewal
                     </span>
-                    <span className="font-bold text-lg text-primary">
+                    <span className="font-bold text-lg text-[#003d21]">
                       ${tier.leaseRenewal}
                     </span>
                   </div>
@@ -277,7 +277,9 @@ export default function PricingPage() {
 
                 <Button
                   className={`mt-8 w-full text-base py-6 ${
-                    tier.popular ? "bg-primary hover:bg-primary/90" : ""
+                    tier.popular
+                      ? "bg-[#003d21] hover:bg-[#c8a977]/90"
+                      : "hover:bg-[#c8a977]/10 text-[#003d21]"
                   }`}
                   variant={tier.popular ? "default" : "outline"}
                 >
@@ -287,7 +289,7 @@ export default function PricingPage() {
 
               <div className="flex flex-1 flex-col border-t border-gray-200 bg-gray-50 p-8 rounded-b-2xl">
                 <div>
-                  <h4 className="text-base font-semibold text-gray-900 mb-6">
+                  <h4 className="text-base font-semibold text-[#003d21] mb-6">
                     Features included:
                   </h4>
                   {renderFeatureSection(tier.name)}
