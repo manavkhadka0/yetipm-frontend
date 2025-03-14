@@ -3,7 +3,7 @@ import ContactMap from "./contact-map";
 
 export default function ContactUsHeroSection() {
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+    <div className="bg-white rounded-2xl p-8 md:p-12">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
         <div className="w-full lg:w-1/2 space-y-8">
           <div className="space-y-4">
