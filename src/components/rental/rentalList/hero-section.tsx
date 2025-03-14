@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Rental } from "@/types/rentals";
 import { RentalShareButtons } from "../rental-share-buttons";
