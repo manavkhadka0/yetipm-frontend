@@ -4,7 +4,6 @@ import Filter from "../filter";
 import NewHomes from "../explore";
 import Page from "../tips";
 import WeInclude from "../we-include";
-import ServicesSection from "../service";
 import Qna from "@/components/ourDiff/whyUs/whyus-list/qna";
 import Testimonials from "../testimonials";
 import { Testimonial } from "@/types/testimonials";
@@ -33,7 +32,6 @@ export default function HomeView({
       <WeInclude />
       <Page />
       <Qna faqs={faqs} />
-      <ServicesSection />
       <Testimonials testimonials={testimonials} />
       <ContactView />
     </>

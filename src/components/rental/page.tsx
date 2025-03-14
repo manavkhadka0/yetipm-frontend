@@ -1,6 +1,6 @@
 import PropertyListingHeroSection from "@/components/rental/rentalList/hero-section";
 import PropertyDetails from "@/components/rental/rentalList/content-section";
-import NearbySections from "@/components/rental/rentalList/nearby-section";
+// import NearbySections from "@/components/rental/rentalList/nearby-section";
 import AdditionalInfo from "@/components/rental/rentalList/additional-info";
 
 import { Rental } from "@/types/rentals";
@@ -16,7 +16,7 @@ const RentalsDetailView: React.FC<RentalDetailProps> = ({
     <div>
       <PropertyListingHeroSection rentalDetail={rentalDetail} />
       <PropertyDetails rentalDetail={rentalDetail} />
-      <NearbySections />
+      {/* <NearbySections /> */}
       <AdditionalInfo />
     </div>
   );

@@ -98,7 +98,7 @@ export default function WeInclude() {
       <div className="container mx-auto px-4">
         <div suppressHydrationWarning>
           <HeadingSection
-            title="Everything you need to manage your property effectively"
+            title='"Everything you need to manage your property effectively"'
             subtitle="Discover our hand-picked selection of premium homes"
           />
         </div>

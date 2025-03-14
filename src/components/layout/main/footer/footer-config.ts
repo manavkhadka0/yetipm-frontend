@@ -28,12 +28,14 @@ export const locations: FooterLink[] = [
 ];
 
 export const findYourHome: FooterLink[] = [
-  { label: "Search locations", href: "#" },
-  { label: "Rental communities", href: "#" },
-  { label: "Qualification requirements", href: "#" },
-  { label: "Before you apply", href: "#" },
-  { label: "Application process", href: "#" },
-  { label: "Leasing fees", href: "#" },
+  { label: "Search locations", href: "/find-home/search" },
+  { label: "Rental communities", href: "/find-home/search" },
+  { label: "Before you apply", href: "/leasing/before-apply" },
+  {
+    label: "Qualification requirements",
+    href: "/leasing/qualification-requirements",
+  },
+  { label: "Application process", href: "/leasing/application-process" },
 ];
 
 export const about: FooterLink[] = [
@@ -65,12 +67,30 @@ export const ourServices: FooterLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { icon: Instagram, href: "https://www.instagram.com/yeti_property_management?igsh=MjU2dzBmcWNkNWVx&utm_source=qr", label: "Instagram" },
-  { icon: Facebook, href: " https://www.facebook.com/share/1CqKDHroKL/?mibextid=wwXIfr", label: "Facebook" },
-  { icon: Linkedin, href: " https://www.linkedin.com/company/yeti-property-management/", label: "LinkedIn" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/yeti_property_management?igsh=MjU2dzBmcWNkNWVx&utm_source=qr",
+    label: "Instagram",
+  },
+  {
+    icon: Facebook,
+    href: " https://www.facebook.com/share/1CqKDHroKL/?mibextid=wwXIfr",
+    label: "Facebook",
+  },
+  {
+    icon: Linkedin,
+    href: " https://www.linkedin.com/company/yeti-property-management/",
+    label: "LinkedIn",
+  },
 ];
 
 export const legalLinks: FooterLink[] = [
-  { label: "Privacy Policy", href: "https://www.neighborly.com/your-privacy-rights" },
-  { label: "Terms & Conditions", href: "https://www.neighborly.com/terms-of-use" },
+  {
+    label: "Privacy Policy",
+    href: "https://www.neighborly.com/your-privacy-rights",
+  },
+  {
+    label: "Terms & Conditions",
+    href: "https://www.neighborly.com/terms-of-use",
+  },
 ];

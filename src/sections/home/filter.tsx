@@ -10,8 +10,8 @@ export default function FeaturedListings() {
         <div className="container mx-auto px-4 py-16 relative">
           <div className=" mx-auto text-center">
             <HeadingSection
-              title="Why settle for traditional? Lease smarter, the Yeti way."
-              subtitle="We are here to make your home-leasing experience easier and hassle-free."
+              title='"Live the worry-free leasing lifestyle"'
+              subtitle="Your journey to finding the perfect home starts here"
             />
             <p className="max-w-3xl mx-auto text-lg mb-10 text-black-600 leading-relaxed">
               Love the home, skip the commitment - Yeti PM has you covered. We

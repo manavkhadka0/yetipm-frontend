@@ -17,7 +17,7 @@ interface QnaProps {
   faqs: Faq[];
 }
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 const CATEGORY_CHOICES = [
   "General Questions",
   "Property Owners/Landlords",
@@ -66,21 +66,21 @@ const FAQ = ({ faqs }: QnaProps) => {
 
   return (
     <ResponsiveContainer variant="narrow" paddingY="xl">
-      <div className="w-full max-w-4xl mx-auto px-6 sm:px-8 md:px-12">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-12">
         <HeadingSection
           badge="FAQ"
-          title="Why Choose YETI PM?"
+          title='"Why Choose YETI PM?"'
           subtitle="Find answers to commonly asked questions about our services"
         />
 
         <div className="mt-8">
           <Tabs defaultValue={categories[0]} className="w-full">
-            <TabsList className="w-full flex flex-wrap justify-center gap-2 bg-transparent p-2 ">
+            <TabsList className="w-full flex flex-wrap h-fit mb-8 justify-center gap-2 bg-transparent p-2">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category}
                   value={category}
-                  className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-200"
+                  className="px-4 py-2 text-sm sm:text-base rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-200"
                 >
                   {category}
                 </TabsTrigger>

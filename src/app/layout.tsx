@@ -3,6 +3,7 @@ import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/ui/ProgressBarProvider";
+import ProgressProviderComponent from "@/providers/progress-provider";
 
 export const metadata: Metadata = {
   title: "Yeti PM",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        <ProgressProviderComponent>
+          <Providers>{children}</Providers>
+        </ProgressProviderComponent>
         <Toaster />
       </body>
     </html>

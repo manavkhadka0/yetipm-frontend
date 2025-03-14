@@ -164,12 +164,13 @@ const leasingDetails: Record<string, LeasingDetails> = {
   },
 };
 
-export default function LeasingDetailPage({
+export default async function LeasingDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const details = leasingDetails[params.slug];
+  const resolvedParams = await params;
+  const details = leasingDetails[resolvedParams.slug];
 
   if (!details) {
     notFound();
@@ -194,7 +195,7 @@ export default function LeasingDetailPage({
                       key={slug}
                       href={`/leasing/${slug}`}
                       className={`block py-2 px-4 rounded-md transition-colors ${
-                        params.slug === slug
+                        resolvedParams.slug === slug
                           ? "bg-blue-100 text-blue-800"
                           : "hover:bg-gray-100 text-gray-700"
                       }`}

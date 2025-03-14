@@ -32,7 +32,7 @@ export default function Page() {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <main className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
         <HeadingSection
-          title="Home-leasing, Simplified"
+          title='"Home-leasing, Simplified"'
           subtitle="Your journey to finding the perfect home starts here"
         />
 

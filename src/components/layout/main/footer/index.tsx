@@ -13,8 +13,6 @@ import {
   findYourHome,
   about,
   helpCenter,
-  currentResidents,
-  ourServices,
   socialLinks,
   legalLinks,
 } from "./footer-config";
@@ -98,7 +96,9 @@ export default function Footer() {
               <AccordionContent className="pb-3">
                 <div className="space-y-2">
                   {errorMessage ? (
-                    <p className="text-sm text-muted-foreground">{errorMessage}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {errorMessage}
+                    </p>
                   ) : (
                     cities.map((city, index) => (
                       <FooterLink
@@ -121,28 +121,6 @@ export default function Footer() {
               <AccordionContent className="pb-3">
                 <div className="space-y-2">
                   {findYourHome.map((link, index) => (
-                    <FooterLink
-                      key={index}
-                      href={link.href}
-                      label={link.label}
-                      className="block text-sm text-muted-foreground hover:text-primary"
-                    />
-                  ))}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            {/* Our Services Accordion */}
-            <AccordionItem
-              value="our-services"
-              className="border-b border-border"
-            >
-              <AccordionTrigger className="text-base font-semibold py-3">
-                Our services
-              </AccordionTrigger>
-              <AccordionContent className="pb-3">
-                <div className="space-y-2">
-                  {ourServices.map((link, index) => (
                     <FooterLink
                       key={index}
                       href={link.href}
@@ -194,28 +172,6 @@ export default function Footer() {
                 </div>
               </AccordionContent>
             </AccordionItem>
-
-            {/* Current Residents Accordion */}
-            <AccordionItem
-              value="current-residents"
-              className="border-b border-border"
-            >
-              <AccordionTrigger className="text-base font-semibold py-3">
-                Current residents
-              </AccordionTrigger>
-              <AccordionContent className="pb-3">
-                <div className="space-y-2">
-                  {currentResidents.map((link, index) => (
-                    <FooterLink
-                      key={index}
-                      href={link.href}
-                      label={link.label}
-                      className="block text-sm text-muted-foreground hover:text-primary"
-                    />
-                  ))}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
           </Accordion>
         </div>
 
@@ -245,18 +201,6 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Find your home</h3>
             <div className="space-y-2">
               {findYourHome.map((link, index) => (
-                <FooterLink
-                  key={index}
-                  href={link.href}
-                  label={link.label}
-                  className="block text-muted-foreground hover:text-primary"
-                />
-              ))}
-            </div>
-
-            <h3 className="font-semibold text-lg pt-4">Our services</h3>
-            <div className="space-y-2">
-              {ourServices.map((link, index) => (
                 <FooterLink
                   key={index}
                   href={link.href}
@@ -298,19 +242,6 @@ export default function Footer() {
           </div>
 
           {/* Current Residents */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Current residents</h3>
-            <div className="space-y-2">
-              {currentResidents.map((link, index) => (
-                <FooterLink
-                  key={index}
-                  href={link.href}
-                  label={link.label}
-                  className="block text-muted-foreground hover:text-primary"
-                />
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Bottom section */}
@@ -346,15 +277,15 @@ export default function Footer() {
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
                   <a
-  key={index}
-  href={social.href}
-  className="text-[#003d21] font-bold"
-  aria-label={social.label}
-  target="_blank" // Add this line
-  rel="noopener noreferrer" // It's a good practice to include this for security
->
-  <social.icon className="h-6 w-6" />
-</a>
+                    key={index}
+                    href={social.href}
+                    className="text-[#003d21] font-bold"
+                    aria-label={social.label}
+                    target="_blank" // Add this line
+                    rel="noopener noreferrer" // It's a good practice to include this for security
+                  >
+                    <social.icon className="h-6 w-6" />
+                  </a>
                 ))}
               </div>
             </div>

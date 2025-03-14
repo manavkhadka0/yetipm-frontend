@@ -16,7 +16,7 @@ export default function FeaturedRentals({ rentals }: FeaturedRentalsProps) {
         <div suppressHydrationWarning>
           <HeadingSection
             badge="Exclusive Listings"
-            title="Why settle for traditional? Lease smarter, the Yeti way."
+            title='"Why settle for traditional? Lease smarter, the Yeti way"'
             subtitle="We are here to make your home-leasing experience easier and hassle-free."
           />
         </div>

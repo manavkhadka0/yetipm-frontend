@@ -10,6 +10,7 @@ import { Testimonial } from "../../types/testimonials";
 import HeadingSection from "@/components/common/heading-section";
 import ResponsiveContainer from "@/components/common/responsive-container";
 import DOMPurify from "isomorphic-dompurify";
+import { ImageWithFallbackAvatar } from "@/components/image-with-fallback-avatar";
 
 type TestimonialsProps = {
   testimonials: Testimonial[];
@@ -20,7 +21,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
     <section className="py-16 ">
       <ResponsiveContainer paddingX="md">
         <HeadingSection
-          title="What Our Clients Say"
+          title='"What Our Clients Say"'
           subtitle="Discover why clients trust and choose our services through their experiences"
         />
 
@@ -54,13 +55,11 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                       </blockquote>
                       <footer className="mt-4">
                         <div className="flex items-center">
-                          {testimonial.image && (
-                            <img
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              className="w-12 h-12 rounded-full object-cover mr-4"
-                            />
-                          )}
+                          <ImageWithFallbackAvatar
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-12 h-12 rounded-full object-cover mr-4"
+                          />
                           <div>
                             <cite className="font-semibold text-gray-900 not-italic">
                               {testimonial.name}

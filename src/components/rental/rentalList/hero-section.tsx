@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, Share2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart, Share2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +11,23 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Link from "next/link";
-import { useState } from "react";
 import { Rental } from "@/types/rentals";
+import React, { useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import ContactForm from "@/sections/contact-us/components/contact-form";
 
 type RentalComponentProps = {
   rentalDetail: Rental;
@@ -22,19 +36,7 @@ type RentalComponentProps = {
 export default function PropertyListingHeroSection({
   rentalDetail,
 }: RentalComponentProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === rentalDetail?.images?.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const previousImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? rentalDetail?.images?.length - 1 : prev - 1
-    );
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
     <div className="max-w-7xl mx-auto p-4">
@@ -61,31 +63,38 @@ export default function PropertyListingHeroSection({
       </div>
 
       {/* Image carousel */}
-      <div className="relative aspect-[16/9] mb-6">
-        <Image
-          src={
-            rentalDetail?.images?.[currentImageIndex]?.image ||
-            "/placeholder-rental.jpg"
-          }
-          alt={`Property image ${currentImageIndex + 1}`}
-          fill
-          className="rounded-lg object-cover"
-        />
-        <button
-          onClick={previousImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg"
+      <div className="relative mb-6">
+        <Carousel
+          className="w-full"
+          setApi={(api) => {
+            if (!api) return;
+
+            api.on("select", () => {
+              setCurrentSlide(api.selectedScrollSnap());
+            });
+          }}
         >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+          <CarouselContent>
+            {rentalDetail?.images?.map((img, index) => (
+              <CarouselItem key={index}>
+                <div className="aspect-[16/9] relative">
+                  <Image
+                    src={img.image || "/placeholder-rental.jpg"}
+                    alt={`Property image ${index + 1}`}
+                    fill
+                    className="rounded-lg object-cover"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-4 bg-white/80" />
+          <CarouselNext className="right-4 bg-white/80" />
+        </Carousel>
+
         {rentalDetail && rentalDetail.images && (
           <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/70 text-white rounded-full text-sm">
-            {currentImageIndex + 1} of {rentalDetail.images.length}
+            {currentSlide + 1} of {rentalDetail.images.length}
           </div>
         )}
       </div>
@@ -131,11 +140,22 @@ export default function PropertyListingHeroSection({
                 : ""}
             </div>
           </div>
-          <Link href={"/apply-now"}>
-            <Button className="bg-green-700 hover:bg-green-800 text-white px-8">
-              Apply now
-            </Button>
-          </Link>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="bg-green-700 hover:bg-green-800 text-white px-8">
+                Contact Us
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-xl">
+              <DialogHeader>
+                <DialogTitle>Interested in this property?</DialogTitle>
+              </DialogHeader>
+              <ContactForm
+                propertyId={rentalDetail.id.toString()}
+                inquiryType="Specific Property"
+              />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
