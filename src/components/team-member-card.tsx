@@ -39,7 +39,7 @@ export function TeamMemberCard({
       <div className={cn("md:w-2/3", reverse ? "md:order-1" : "")}>
         <div className="space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-300">
+            <h2 className="text-3xl font-bold text-[#003d21] group-hover:text-[#003d21]/80 transition-colors duration-300">
               {member.name}
             </h2>
             <p className="text-xl text-gray-600 font-medium mt-2">
@@ -47,7 +47,7 @@ export function TeamMemberCard({
             </p>
           </div>
 
-          <div className="w-24 h-1 bg-primary/20 rounded-full group-hover:w-32 transition-all duration-300" />
+          <div className="w-24 h-1 bg-[#c8a977]/20 rounded-full group-hover:w-32 transition-all duration-300" />
 
           <div className="text-gray-600 leading-relaxed">
             <div
@@ -96,8 +96,8 @@ function SocialLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-gray-400 hover:text-primary transition-colors duration-300 
-                 p-2 rounded-full hover:bg-primary/5"
+      className="text-gray-400 hover:text-[#003d21] transition-colors duration-300 
+                 p-2 rounded-full hover:bg-[#c8a977]/10"
     >
       {children}
     </a>

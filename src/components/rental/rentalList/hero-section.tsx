@@ -1,8 +1,11 @@
 "use client";
 
-import { Heart, Share2 } from "lucide-react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Rental } from "@/types/rentals";
+import { RentalShareButtons } from "../rental-share-buttons";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,8 +14,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Rental } from "@/types/rentals";
-import React, { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -52,14 +53,10 @@ export default function PropertyListingHeroSection({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex gap-3">
-          <button className="p-2 hover:bg-gray-100 rounded-full">
-            <Share2 className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-gray-100 rounded-full">
-            <Heart className="w-5 h-5" />
-          </button>
-        </div>
+        <RentalShareButtons
+          rentalSlug={rentalDetail.slug}
+          rentalTitle={rentalDetail.name}
+        />
       </div>
 
       {/* Image carousel */}

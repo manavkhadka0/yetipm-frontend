@@ -187,18 +187,18 @@ export default function PricingPage() {
     return (
       <div className="space-y-4">
         {includedText && (
-          <div className="pb-2 text-sm font-medium text-[#003d21] border-b border-gray-200">
-            {includedText}
+          <div className="pb-2 text-sm font-bold text-[#003d21] border-b-2 border-[#c8a977]/50 bg-[#c8a977]/5 px-3 py-2 rounded-md shadow-sm">
+            <span className="text-[#003d21]">{includedText}</span>
           </div>
         )}
         <ul className="space-y-3">
           {featuresToShow.map((feature) => (
             <li
               key={feature}
-              className="flex items-center gap-2 text-sm text-gray-600"
+              className="flex items-center gap-3 text-sm text-gray-700 hover:bg-gray-50 px-2 py-1 rounded-md transition-colors duration-200"
             >
-              <CheckIcon className="h-4 w-4 text-[#c8a977] flex-shrink-0" />
-              <span>{renderFeatureLabel(feature)}</span>
+              <CheckIcon className="h-5 w-5 text-[#c8a977] flex-shrink-0" />
+              <span className="font-medium">{renderFeatureLabel(feature)}</span>
             </li>
           ))}
         </ul>
@@ -225,14 +225,14 @@ export default function PricingPage() {
           {pricingTiers.map((tier) => (
             <div
               key={tier.name}
-              className={`flex flex-col rounded-2xl shadow-lg transition-all duration-200 hover:scale-105 ${
+              className={`flex flex-col rounded-3xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
                 tier.popular
-                  ? "relative border-2 border-[#003d21] bg-white ring-4 ring-[#c8a977]/10"
-                  : "border border-gray-200 bg-white hover:border-[#c8a977]/50"
+                  ? "relative border-2 border-[#003d21]/20 bg-white ring-4 ring-[#c8a977]/10 transform -translate-y-2 scale-105"
+                  : "border border-gray-200 bg-white hover:shadow-2xl hover:border-[#c8a977]/50"
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-5 left-0 right-0 mx-auto w-32">
+                <div className="absolute -top-4 left-0 right-0 mx-auto w-40">
                   <Badge
                     className="w-full justify-center bg-[#003d21] text-white shadow-lg"
                     variant="default"
@@ -242,22 +242,22 @@ export default function PricingPage() {
                 </div>
               )}
 
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-[#003d21]">
+              <div className="p-8 pb-0">
+                <h3 className="text-2xl font-bold text-[#003d21] mb-4">
                   {tier.name}
                 </h3>
 
-                <div className="mt-6 flex items-baseline">
-                  <span className="text-5xl font-bold tracking-tight text-[#c8a977]">
+                <div className="flex items-baseline">
+                  <span className="text-5xl font-extrabold tracking-tight text-[#c8a977]">
                     ${tier.monthlyPrice}
                   </span>
-                  <span className="ml-1 text-xl font-medium text-gray-500">
+                  <span className="ml-2 text-xl font-medium text-gray-500">
                     /month
                   </span>
                 </div>
 
-                <div className="mt-6 space-y-3">
-                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-[#c8a977]/10">
+                <div className="mt-6 space-y-4">
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md hover:bg-[#c8a977]/5">
                     <span className="text-gray-600 font-medium">
                       Leasing Fee
                     </span>
@@ -265,7 +265,7 @@ export default function PricingPage() {
                       {tier.leasingFee}
                     </span>
                   </div>
-                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:scale-[1.02] hover:bg-[#c8a977]/10">
+                  <div className="group flex justify-between items-center p-4 bg-gray-50 rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md hover:bg-[#c8a977]/5">
                     <span className="text-gray-600 font-medium">
                       Lease Renewal
                     </span>
@@ -276,10 +276,10 @@ export default function PricingPage() {
                 </div>
 
                 <Button
-                  className={`mt-8 w-full text-base py-6 ${
+                  className={`mt-8 w-full text-base py-6 rounded-xl ${
                     tier.popular
-                      ? "bg-[#003d21] hover:bg-[#c8a977]/90"
-                      : "hover:bg-[#c8a977]/10 text-[#003d21]"
+                      ? "bg-[#003d21] hover:bg-[#003d21]/90"
+                      : "border-2 border-[#003d21] hover:bg-[#c8a977]/10 text-[#003d21]"
                   }`}
                   variant={tier.popular ? "default" : "outline"}
                 >
@@ -287,9 +287,9 @@ export default function PricingPage() {
                 </Button>
               </div>
 
-              <div className="flex flex-1 flex-col border-t border-gray-200 bg-gray-50 p-8 rounded-b-2xl">
+              <div className="flex flex-1 flex-col border-t border-gray-200 bg-gray-50 p-8 rounded-b-3xl">
                 <div>
-                  <h4 className="text-base font-semibold text-[#003d21] mb-6">
+                  <h4 className="text-base font-semibold text-[#003d21] mb-6 border-b pb-2 border-[#c8a977]/30">
                     Features included:
                   </h4>
                   {renderFeatureSection(tier.name)}

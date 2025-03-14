@@ -12,6 +12,21 @@ const fetchRental = async (slug: string): Promise<Rental> => {
   return response.json();
 };
 
+export async function generateMetadata({ params }: RentalDetailPageProps) {
+  const resolvedParams = await params;
+  const rentalDetail: Rental = await fetchRental(resolvedParams.slug);
+
+  return {
+    title: rentalDetail.name,
+    description: rentalDetail.project_description,
+    openGraph: {
+      title: rentalDetail.name,
+      description: rentalDetail.project_description,
+      images: rentalDetail.images,
+    },
+  };
+}
+
 export default async function RentalsDetailPage({
   params,
 }: RentalDetailPageProps) {
