@@ -225,7 +225,7 @@ export default function PricingPage() {
           {pricingTiers.map((tier) => (
             <div
               key={tier.name}
-              className={`flex flex-col rounded-3xl shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
+              className={`flex flex-col rounded-3xl shadow-xl  transition-all duration-300 ease-in-out ${
                 tier.popular
                   ? "relative border-2 border-[#003d21]/20 bg-white ring-4 ring-[#c8a977]/10 transform -translate-y-2 scale-105"
                   : "border border-gray-200 bg-white hover:shadow-2xl hover:border-[#c8a977]/50"

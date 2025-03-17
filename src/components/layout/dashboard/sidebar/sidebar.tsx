@@ -8,7 +8,6 @@ import {
   Settings,
   ChevronRight,
   type LucideIcon,
-  LogOut,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -33,10 +32,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/providers/auth-provider";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 interface MenuItem {
   label: string;
@@ -128,24 +126,21 @@ const items: MenuItem[] = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
 
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b">
-        <div className="flex h-[60px] items-center justify-center px-6 group-[[data-collapsed=true]]:px-2">
-          <Image
-            src="/image.png"
-            alt="Logo"
-            width={32}
-            height={32}
-            className="group-[[data-collapsed=true]]:w-8 group-[[data-collapsed=true]]:h-8"
-          />
-        </div>
+        <Link href="/">
+          <div className="flex h-[60px] items-center justify-center px-6 group-[[data-collapsed=true]]:px-2">
+            <Image
+              src="/image.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="group-[[data-collapsed=true]]:w-8 group-[[data-collapsed=true]]:h-8"
+            />
+          </div>
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -226,16 +221,12 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter className="border-t">
         <div className="flex h-[60px] items-center justify-center px-6 group-[[data-collapsed=true]]:px-2">
-          <Button
-            onClick={handleLogout}
-            variant="ghost"
-            size="icon"
-            title="Logout"
-            className="w-full justify-start gap-2"
-          >
-            <LogOut className="h-4 w-4 text-gray-500 flex-shrink-0" />
-            <span className="group-[[data-collapsed=true]]:hidden">Logout</span>
-          </Button>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </SidebarFooter>
       <SidebarRail />

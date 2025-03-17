@@ -14,6 +14,7 @@ import { Menu, ChevronDown, ChevronUp, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navigation } from "./nav-config";
 import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
 
 const ListItem = ({
   name,
@@ -56,11 +57,8 @@ export default function Header() {
     }, 150);
   };
 
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      "Hi, I'd like to learn more about your services."
-    );
-    window.open(`https://wa.me/9779861884374?text=${message}`, "_blank");
+  const handleCallClick = () => {
+    window.location.href = "tel:469-345-6419";
   };
 
   const handleMobileItemClick = (itemName: string) => {
@@ -93,8 +91,9 @@ export default function Header() {
                 {item.items ? (
                   <>
                     <button
+                      type="button"
                       className={cn(
-                        "flex items-center space-x-1  mx-4 py-1 rounded-lg text-sm font-bold transition-colors duration-200",
+                        "flex items-center space-x-1 mx-4 py-1 rounded-lg text-sm font-bold transition-colors duration-200",
                         pathname === item.href
                           ? "text-primary"
                           : "text-gray-700 hover:text-primary",
@@ -122,7 +121,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "px-4 py-2 font-bold rounded-lg text-sm  transition-colors duration-200",
+                      "px-4 py-2 font-bold rounded-lg text-sm transition-colors duration-200",
                       pathname === item.href
                         ? "text-primary"
                         : "text-gray-700 hover:text-primary"
@@ -134,33 +133,42 @@ export default function Header() {
               </div>
             ))}
 
-            {/* WhatsApp CTA Button */}
-            <button
-              onClick={handleWhatsAppClick}
-              className="flex items-center space-x-2 bg-[#003d21] text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
+            {/* Call Button */}
+            <Button
+              onClick={handleCallClick}
+              variant="default"
+              size="default"
+              className="bg-[#003d21] hover:bg-[#003d21]/90 text-white font-medium"
             >
               <Phone className="w-4 h-4" />
-              <span className="font-medium">Call Us</span>
-            </button>
+              <span>Call Us</span>
+              <span className="ml-1 text-sm opacity-90">469-345-6419</span>
+            </Button>
           </nav>
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <button className="p-2 rounded-lg text-gray-600 hover:bg-gray-50">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="p-2 rounded-lg text-gray-600 hover:bg-gray-50"
+                >
                   <Menu className="h-6 w-6" />
-                </button>
+                </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] p-0">
-                <SheetTitle> Menu </SheetTitle>
+                <SheetTitle>Menu</SheetTitle>
                 <div className="mt-4 py-2">
                   {navigation.map((item) => (
                     <div
                       key={item.name}
                       className="border-b border-gray-100 last:border-0"
                     >
-                      <div
-                        className="flex items-center justify-between px-4 py-2.5 cursor-pointer"
+                      <button
+                        type="button"
+                        className="flex items-center justify-between w-full px-4 py-2.5 cursor-pointer"
                         onClick={() =>
                           item.items && handleMobileItemClick(item.name)
                         }
@@ -185,7 +193,7 @@ export default function Header() {
                             )}
                           />
                         )}
-                      </div>
+                      </button>
                       {item.items && openMobileItem === item.name && (
                         <div className="bg-gray-50 px-4 py-2">
                           {item.items.map((subItem) => (
@@ -202,15 +210,20 @@ export default function Header() {
                     </div>
                   ))}
 
-                  {/* Mobile WhatsApp CTA */}
+                  {/* Mobile Call Button */}
                   <div className="px-4 pt-4">
-                    <button
-                      onClick={handleWhatsAppClick}
-                      className="w-full flex items-center justify-center space-x-2 bg-primary text-white px-6 py-2.5 rounded-lg hover:bg-primary/90 transition-colors duration-200"
+                    <Button
+                      onClick={handleCallClick}
+                      variant="default"
+                      size="default"
+                      className="w-full bg-[#003d21] hover:bg-[#003d21]/90 text-white font-medium"
                     >
                       <Phone className="w-4 h-4" />
-                      <span className="font-medium">Call Us</span>
-                    </button>
+                      <span>Call Us</span>
+                      <span className="ml-1 text-sm opacity-90">
+                        469-345-6419
+                      </span>
+                    </Button>
                   </div>
                 </div>
               </SheetContent>

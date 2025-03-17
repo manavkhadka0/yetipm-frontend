@@ -3,7 +3,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "yetipm.baliyoventures.com",
+        hostname: "admin.yetipm.com",
         pathname: "/media/**/**", // Adjust the pathname if necessary
       },
     ],

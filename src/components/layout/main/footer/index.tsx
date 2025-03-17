@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import ResponsiveContainer from "@/components/common/responsive-container";
@@ -23,7 +21,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
 import { City } from "@/types/city";
 
 // Helper component for links with tooltip
@@ -56,31 +53,16 @@ function FooterLink({
   );
 }
 
-export default function Footer() {
-  const [cities, setCities] = useState<City[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+const getCities = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/cities/`
+  );
+  const data = await response.json();
+  return data.results;
+};
 
-  // Fetch cities from the API
-  const fetchCities = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch cities");
-      }
-      const data = await response.json();
-      setCities(data.results); // Assuming the API returns an object with a `results` array
-    } catch (err) {
-      setErrorMessage("Failed to fetch cities");
-      console.error(err);
-    }
-  };
-
-  // Fetch cities on component mount
-  useEffect(() => {
-    fetchCities();
-  }, []);
+export default async function Footer() {
+  const cities: City[] = await getCities();
 
   return (
     <TooltipProvider>
@@ -95,20 +77,14 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent className="pb-3">
                 <div className="space-y-2">
-                  {errorMessage ? (
-                    <p className="text-sm text-muted-foreground">
-                      {errorMessage}
-                    </p>
-                  ) : (
-                    cities.map((city, index) => (
-                      <FooterLink
-                        key={index}
-                        href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
-                        label={city.name} // Assuming each city has a `name` for the label
-                        className="block text-sm text-muted-foreground hover:text-primary"
-                      />
-                    ))
-                  )}
+                  {cities.map((city, index) => (
+                    <FooterLink
+                      key={index}
+                      href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
+                      label={city.name} // Assuming each city has a `name` for the label
+                      className="block text-sm text-muted-foreground hover:text-primary"
+                    />
+                  ))}
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -181,18 +157,14 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Locations</h3>
             <div className="space-y-2">
-              {errorMessage ? (
-                <p className="text-sm text-muted-foreground">{errorMessage}</p>
-              ) : (
-                cities.map((city, index) => (
-                  <FooterLink
-                    key={index}
-                    href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
-                    label={city.name} // Assuming each city has a `name` for the label
-                    className="block text-muted-foreground hover:text-primary"
-                  />
-                ))
-              )}
+              {cities.map((city, index) => (
+                <FooterLink
+                  key={index}
+                  href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
+                  label={city.name} // Assuming each city has a `name` for the label
+                  className="block text-muted-foreground hover:text-primary"
+                />
+              ))}
             </div>
           </div>
 
