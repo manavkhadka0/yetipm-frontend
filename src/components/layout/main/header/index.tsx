@@ -159,7 +159,7 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] p-0">
-                <SheetTitle>Menu</SheetTitle>
+                <SheetTitle hidden>Menu</SheetTitle>
                 <div className="mt-4 py-2">
                   {navigation.map((item) => (
                     <div
