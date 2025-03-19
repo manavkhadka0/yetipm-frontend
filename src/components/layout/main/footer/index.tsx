@@ -80,8 +80,10 @@ export default async function Footer() {
                   {cities.map((city, index) => (
                     <FooterLink
                       key={index}
-                      href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
-                      label={city.name} // Assuming each city has a `name` for the label
+                      href={`/find-home/search/${city.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}?city=${city.id}`}
+                      label={city.name}
                       className="block text-sm text-muted-foreground hover:text-primary"
                     />
                   ))}
@@ -160,8 +162,10 @@ export default async function Footer() {
               {cities.map((city, index) => (
                 <FooterLink
                   key={index}
-                  href={`/locations/${city.slug}`} // Assuming each city has a `slug` for the URL
-                  label={city.name} // Assuming each city has a `name` for the label
+                  href={`/find-home/search/${city.name
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}?city=${city.id}`}
+                  label={city.name}
                   className="block text-muted-foreground hover:text-primary"
                 />
               ))}
