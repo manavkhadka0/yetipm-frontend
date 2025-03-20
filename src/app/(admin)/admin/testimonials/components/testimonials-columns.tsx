@@ -2,10 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Testimonial } from "@/types/testimonials";
-import Image from "next/image";
 import { DataTableColumnHeader } from "./testimonials-data-table-column-header";
 import { DataTableRowActions } from "./testimonials-data-table-row-actions";
 import { TableMeta } from "./testimonials-data-table";
+import { ImageWithFallbackAvatar } from "@/components/image-with-fallback-avatar";
 
 export const columns: ColumnDef<Testimonial>[] = [
   {
@@ -14,18 +14,12 @@ export const columns: ColumnDef<Testimonial>[] = [
       <DataTableColumnHeader column={column} title="Image" />
     ),
     cell: ({ row }) => {
-      const image = row.getValue("image") as string;
-      return image ? (
-        <div className="relative w-10 h-10">
-          <Image
-            src={image}
-            alt={row.getValue("name")}
-            fill
-            className="object-cover rounded-full"
-          />
-        </div>
-      ) : (
-        <div className="w-10 h-10 bg-gray-200 rounded-full" />
+      return (
+        <ImageWithFallbackAvatar
+          src={row.getValue("image")}
+          alt={row.getValue("name")}
+          className="w-10 h-10 rounded-full"
+        />
       );
     },
   },

@@ -10,7 +10,7 @@ export default function FeaturedListings() {
         <div className="container mx-auto px-4 py-16 relative">
           <div className=" mx-auto text-center">
             <HeadingSection
-              title='"Live the worry-free leasing lifestyle"'
+              title="Live the worry-free leasing lifestyle"
               subtitle="Your journey to finding the perfect home starts here"
             />
             <p className="max-w-3xl mx-auto text-lg mb-10 text-black-600 leading-relaxed">

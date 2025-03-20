@@ -54,6 +54,7 @@ export function EditTeamDialog({
       role: member?.role || "",
       description: member?.description || "",
       email: member?.email || "",
+      profile_picture: member?.profile_picture || undefined,
       profile_picture_alt_description:
         member?.profile_picture_alt_description || "",
       facebook_link: member?.facebook_link || "",
@@ -64,6 +65,12 @@ export function EditTeamDialog({
   });
 
   const onSubmit = async (values: TeamFormSchema) => {
+    // Validate that we have either a file or an existing image
+    if (!file && !member?.profile_picture) {
+      showError("Profile picture is required");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const formData = new FormData();
@@ -72,7 +79,10 @@ export function EditTeamDialog({
           formData.append(key, value);
         }
       });
-      if (file) formData.append("profile_picture", file);
+
+      if (file) {
+        formData.append("profile_picture", file);
+      }
 
       const url = member
         ? `${process.env.NEXT_PUBLIC_API_URL}/api/team/${member.id}/`
@@ -97,10 +107,6 @@ export function EditTeamDialog({
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleImageDelete = () => {
-    setFile(null);
   };
 
   const dropZoneConfig = {
@@ -192,6 +198,97 @@ export function EditTeamDialog({
               />
             </div>
 
+            {/* Profile Picture - Required */}
+            <FormField
+              control={form.control}
+              name="profile_picture"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Profile Picture <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <div className="space-y-4">
+                    {member?.profile_picture && !file && (
+                      <div className="relative w-32 h-32 group">
+                        <img
+                          src={member.profile_picture}
+                          alt="Profile"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                        {/* Only show delete button if we have a new file ready */}
+                        {file && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFile(null);
+                              field.onChange("");
+                            }}
+                            className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    <FileUploader
+                      value={file ? [file] : []}
+                      onValueChange={(files) => {
+                        const newFile = files?.[0] || null;
+                        setFile(newFile);
+                        field.onChange(newFile);
+                      }}
+                      dropzoneOptions={dropZoneConfig}
+                      className="relative bg-background rounded-lg p-2"
+                    >
+                      <FileInput className="outline-dashed outline-1 outline-slate-500">
+                        <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
+                          <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
+                          <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
+                            <span className="font-semibold">
+                              Click to upload
+                            </span>
+                            &nbsp; or drag and drop
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            PNG, JPG or GIF (max 2MB)
+                          </p>
+                        </div>
+                      </FileInput>
+                      <FileUploaderContent>
+                        {file && (
+                          <FileUploaderItem index={0}>
+                            <Paperclip className="h-4 w-4 stroke-current" />
+                            <span>{file.name}</span>
+                          </FileUploaderItem>
+                        )}
+                      </FileUploaderContent>
+                    </FileUploader>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Profile Picture Alt Description */}
+            <FormField
+              control={form.control}
+              name="profile_picture_alt_description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Profile Picture Alt Description</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter image description for accessibility"
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/* Social Links */}
             <div className="space-y-4">
               <FormField
@@ -266,66 +363,6 @@ export function EditTeamDialog({
                 )}
               />
             </div>
-
-            {/* Profile Picture */}
-            <FormField
-              control={form.control}
-              name="profile_picture"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Profile Picture</FormLabel>
-                  <div className="space-y-4">
-                    {member?.profile_picture && !file && (
-                      <div className="relative w-32 h-32 group">
-                        <img
-                          src={member.profile_picture}
-                          alt="Profile"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        <button
-                          type="button"
-                          onClick={handleImageDelete}
-                          className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
-                      </div>
-                    )}
-
-                    <FileUploader
-                      value={file ? [file] : []}
-                      onValueChange={(files) => setFile(files?.[0] || null)}
-                      dropzoneOptions={dropZoneConfig}
-                      className="relative bg-background rounded-lg p-2"
-                    >
-                      <FileInput className="outline-dashed outline-1 outline-slate-500">
-                        <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
-                          <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
-                          <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
-                            <span className="font-semibold">
-                              Click to upload
-                            </span>
-                            &nbsp; or drag and drop
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            PNG, JPG or GIF (max 2MB)
-                          </p>
-                        </div>
-                      </FileInput>
-                      <FileUploaderContent>
-                        {file && (
-                          <FileUploaderItem index={0}>
-                            <Paperclip className="h-4 w-4 stroke-current" />
-                            <span>{file.name}</span>
-                          </FileUploaderItem>
-                        )}
-                      </FileUploaderContent>
-                    </FileUploader>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <div className="flex justify-end space-x-2">
               <Button

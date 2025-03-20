@@ -49,6 +49,7 @@ export function EditBlogAuthorDialog({
 }: EditBlogAuthorDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [shouldDeleteImage, setShouldDeleteImage] = useState(false);
 
   const form = useForm<BlogAuthorFormSchema>({
     resolver: zodResolver(blogAuthorFormSchema),
@@ -57,6 +58,7 @@ export function EditBlogAuthorDialog({
       role: author?.role || "",
       phone: author?.phone || "",
       about: author?.about || "",
+      picture: author?.picture || undefined,
     },
   });
 
@@ -70,6 +72,8 @@ export function EditBlogAuthorDialog({
       formData.append("about", values.about);
       if (file) {
         formData.append("picture", file);
+      } else if (shouldDeleteImage) {
+        formData.append("picture", "");
       }
 
       const url = author
@@ -95,6 +99,12 @@ export function EditBlogAuthorDialog({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const dropZoneConfig = {
+    maxFiles: 1,
+    maxSize: 1024 * 1024 * 2, // 2MB
+    multiple: false,
   };
 
   return (
@@ -172,7 +182,7 @@ export function EditBlogAuthorDialog({
                 <FormItem>
                   <FormLabel>Profile Picture</FormLabel>
                   <div className="space-y-4">
-                    {author?.picture && !file && (
+                    {author?.picture && !file && !shouldDeleteImage && (
                       <div className="relative w-32 h-32 group">
                         <img
                           src={author.picture}
@@ -181,7 +191,11 @@ export function EditBlogAuthorDialog({
                         />
                         <button
                           type="button"
-                          onClick={() => setFile(null)}
+                          onClick={() => {
+                            setFile(null);
+                            setShouldDeleteImage(true);
+                            field.onChange("");
+                          }}
                           className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                           <X className="h-4 w-4" />
@@ -194,13 +208,10 @@ export function EditBlogAuthorDialog({
                       onValueChange={(files) => {
                         const newFile = files?.[0] || null;
                         setFile(newFile);
+                        setShouldDeleteImage(false);
                         field.onChange(newFile);
                       }}
-                      dropzoneOptions={{
-                        maxFiles: 1,
-                        maxSize: 1024 * 1024 * 2, // 2MB
-                        multiple: false,
-                      }}
+                      dropzoneOptions={dropZoneConfig}
                       className="relative bg-background rounded-lg p-2"
                     >
                       <FileInput className="outline-dashed outline-1 outline-slate-500">

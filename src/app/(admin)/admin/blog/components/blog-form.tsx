@@ -40,6 +40,13 @@ import { EditBlogCategoryDialog } from "../categories/components/blog-category-e
 import { EditBlogTagDialog } from "../tags/components/blog-tag-edit-dialog";
 import { MinimalTiptapEditor } from "@/components/common/minimal-tiptap";
 import { TagInput } from "@/components/ui/tag-input";
+import {
+  FileInput,
+  FileUploader,
+  FileUploaderContent,
+  FileUploaderItem,
+} from "@/components/ui/file-upload";
+import { CloudUpload, Paperclip, X } from "lucide-react";
 
 interface BlogFormProps {
   initialData?: Blog;
@@ -56,6 +63,8 @@ export function BlogForm({ initialData }: BlogFormProps) {
   const [authorDialogOpen, setAuthorDialogOpen] = useState(false);
   const [categoryDialogOpen, setCategoryDialogOpen] = useState(false);
   const [tagDialogOpen, setTagDialogOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [shouldDeleteImage, setShouldDeleteImage] = useState(false);
 
   console.log("initialData:", initialData);
   console.log("initialData?.tags:", initialData?.tags);
@@ -127,8 +136,12 @@ export function BlogForm({ initialData }: BlogFormProps) {
 
       // Append all form fields to formData
       Object.entries(values).forEach(([key, value]) => {
-        if (key === "featured_image" && value instanceof File) {
-          formData.append(key, value);
+        if (key === "thumbnail_image") {
+          if (file) {
+            formData.append(key, file);
+          } else if (shouldDeleteImage) {
+            formData.append(key, "");
+          }
         } else if (Array.isArray(value)) {
           value.forEach((v) => formData.append(key, v.toString()));
         } else if (value !== undefined) {
@@ -250,6 +263,12 @@ export function BlogForm({ initialData }: BlogFormProps) {
     />
   );
 
+  const dropZoneConfig = {
+    maxFiles: 1,
+    maxSize: 1024 * 1024 * 2, // 2MB
+    multiple: false,
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -262,6 +281,88 @@ export function BlogForm({ initialData }: BlogFormProps) {
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Thumbnail Image field */}
+        <FormField
+          control={form.control}
+          name="thumbnail_image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Thumbnail Image</FormLabel>
+              <div className="space-y-4">
+                {field.value && !file && !shouldDeleteImage && (
+                  <div className="relative w-32 h-32 group">
+                    <img
+                      src={field.value}
+                      alt="Thumbnail"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFile(null);
+                        setShouldDeleteImage(true);
+                        field.onChange("");
+                      }}
+                      className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                )}
+
+                <FileUploader
+                  value={file ? [file] : []}
+                  onValueChange={(files) => {
+                    const newFile = files?.[0] || null;
+                    setFile(newFile);
+                    setShouldDeleteImage(false);
+                    field.onChange(newFile);
+                  }}
+                  dropzoneOptions={dropZoneConfig}
+                  className="relative bg-background rounded-lg p-2"
+                >
+                  <FileInput className="outline-dashed outline-1 outline-slate-500">
+                    <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
+                      <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
+                      <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
+                        <span className="font-semibold">Click to upload</span>
+                        &nbsp; or drag and drop
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG or GIF (max 2MB)
+                      </p>
+                    </div>
+                  </FileInput>
+                  <FileUploaderContent>
+                    {file && (
+                      <FileUploaderItem index={0}>
+                        <Paperclip className="h-4 w-4 stroke-current" />
+                        <span>{file.name}</span>
+                      </FileUploaderItem>
+                    )}
+                  </FileUploaderContent>
+                </FileUploader>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Thumbnail Image Alt Description field */}
+        <FormField
+          control={form.control}
+          name="thumbnail_image_alt_description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Thumbnail Image Alt Description</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Enter image alt text" />
               </FormControl>
               <FormMessage />
             </FormItem>

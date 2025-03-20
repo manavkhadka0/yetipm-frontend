@@ -2,10 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { BlogAuthor } from "@/types/blog";
-import Image from "next/image";
 import { DataTableColumnHeader } from "./blog-author-data-table-column-header";
 import { DataTableRowActions } from "./blog-author-data-table-row-actions";
 import { TableMeta } from "./blog-author-data-table";
+import { ImageWithFallbackAvatar } from "@/components/image-with-fallback-avatar";
 
 export const columns: ColumnDef<BlogAuthor>[] = [
   {
@@ -15,17 +15,12 @@ export const columns: ColumnDef<BlogAuthor>[] = [
     ),
     cell: ({ row }) => {
       const image = row.getValue("picture") as string;
-      return image ? (
-        <div className="relative w-10 h-10">
-          <Image
-            src={image}
-            alt={row.getValue("name")}
-            fill
-            className="object-cover rounded-full"
-          />
-        </div>
-      ) : (
-        <div className="w-10 h-10 bg-gray-200 rounded-full" />
+      return (
+        <ImageWithFallbackAvatar
+          src={image}
+          alt={row.getValue("name")}
+          className="w-10 h-10 rounded-full"
+        />
       );
     },
   },

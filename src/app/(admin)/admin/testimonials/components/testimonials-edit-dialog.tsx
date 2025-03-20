@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +42,50 @@ interface EditTestimonialDialogProps {
   onSuccess: () => void;
 }
 
+interface ConfirmationDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onConfirm: () => void;
+}
+
+function ConfirmationDialog({
+  open,
+  onOpenChange,
+  onConfirm,
+}: ConfirmationDialogProps) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Delete Image</DialogTitle>
+        </DialogHeader>
+        <div className="py-4">
+          Are you sure? You won&apos;t be able to revert this!
+        </div>
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => {
+              onConfirm();
+              onOpenChange(false);
+            }}
+          >
+            Delete
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 export function EditTestimonialDialog({
   open,
   onOpenChange,
@@ -49,6 +94,8 @@ export function EditTestimonialDialog({
 }: EditTestimonialDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [shouldDeleteImage, setShouldDeleteImage] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const form = useForm<TestimonialFormSchema>({
     resolver: zodResolver(testimonialFormSchema),
@@ -56,6 +103,7 @@ export function EditTestimonialDialog({
       name: testimonial?.name || "",
       testimonial: testimonial?.testimonial || "",
       source: testimonial?.source || "",
+      image: testimonial?.image || null,
     },
   });
 
@@ -66,7 +114,11 @@ export function EditTestimonialDialog({
       formData.append("name", values.name);
       formData.append("testimonial", values.testimonial);
       if (values.source) formData.append("source", values.source);
-      if (file) formData.append("image", file);
+      if (file) {
+        formData.append("image", file);
+      } else if (shouldDeleteImage) {
+        formData.append("image", "");
+      }
 
       const url = testimonial
         ? `${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/${testimonial.id}/`
@@ -96,7 +148,12 @@ export function EditTestimonialDialog({
   };
 
   const handleImageDelete = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
     setFile(null);
+    setShouldDeleteImage(true);
   };
 
   const dropZoneConfig = {
@@ -106,141 +163,148 @@ export function EditTestimonialDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>
-            {testimonial ? "Edit Testimonial" : "Add New Testimonial"}
-          </DialogTitle>
-        </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {testimonial ? "Edit Testimonial" : "Add New Testimonial"}
+            </DialogTitle>
+          </DialogHeader>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="testimonial"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Testimonial</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <MinimalTiptapEditor
-                        value={field.value}
-                        onChange={field.onChange}
-                        className="min-h-[200px] sm:min-h-[250px] bg-white dark:bg-gray-900 overflow-y-auto"
-                        editorContentClassName="p-3 sm:p-4"
-                        output="html"
-                        placeholder="Enter testimonial content..."
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="source"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Source</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter source (optional)" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="image"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Profile Image</FormLabel>
-                  <div className="space-y-4">
-                    {testimonial?.image && !file && (
-                      <div className="relative w-32 h-32 group">
-                        <img
-                          src={testimonial.image}
-                          alt="Profile"
-                          className="w-full h-full object-cover rounded-lg"
+              <FormField
+                control={form.control}
+                name="testimonial"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Testimonial</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <MinimalTiptapEditor
+                          value={field.value}
+                          onChange={field.onChange}
+                          className="min-h-[200px] sm:min-h-[250px] bg-white dark:bg-gray-900 overflow-y-auto"
+                          editorContentClassName="p-3 sm:p-4"
+                          output="html"
+                          placeholder="Enter testimonial content..."
                         />
-                        <button
-                          type="button"
-                          onClick={handleImageDelete}
-                          className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
                       </div>
-                    )}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                    <FileUploader
-                      value={file ? [file] : []}
-                      onValueChange={(files) => setFile(files?.[0] || null)}
-                      dropzoneOptions={dropZoneConfig}
-                      className="relative bg-background rounded-lg p-2"
-                    >
-                      <FileInput className="outline-dashed outline-1 outline-slate-500">
-                        <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
-                          <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
-                          <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
-                            <span className="font-semibold">
-                              Click to upload
-                            </span>
-                            &nbsp; or drag and drop
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            PNG, JPG or GIF (max 2MB)
-                          </p>
+              <FormField
+                control={form.control}
+                name="source"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Source</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter source (optional)" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Profile Image</FormLabel>
+                    <div className="space-y-4">
+                      {field.value && !file && !shouldDeleteImage && (
+                        <div className="relative w-32 h-32 group">
+                          <img
+                            src={field.value}
+                            alt="Profile"
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleImageDelete}
+                            className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
                         </div>
-                      </FileInput>
-                      <FileUploaderContent>
-                        {file && (
-                          <FileUploaderItem index={0}>
-                            <Paperclip className="h-4 w-4 stroke-current" />
-                            <span>{file.name}</span>
-                          </FileUploaderItem>
-                        )}
-                      </FileUploaderContent>
-                    </FileUploader>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      )}
 
-            <div className="flex justify-end space-x-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => onOpenChange(false)}
-                disabled={isLoading}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Saving..." : testimonial ? "Update" : "Create"}
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+                      <FileUploader
+                        value={file ? [file] : []}
+                        onValueChange={(files) => setFile(files?.[0] || null)}
+                        dropzoneOptions={dropZoneConfig}
+                        className="relative bg-background rounded-lg p-2"
+                      >
+                        <FileInput className="outline-dashed outline-1 outline-slate-500">
+                          <div className="flex items-center justify-center flex-col p-4 sm:p-8 w-full">
+                            <CloudUpload className="text-gray-500 w-8 h-8 sm:w-10 sm:h-10" />
+                            <p className="mb-1 text-xs sm:text-sm text-gray-500 text-center">
+                              <span className="font-semibold">
+                                Click to upload
+                              </span>
+                              &nbsp; or drag and drop
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              PNG, JPG or GIF (max 2MB)
+                            </p>
+                          </div>
+                        </FileInput>
+                        <FileUploaderContent>
+                          {file && (
+                            <FileUploaderItem index={0}>
+                              <Paperclip className="h-4 w-4 stroke-current" />
+                              <span>{file.name}</span>
+                            </FileUploaderItem>
+                          )}
+                        </FileUploaderContent>
+                      </FileUploader>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex justify-end space-x-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => onOpenChange(false)}
+                  disabled={isLoading}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? "Saving..." : testimonial ? "Update" : "Create"}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+      <ConfirmationDialog
+        open={showDeleteConfirmation}
+        onOpenChange={setShowDeleteConfirmation}
+        onConfirm={handleConfirmDelete}
+      />
+    </>
   );
 }

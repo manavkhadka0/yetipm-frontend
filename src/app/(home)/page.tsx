@@ -22,6 +22,8 @@ const fetchFeaturedRentals = async () => {
   return data.results;
 };
 
+export const revalidate = 10;
+
 export default async function Home() {
   const faqs = await fetchFaqs();
   const testimonials = await fetchTestimonials();

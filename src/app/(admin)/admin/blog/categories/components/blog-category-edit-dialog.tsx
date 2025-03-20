@@ -48,11 +48,13 @@ export function EditBlogCategoryDialog({
 }: EditBlogCategoryDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [shouldDeleteImage, setShouldDeleteImage] = useState(false);
 
   const form = useForm<BlogCategoryFormSchema>({
     resolver: zodResolver(blogCategoryFormSchema),
     defaultValues: {
       category_name: category?.category_name || "",
+      category_image: category?.category_image || undefined,
     },
   });
 
@@ -63,6 +65,8 @@ export function EditBlogCategoryDialog({
       formData.append("category_name", values.category_name);
       if (file) {
         formData.append("category_image", file);
+      } else if (shouldDeleteImage) {
+        formData.append("category_image", "");
       }
 
       const url = category
@@ -88,6 +92,12 @@ export function EditBlogCategoryDialog({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const dropZoneConfig = {
+    maxFiles: 1,
+    maxSize: 1024 * 1024 * 2, // 2MB
+    multiple: false,
   };
 
   return (
@@ -121,35 +131,38 @@ export function EditBlogCategoryDialog({
                 <FormItem>
                   <FormLabel>Category Image</FormLabel>
                   <div className="space-y-4">
-                    {category?.category_image && !file && (
-                      <div className="relative w-32 h-32 group">
-                        <img
-                          src={category.category_image}
-                          alt="Category"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setFile(null)}
-                          className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <X className="h-4 w-4" />
-                        </button>
-                      </div>
-                    )}
+                    {category?.category_image &&
+                      !file &&
+                      !shouldDeleteImage && (
+                        <div className="relative w-32 h-32 group">
+                          <img
+                            src={category.category_image}
+                            alt="Category"
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFile(null);
+                              setShouldDeleteImage(true);
+                              field.onChange("");
+                            }}
+                            className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      )}
 
                     <FileUploader
                       value={file ? [file] : []}
                       onValueChange={(files) => {
                         const newFile = files?.[0] || null;
                         setFile(newFile);
+                        setShouldDeleteImage(false);
                         field.onChange(newFile);
                       }}
-                      dropzoneOptions={{
-                        maxFiles: 1,
-                        maxSize: 1024 * 1024 * 2, // 2MB
-                        multiple: false,
-                      }}
+                      dropzoneOptions={dropZoneConfig}
                       className="relative bg-background rounded-lg p-2"
                     >
                       <FileInput className="outline-dashed outline-1 outline-slate-500">

@@ -2,10 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { BlogCategory } from "@/types/blog";
-import Image from "next/image";
 import { DataTableColumnHeader } from "./blog-category-data-table-column-header";
 import { DataTableRowActions } from "./blog-category-data-table-row-actions";
 import { TableMeta } from "./blog-category-data-table";
+import { ImageWithFallbackAvatar } from "@/components/image-with-fallback-avatar";
 
 export const columns: ColumnDef<BlogCategory>[] = [
   {
@@ -15,17 +15,12 @@ export const columns: ColumnDef<BlogCategory>[] = [
     ),
     cell: ({ row }) => {
       const image = row.getValue("category_image") as string;
-      return image ? (
-        <div className="relative w-10 h-10">
-          <Image
-            src={image}
-            alt={row.getValue("category_name")}
-            fill
-            className="object-cover rounded-md"
-          />
-        </div>
-      ) : (
-        <div className="w-10 h-10 bg-gray-200 rounded-md" />
+      return (
+        <ImageWithFallbackAvatar
+          src={image}
+          alt={row.getValue("category_name")}
+          className="w-10 h-10 rounded-full"
+        />
       );
     },
   },
