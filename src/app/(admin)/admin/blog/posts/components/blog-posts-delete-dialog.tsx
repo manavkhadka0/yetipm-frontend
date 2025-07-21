@@ -34,7 +34,7 @@ export function DeleteBlogPostDialog({
     setIsDeleting(true);
     try {
       const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts/${postSlug}/`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/blogs-single/${postSlug}/`
       );
 
       if (response.status !== 204) throw new Error("Failed to delete post");

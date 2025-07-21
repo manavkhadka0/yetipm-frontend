@@ -139,42 +139,82 @@ export function BlogForm({ initialData }: BlogFormProps) {
       setIsLoading(true);
       const formData = new FormData();
 
+      // Log form values for debugging
+      console.log("Form values before submission:", values);
+      console.log("Selected tags:", selectedTags);
+      console.log("File to upload:", file);
+
       // Append all form fields to formData
       Object.entries(values).forEach(([key, value]) => {
         if (key === "thumbnail_image") {
           if (file) {
             formData.append(key, file);
+            console.log(`Added file: ${key}`, file.name);
           } else if (shouldDeleteImage) {
             formData.append(key, "");
+            console.log(`Deleting image: ${key}`);
+          } else if (value && typeof value === "string") {
+            // Keep existing image URL
+            console.log(`Keeping existing image: ${key}`, value);
           }
         } else if (Array.isArray(value)) {
           value.forEach((v) => formData.append(key, v.toString()));
-        } else if (value !== undefined) {
+          console.log(`Added array: ${key}`, value);
+        } else if (value !== undefined && value !== null && value !== "") {
           formData.append(key, value.toString());
+          console.log(`Added field: ${key}`, value);
         }
       });
 
+      // Log FormData entries for debugging
+      console.log("FormData entries:");
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+
       if (initialData) {
         await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts/${initialData.slug}/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/blogs-single/${initialData.slug}/`,
           formData
         );
         showSuccess("Blog updated successfully");
       } else {
         await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts/`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/`,
           formData
         );
         showSuccess("Blog created successfully");
       }
 
       router.push("/admin/blog/posts");
-    } catch {
-      showError(
-        initialData
-          ? "Failed to update blog post"
-          : "Failed to create blog post"
-      );
+    } catch (error) {
+      console.error("Blog submission error:", error);
+
+      // Extract error message from response if available
+      let errorMessage = initialData
+        ? "Failed to update blog post"
+        : "Failed to create blog post";
+
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data) {
+          // Log the full error response for debugging
+          console.error("Server error response:", error.response.data);
+
+          // Try to extract a more specific error message
+          if (typeof error.response.data === "string") {
+            errorMessage += `: ${error.response.data}`;
+          } else if (error.response.data.detail) {
+            errorMessage += `: ${error.response.data.detail}`;
+          } else if (error.response.data.message) {
+            errorMessage += `: ${error.response.data.message}`;
+          }
+        }
+        if (error.response?.status) {
+          errorMessage += ` (Status: ${error.response.status})`;
+        }
+      }
+
+      showError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -298,6 +338,40 @@ export function BlogForm({ initialData }: BlogFormProps) {
           )}
         />
 
+        {/* Blog Duration to Read field */}
+        <FormField
+          control={form.control}
+          name="blog_duration_to_read"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Reading Duration</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="5 min read" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Content field - moved up before other fields */}
+        <FormField
+          control={form.control}
+          name="blog_content"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Content</FormLabel>
+              <FormControl>
+                <MinimalTiptapEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Write your blog post content here..."
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         {/* Thumbnail Image field */}
         <FormField
           control={form.control}
@@ -380,25 +454,6 @@ export function BlogForm({ initialData }: BlogFormProps) {
           )}
         />
 
-        {/* Content field */}
-        <FormField
-          control={form.control}
-          name="blog_content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Content</FormLabel>
-              <FormControl>
-                <MinimalTiptapEditor
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Write your blog post content here..."
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         {/* Author selection with create button */}
         <FormField
           control={form.control}
@@ -468,6 +523,21 @@ export function BlogForm({ initialData }: BlogFormProps) {
               <FormLabel>Meta Description</FormLabel>
               <FormControl>
                 <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Meta Keywords field */}
+        <FormField
+          control={form.control}
+          name="meta_keywords"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Keywords</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="keyword1, keyword2, keyword3" />
               </FormControl>
               <FormMessage />
             </FormItem>
