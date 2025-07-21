@@ -38,15 +38,15 @@ const pricingTiers: PricingTier[] = [
     name: "Yeti Essential",
     monthlyPrice: 109,
     yearlyPrice: 109,
-    leasingFee: "55%",
+    leasingFee: "80%",
     leaseRenewal: 350,
     features: {
-      startManaging: true,
+      startManaging: false,
       virtualTour: true,
       rentalMarketAnalysis: true,
       dedicatedManager: true,
-      priceAssurance: true,
-      satisfactionGuarantee: true,
+      priceAssurance: false, // Not listed
+      satisfactionGuarantee: true, // 90-Day
       accountingTracking: true,
       evictionProtection: true,
       tenantPlacement10: true,
@@ -64,7 +64,7 @@ const pricingTiers: PricingTier[] = [
     name: "Yeti Advantage",
     monthlyPrice: 149,
     yearlyPrice: 149,
-    leasingFee: "45%",
+    leasingFee: "60%",
     leaseRenewal: 350,
     popular: true,
     features: {
@@ -72,14 +72,14 @@ const pricingTiers: PricingTier[] = [
       virtualTour: true,
       rentalMarketAnalysis: true,
       dedicatedManager: true,
-      priceAssurance: true,
-      satisfactionGuarantee: true,
+      priceAssurance: false, // Not listed
+      satisfactionGuarantee: true, // 90-Day
       accountingTracking: true,
       evictionProtection: true,
       tenantPlacement10: true,
-      rentalIncome10: true,
-      tenantPlacement12: true,
-      rentalIncome12: true,
+      rentalIncome10: false,
+      tenantPlacement12: false,
+      rentalIncome12: false,
       freeEvaluation: false,
       priorityTenantPlacement: false,
       photographyStaging: false,
@@ -91,21 +91,21 @@ const pricingTiers: PricingTier[] = [
     name: "Yeti Elite",
     monthlyPrice: 199,
     yearlyPrice: 199,
-    leasingFee: "No Leasing Fee",
-    leaseRenewal: 350,
+    leasingFee: "40%",
+    leaseRenewal: 199,
     features: {
       startManaging: true,
       virtualTour: true,
       rentalMarketAnalysis: true,
       dedicatedManager: true,
-      priceAssurance: true,
-      satisfactionGuarantee: true,
+      priceAssurance: false, // Not listed
+      satisfactionGuarantee: true, // 90-Day
       accountingTracking: true,
       evictionProtection: true,
       tenantPlacement10: true,
-      rentalIncome10: true,
-      tenantPlacement12: true,
-      rentalIncome12: true,
+      rentalIncome10: false,
+      tenantPlacement12: false,
+      rentalIncome12: false,
       freeEvaluation: true,
       priorityTenantPlacement: true,
       photographyStaging: true,
@@ -118,24 +118,20 @@ const pricingTiers: PricingTier[] = [
 export default function PricingPage() {
   // Group features by tier for better organization
   const essentialFeatures = [
-    "startManaging",
     "virtualTour",
     "rentalMarketAnalysis",
     "dedicatedManager",
-    "priceAssurance",
     "satisfactionGuarantee",
     "accountingTracking",
     "evictionProtection",
     "tenantPlacement10",
   ];
 
-  const advantageOnlyFeatures = [
-    "rentalIncome10",
-    "tenantPlacement12",
-    "rentalIncome12",
-  ];
+  const advantageOnlyFeatures = ["startManaging", ...essentialFeatures];
 
   const eliteOnlyFeatures = [
+    "startManaging",
+    ...essentialFeatures,
     "freeEvaluation",
     "priorityTenantPlacement",
     "photographyStaging",
@@ -150,7 +146,7 @@ export default function PricingPage() {
       rentalMarketAnalysis: "Rental Market Analysis",
       dedicatedManager: "Dedicated Property Manager",
       priceAssurance: "Yeti Price Assurance",
-      satisfactionGuarantee: "60-Day Satisfaction Guarantee",
+      satisfactionGuarantee: "90-Day Satisfaction Guarantee",
       accountingTracking: "Accounting & Financial Tracking",
       evictionProtection: "Eviction Protection ($20/month)",
       tenantPlacement10: "Tenant Placement Guarantee – 10 Months",
@@ -168,7 +164,7 @@ export default function PricingPage() {
 
   const renderFeatureSection = (tierName: string) => {
     let featuresToShow: string[] = [];
-    let includedText = "";
+    const includedText = "";
 
     switch (tierName) {
       case "Yeti Essential":
@@ -176,11 +172,11 @@ export default function PricingPage() {
         break;
       case "Yeti Advantage":
         featuresToShow = advantageOnlyFeatures;
-        includedText = "Everything in Yeti Essential +";
+        // includedText = "Everything in Yeti Essential +";
         break;
       case "Yeti Elite":
         featuresToShow = eliteOnlyFeatures;
-        includedText = "Everything in Yeti Advantage +";
+        // includedText = "Everything in Yeti Advantage +";
         break;
     }
 

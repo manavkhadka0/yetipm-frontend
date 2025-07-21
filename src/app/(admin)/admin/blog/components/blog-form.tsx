@@ -103,14 +103,19 @@ export function BlogForm({ initialData }: BlogFormProps) {
         ),
       ]);
 
-      setAuthors(authorsRes.data.results);
-      setCategories(categoriesRes.data.results);
-      setTags(tagsRes.data.results);
+      setAuthors(authorsRes.data.results || []);
+      setCategories(categoriesRes.data.results || []);
+      setTags(tagsRes.data.results || []);
 
-      if (initialData?.tags) {
-        setSelectedTags(initialData.tags);
+      // Safely set selectedTags from initialData
+      const initialTags = initialData?.tags;
+      if (Array.isArray(initialTags)) {
+        setSelectedTags(initialTags);
+      } else {
+        setSelectedTags([]);
       }
-    } catch {
+    } catch (error) {
+      console.error("Failed to fetch form data:", error);
       showError("Failed to fetch form data");
     } finally {
       setIsDataLoading(false);
@@ -229,17 +234,23 @@ export function BlogForm({ initialData }: BlogFormProps) {
               <FormControl>
                 <TagInput
                   placeholder="Search tags..."
-                  availableTags={tags}
-                  selectedTags={selectedTags}
+                  availableTags={Array.isArray(tags) ? tags : []}
+                  selectedTags={Array.isArray(selectedTags) ? selectedTags : []}
                   onTagSelect={(tag) => {
-                    if (!selectedTags.some((t) => t.id === tag.id)) {
-                      const newTags = [...selectedTags, tag];
+                    const currentSelected = Array.isArray(selectedTags)
+                      ? selectedTags
+                      : [];
+                    if (!currentSelected.some((t) => t.id === tag.id)) {
+                      const newTags = [...currentSelected, tag];
                       setSelectedTags(newTags);
                       field.onChange(newTags.map((t) => t.id));
                     }
                   }}
                   onTagRemove={(tagToRemove) => {
-                    const newTags = selectedTags.filter(
+                    const currentSelected = Array.isArray(selectedTags)
+                      ? selectedTags
+                      : [];
+                    const newTags = currentSelected.filter(
                       (t) => t.id !== tagToRemove.id
                     );
                     setSelectedTags(newTags);
